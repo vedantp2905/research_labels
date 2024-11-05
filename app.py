@@ -134,7 +134,22 @@ def main():
     # Initialize the comparator in session state if it doesn't exist
     if 'comparator' not in st.session_state:
         st.session_state.comparator = ClusterComparator()
-        st.session_state.comparator.load_data()  # Load data after initialization
+        st.session_state.comparator.load_data()
+        
+        # Get all evaluations
+        evaluations = st.session_state.comparator.load_progress()
+        
+        # Find the highest cluster index that has been evaluated
+        if evaluations:
+            last_evaluated_index = max(
+                st.session_state.comparator.cluster_ids.index(cluster_id)
+                for cluster_id in evaluations.keys()
+            )
+            # Start from the next unevaluated cluster
+            st.session_state.current_index = last_evaluated_index + 1
+        else:
+            # If no evaluations exist, start from 0
+            st.session_state.current_index = 0
 
     comparator = st.session_state.comparator  # Access the comparator from session state
 
