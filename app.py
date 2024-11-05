@@ -256,26 +256,26 @@ def main():
             st.write(f"Quality: {existing_eval['quality']}")
             st.write(f"Notes: {existing_eval['notes']}")
 
-        # Display code examples section
-        st.header("Code Examples")
-        if current_cluster in comparator.clusters_data:
-            token_positions = {}
-            with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
-                for line in f:
-                    parts = line.strip().split('|||')
-                    if len(parts) >= 5 and parts[4] == str(current_cluster):
-                        line_num = int(parts[2])
-                        if line_num not in token_positions:
-                            token_positions[line_num] = []
-                        token_positions[line_num].append({
-                            'token': parts[0],
-                            'column': int(parts[3])
-                        })
+    # Display code examples section
+    st.header("Code Examples")
+    if current_cluster in comparator.clusters_data:
+        token_positions = {}
+        with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
+            for line in f:
+                parts = line.strip().split('|||')
+                if len(parts) >= 5 and parts[4] == str(current_cluster):
+                    line_num = int(parts[2])
+                    if line_num not in token_positions:
+                        token_positions[line_num] = []
+                    token_positions[line_num].append({
+                        'token': parts[0],
+                        'column': int(parts[3])
+                    })
             
-            for sentence_id in comparator.clusters_data[current_cluster]:
-                if sentence_id in comparator.java_sentences:
-                    sentence = comparator.java_sentences[sentence_id]
-                    st.code(sentence, language="java")
+        for sentence_id in comparator.clusters_data[current_cluster]:
+            if sentence_id in comparator.java_sentences:
+                sentence = comparator.java_sentences[sentence_id]
+                st.code(sentence, language="java")
 
     
 if __name__ == "__main__":
