@@ -221,6 +221,9 @@ def main():
                         "quality": quality,
                         "notes": notes
                     })
+                    # Move to the next cluster after submission
+                    st.session_state.current_index += 1
+                    st.experimental_rerun()  # Rerun the app to refresh the state
         
         # Check if the current cluster has already been evaluated
         if current_cluster in comparator.evaluations:
@@ -237,12 +240,12 @@ def main():
         with col1:
             if st.button("Back"):
                 st.session_state.current_index = max(0, st.session_state.current_index - 1)
-                st.rerun()
+                st.experimental_rerun()  # Rerun the app to refresh the state
         
         with col2:
             if st.button("Next"):
                 st.session_state.current_index += 1
-                st.rerun()
+                st.experimental_rerun()  # Rerun the app to refresh the state
         
         st.header("Code Examples")
         if current_cluster in comparator.clusters_data:
@@ -267,12 +270,15 @@ def main():
     # Add a download button for evaluations
     if st.button("Download Evaluations"):
         evaluations_json = json.dumps(comparator.evaluations, indent=2)
-        st.download_button(
-            label="Download Current Evaluations",
-            data=evaluations_json,
-            file_name='evaluations.json',
-            mime='application/json'
-        )
+        if evaluations_json:
+            st.download_button(
+                label="Download Current Evaluations",
+                data=evaluations_json,
+                file_name='evaluations.json',
+                mime='application/json'
+            )
+        else:
+            st.warning("No evaluations available to download.")
 
 if __name__ == "__main__":
     main()
