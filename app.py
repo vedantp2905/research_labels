@@ -121,6 +121,16 @@ class ClusterComparator:
         self.cluster_ids = sorted(list(set(self.clusters_data.keys())), 
                                 key=lambda x: int(x) if x.isdigit() else float('inf'))
         
+def find_next_unevaluated_cluster(comparator, start_index=0):
+    """Find the next unevaluated cluster starting from given index"""
+    fresh_evaluations = comparator.load_progress()
+    evaluated_cluster_ids = set(fresh_evaluations.keys())
+    
+    for i in range(start_index, len(comparator.cluster_ids)):
+        if comparator.cluster_ids[i] not in evaluated_cluster_ids:
+            return i
+    return None
+
 def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
@@ -169,31 +179,29 @@ def main():
             key="jump_to_cluster"
         )
         if st.button("Go"):
-            st.session_state.current_index = int(jump_to)
-            st.session_state.evaluation_start_time = datetime.now().isoformat()
-            st.rerun()
-    with col5:
-        if evaluated_clusters > 0:
-            # Convert evaluations to downloadable format
-            download_data = {}
-            for cluster_id, eval_data in fresh_evaluations.items():
-                download_data[f"c{cluster_id}"] = {
-                    "acceptability": eval_data["acceptability"],
-                    "precision": eval_data["precision"],
-                    "quality": eval_data["quality"],
-                    "notes": eval_data["notes"]
-                }
-            
-            # Create download button
-            st.download_button(
-                label="Download Evaluations",
-                data=json.dumps(download_data, indent=2),
-                file_name="cluster_evaluations.json",
-                mime="application/json"
-            )
+            # Find next unevaluated cluster from the jumped position
+            next_index = find_next_unevaluated_cluster(comparator, int(jump_to))
+            if next_index is not None:
+                st.session_state.current_index = next_index
+                st.session_state.evaluation_start_time = datetime.now().isoformat()
+                st.rerun()
+            else:
+                st.error("No unevaluated clusters found after this position!")
 
+    # Check if current cluster is already evaluated
     current_cluster = comparator.cluster_ids[st.session_state.current_index]
+    fresh_evaluations = comparator.load_progress()
     
+    if current_cluster in fresh_evaluations:
+        # Find next unevaluated cluster
+        next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index)
+        if next_index is not None:
+            st.session_state.current_index = next_index
+            st.rerun()
+        else:
+            st.success("All clusters have been evaluated!")
+            st.stop()
+
     # Store the time when we start viewing this cluster
     if 'evaluation_start_time' not in st.session_state:
         st.session_state.evaluation_start_time = datetime.now().isoformat()
@@ -280,28 +288,14 @@ def main():
                     "quality": quality,
                     "notes": notes
                 }):
-                    # Get fresh evaluations to find the next unevaluated cluster
-                    fresh_evaluations = comparator.load_progress()
-                    evaluated_cluster_ids = set(fresh_evaluations.keys())
-                    
-                    # Find the next unevaluated cluster starting from current index
-                    found_next = False
-                    current_pos = st.session_state.current_index
-                    
-                    # First try to find next unevaluated cluster after current position
-                    for i in range(current_pos + 1, len(comparator.cluster_ids)):
-                        if comparator.cluster_ids[i] not in evaluated_cluster_ids:
-                            st.session_state.current_index = i
-                            found_next = True
-                            break
-                    
-                    # If no unevaluated clusters found after current position, and user wants,
-                    # could search from beginning (optional)
-                    if not found_next:
-                        st.info("No more unevaluated clusters after this position!")
-                        
-                    st.rerun()
-        
+                    # Find next unevaluated cluster
+                    next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index + 1)
+                    if next_index is not None:
+                        st.session_state.current_index = next_index
+                        st.rerun()
+                    else:
+                        st.success("All clusters have been evaluated!")
+            
         # Show previous evaluation if it exists
         if current_cluster in comparator.evaluations:
             existing_eval = comparator.evaluations[current_cluster]
