@@ -16,10 +16,10 @@ class ClusterComparator:
         
         # Connect to MySQL database with new credentials
         self.db_connection = mysql.connector.connect(
-            host='sql5.freesqldatabase.com',
-            database='sql5742739',
-            user='sql5742739',
-            password='AhvzmKbr2A',
+            host='http://coms-3090-010.class.las.iastate.edu:3306',
+            database='TravelBuddy',
+            user='vedant',
+            password='vedant123',
             port=3306
         )
         self.create_table()
