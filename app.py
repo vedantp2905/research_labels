@@ -101,15 +101,27 @@ class ClusterComparator:
         clusters_path = os.path.join(self.base_path, 'clusters-500.txt')
         with open(clusters_path, 'r') as f:
             for line in f:
-                parts = line.strip().split('|||')
-                if len(parts) >= 5:
+                stripped_line = line.strip()
+                pipe_count = stripped_line.count('|')
+
+                # Handle special token cases
+                if pipe_count == 13:
+                    token = '|'
+                elif pipe_count == 14:
+                    token = '||'
+                elif pipe_count == 12:
+                    parts = stripped_line.split('|||')
                     token = parts[0]
-                    line_number = int(parts[2])
-                    cluster_id = parts[4]
-                    
-                    if cluster_id not in self.clusters_data:
-                        self.clusters_data[cluster_id] = []
-                    self.clusters_data[cluster_id].append(line_number)
+                else:
+                    continue  # Skip invalid lines
+
+                parts = stripped_line.split('|||')
+                line_number = int(parts[2])
+                cluster_id = parts[4]
+                
+                if cluster_id not in self.clusters_data:
+                    self.clusters_data[cluster_id] = []
+                self.clusters_data[cluster_id].append(line_number)
         
         self.cluster_ids = sorted(list(set(self.clusters_data.keys())), 
                                 key=lambda x: int(x) if x.isdigit() else float('inf'))
@@ -257,7 +269,7 @@ def main():
             st.write(f"Notes: {existing_eval['notes']}")
 
     # Display code examples section
-    st.header("Code Examples")
+    st.header("Sentences where the token appears")
     if current_cluster in comparator.clusters_data:
         token_positions = {}
         with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
