@@ -284,12 +284,22 @@ def main():
                     fresh_evaluations = comparator.load_progress()
                     evaluated_cluster_ids = set(fresh_evaluations.keys())
                     
-                    # Find the next unevaluated cluster
-                    for i, cluster_id in enumerate(comparator.cluster_ids):
-                        if cluster_id not in evaluated_cluster_ids:
+                    # Find the next unevaluated cluster starting from current index
+                    found_next = False
+                    current_pos = st.session_state.current_index
+                    
+                    # First try to find next unevaluated cluster after current position
+                    for i in range(current_pos + 1, len(comparator.cluster_ids)):
+                        if comparator.cluster_ids[i] not in evaluated_cluster_ids:
                             st.session_state.current_index = i
+                            found_next = True
                             break
                     
+                    # If no unevaluated clusters found after current position, and user wants,
+                    # could search from beginning (optional)
+                    if not found_next:
+                        st.info("No more unevaluated clusters after this position!")
+                        
                     st.rerun()
         
         # Show previous evaluation if it exists
