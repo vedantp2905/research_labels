@@ -151,9 +151,33 @@ def main():
     fresh_evaluations = comparator.load_progress()
     evaluated_clusters = len(fresh_evaluations)
 
-    st.write(f"Total clusters: {len(comparator.cluster_ids)}")
-    st.write(f"Clusters remaining: {500 - evaluated_clusters}")
-    st.write(f"Current cluster Number: {st.session_state.current_index}")
+    col1, col2, col3, col4 = st.columns([1,1,1,1])
+    
+    with col1:
+        st.write(f"Total clusters: {len(comparator.cluster_ids)}")
+    with col2:
+        st.write(f"Clusters remaining: {500 - evaluated_clusters}")
+    with col3:
+        st.write(f"Current cluster Number: {st.session_state.current_index}")
+    with col4:
+        if evaluated_clusters > 0:
+            # Convert evaluations to downloadable format
+            download_data = {}
+            for cluster_id, eval_data in fresh_evaluations.items():
+                download_data[f"c{cluster_id}"] = {
+                    "acceptability": eval_data["acceptability"],
+                    "precision": eval_data["precision"],
+                    "quality": eval_data["quality"],
+                    "notes": eval_data["notes"]
+                }
+            
+            # Create download button
+            st.download_button(
+                label="Download Evaluations",
+                data=json.dumps(download_data, indent=2),
+                file_name="cluster_evaluations.json",
+                mime="application/json"
+            )
 
     current_cluster = comparator.cluster_ids[st.session_state.current_index]
     
