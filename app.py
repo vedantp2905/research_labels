@@ -58,12 +58,12 @@ class ClusterComparator:
     def save_progress(self, cluster_id, evaluation):
         with self.db_connection.cursor() as cursor:
             cursor.execute('''
-                INSERT INTO evaluations (cluster_id, last_cluster_index, acceptability, precision, quality, notes)
+                INSERT INTO evaluations (cluster_id, last_cluster_index, acceptability, `precision`, quality, notes)
                 VALUES (%s, %s, %s, %s, %s, %s)
                 ON DUPLICATE KEY UPDATE
                     last_cluster_index = VALUES(last_cluster_index),
                     acceptability = VALUES(acceptability),
-                    precision = VALUES(precision),
+                    `precision` = VALUES(`precision`),
                     quality = VALUES(quality),
                     notes = VALUES(notes)
             ''', (
