@@ -41,10 +41,18 @@ class ClusterComparator:
             self.db_connection.commit()
         
     def load_progress(self):
-        cursor = self.db_connection.cursor()
+        cursor = self.db_connection.cursor(dictionary=True)  # Get results as dictionaries
         cursor.execute("SELECT * FROM evaluations")
         rows = cursor.fetchall()
-        evaluations = {row[0]: row[1:] for row in rows}  # Convert to a dictionary
+        evaluations = {}
+        for row in rows:
+            evaluations[row['cluster_id']] = {
+                'last_cluster_index': row['last_cluster_index'],
+                'acceptability': row['acceptability'],
+                'precision': row['precision'],
+                'quality': row['quality'],
+                'notes': row['notes']
+            }
         return evaluations
 
     def save_progress(self, cluster_id, evaluation):
@@ -58,7 +66,14 @@ class ClusterComparator:
                     precision = VALUES(precision),
                     quality = VALUES(quality),
                     notes = VALUES(notes)
-            ''', (cluster_id, evaluation['last_cluster_index'], evaluation['acceptability'], evaluation['precision'], evaluation['quality'], evaluation['notes']))
+            ''', (
+                cluster_id, 
+                st.session_state.current_index,  # Save current index instead of from evaluation
+                evaluation['acceptability'],
+                evaluation['precision'],
+                evaluation['quality'],
+                evaluation['notes']
+            ))
             self.db_connection.commit()
         
     def load_data(self):
@@ -97,8 +112,15 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
 
+    # Initialize the comparator in session state if it doesn't exist
+    if 'comparator' not in st.session_state:
+        st.session_state.comparator = ClusterComparator()
+        st.session_state.comparator.load_data()  # Load data after initialization
+
+    comparator = st.session_state.comparator  # Access the comparator from session state
+
     # Add a download button for evaluations at the top
-    evaluations_json = json.dumps(st.session_state.comparator.evaluations, indent=2)
+    evaluations_json = json.dumps(comparator.evaluations, indent=2)
     st.download_button(
         label="Download Current Evaluations",
         data=evaluations_json,
@@ -106,37 +128,22 @@ def main():
         mime='application/json'
     )
 
-    if 'comparator' not in st.session_state:
-        st.session_state.comparator = ClusterComparator()
-        st.session_state.comparator.load_data()
-        
-        # Add a download button for evaluations at the top
-        evaluations_json = json.dumps(st.session_state.comparator.evaluations, indent=2)
-        st.download_button(
-        label="Download Current Evaluations",
-            data=evaluations_json,
-            file_name='evaluations.json',
-            mime='application/json'
-        )
-        
-        # Load the last cluster index from progress file
-        last_index = st.session_state.comparator.evaluations.get("last_cluster_index", 0)
-        
-        # Check if the last index is already evaluated
-        if last_index in st.session_state.comparator.evaluations["evaluations"]:
-            # Start from the next index if the last one is done
-            st.session_state.current_index = last_index + 1
-        else:
-            st.session_state.current_index = last_index  # Start from the last index if not done
+    # Load the last cluster index from progress file
+    last_index = comparator.evaluations.get("last_cluster_index", 0)
 
-    comparator = st.session_state.comparator
-    
+    # Check if the last index is already evaluated
+    if last_index in comparator.evaluations.get("evaluations", {}):
+        # Start from the next index if the last one is done
+        st.session_state.current_index = last_index + 1
+    else:
+        st.session_state.current_index = last_index  # Start from the last index if not done
+
     st.write(f"Total clusters: {len(comparator.cluster_ids)}")
     
     # Calculate clusters remaining based on evaluations
-    evaluated_clusters = len(comparator.evaluations["evaluations"])
+    evaluated_clusters = len(comparator.evaluations)
     st.write(f"Clusters remaining: {len(comparator.cluster_ids) - evaluated_clusters}")
-    
+
     # Entry field for cluster ID
     cluster_id_input = st.text_input("Enter Cluster ID:", "")
     
@@ -216,8 +223,13 @@ def main():
                     })
         
         # Check if the current cluster has already been evaluated
-        if current_cluster in comparator.evaluations["evaluations"]:
-            st.success("Cluster done")
+        if current_cluster in comparator.evaluations:
+            existing_eval = comparator.evaluations[current_cluster]
+            st.info("Previous evaluation exists:")
+            st.write(f"Acceptability: {existing_eval['acceptability']}")
+            st.write(f"Precision: {existing_eval['precision']}")
+            st.write(f"Quality: {existing_eval['quality']}")
+            st.write(f"Notes: {existing_eval['notes']}")
         
         # Add "Back" and "Next" buttons outside the form
         col1, col2 = st.columns(2)
