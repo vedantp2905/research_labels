@@ -248,11 +248,8 @@ def main():
                         "notes": notes
                     })
                     # Move to next cluster
-                    if st.session_state.current_index < len(comparator.cluster_ids) - 1:
-                        st.session_state.current_index += 1
-                        st.rerun()
-                    else:
-                        st.success("You've reached the end of the clusters!")
+                    st.session_state.current_index += 1
+                    st.rerun()
         
         # Check if the current cluster has already been evaluated
         if current_cluster in comparator.evaluations:
