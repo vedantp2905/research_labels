@@ -1,21 +1,15 @@
 import json
 import pandas as pd
 
-def analyze_evaluations(progress_file='clusters_data/500-clusters-output/comparison_progress.json'):
-    # Load the evaluation data
-    with open(progress_file, 'r') as f:
-        data = json.load(f)
-    
-    evaluations = data['evaluations']
-    
+def analyze_evaluations(evaluations):
     # Initialize counters
     total = len(evaluations)
     if total == 0:
         # Return empty DataFrame with same structure when no evaluations exist
         return pd.DataFrame({
             'Evaluation Criteria': ['Acceptability', 'Precision', 'Quality vs. Human (Superior)'],
-            'Before (%)': ['-', '-', '-'],
-            'After (%)': ['-', '-', '-']
+            'Count': [0, 0, 0],
+            'Percentage (%)': [0, 0, 0]
         })
     
     metrics = {
@@ -33,8 +27,12 @@ def analyze_evaluations(progress_file='clusters_data/500-clusters-output/compari
     # Calculate percentages
     results = {
         'Evaluation Criteria': ['Acceptability', 'Precision', 'Quality vs. Human (Superior)'],
-        'Before (%)': ['-', '-', '-'],
-        'After (%)': [
+        'Count': [
+            metrics['acceptability']['Yes'],
+            metrics['precision']['More Precise'],
+            metrics['quality']['More Accurate']
+        ],
+        'Percentage (%)': [
             round(metrics['acceptability']['Yes'] / total * 100, 1),
             round(metrics['precision']['More Precise'] / total * 100, 1),
             round(metrics['quality']['More Accurate'] / total * 100, 1)
