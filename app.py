@@ -270,7 +270,7 @@ def main():
             if st.button("← Previous Cluster"):
                 if st.session_state.current_index > 0:
                     st.session_state.current_index -= 1
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.warning("Already at the first cluster!")
         
@@ -278,7 +278,7 @@ def main():
             if st.button("Next Cluster →"):
                 if st.session_state.current_index < len(comparator.cluster_ids) - 1:
                     st.session_state.current_index += 1
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.warning("Already at the last cluster!")
         
