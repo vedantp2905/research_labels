@@ -151,7 +151,7 @@ def main():
     fresh_evaluations = comparator.load_progress()
     evaluated_clusters = len(fresh_evaluations)
 
-    col1, col2, col3, col4 = st.columns([1,1,1,1])
+    col1, col2, col3, col4, col5 = st.columns([1,1,1,1,1])
     
     with col1:
         st.write(f"Total clusters: {len(comparator.cluster_ids)}")
@@ -160,6 +160,19 @@ def main():
     with col3:
         st.write(f"Current cluster Number: {st.session_state.current_index}")
     with col4:
+        # Add jump to cluster functionality
+        jump_to = st.number_input(
+            "Jump to cluster",
+            min_value=0,
+            max_value=len(comparator.cluster_ids) - 1,
+            value=st.session_state.current_index,
+            key="jump_to_cluster"
+        )
+        if st.button("Go"):
+            st.session_state.current_index = int(jump_to)
+            st.session_state.evaluation_start_time = datetime.now().isoformat()
+            st.rerun()
+    with col5:
         if evaluated_clusters > 0:
             # Convert evaluations to downloadable format
             download_data = {}
