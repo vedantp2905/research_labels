@@ -14,12 +14,12 @@ class ClusterComparator:
         self.current_cluster_index = 0
         self.cluster_ids = []
         
-        # Connect to MySQL database
+        # Connect to MySQL database with new credentials
         self.db_connection = mysql.connector.connect(
             host='sql5.freesqldatabase.com',
-            database='sql5742737',
-            user='sql5742737',
-            password='l3IY6dmVEe',
+            database='sql5742739',
+            user='sql5742739',
+            password='AhvzmKbr2A',
             port=3306
         )
         self.create_table()
