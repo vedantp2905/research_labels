@@ -90,7 +90,10 @@ def main():
     comparator = st.session_state.comparator
     
     st.write(f"Total clusters: {len(comparator.cluster_ids)}")
-    st.write(f"Clusters remaining: {len(comparator.cluster_ids) - st.session_state.current_index}")
+    
+    # Calculate clusters remaining based on evaluations
+    evaluated_clusters = len(comparator.evaluations["evaluations"])
+    st.write(f"Clusters remaining: {len(comparator.cluster_ids) - evaluated_clusters}")
     
     # Entry field for cluster ID
     cluster_id_input = st.text_input("Enter Cluster ID:", "")
