@@ -250,7 +250,7 @@ def main():
                     # Move to next cluster
                     if st.session_state.current_index < len(comparator.cluster_ids) - 1:
                         st.session_state.current_index += 1
-                        st.experimental_rerun()
+                        st.rerun()
                     else:
                         st.success("You've reached the end of the clusters!")
         
