@@ -41,21 +41,28 @@ class ClusterComparator:
             self.db_connection.commit()
         
     def load_progress(self):
-        cursor = self.db_connection.cursor(dictionary=True)  # Get results as dictionaries
-        cursor.execute("SELECT * FROM evaluations")
-        rows = cursor.fetchall()
-        evaluations = {}
-        for row in rows:
-            evaluations[row['cluster_id']] = {
-                'last_cluster_index': row['last_cluster_index'],
-                'acceptability': row['acceptability'],
-                'precision': row['precision'],
-                'quality': row['quality'],
-                'notes': row['notes']
-            }
-        return evaluations
+        try:
+            cursor = self.db_connection.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM evaluations")
+            rows = cursor.fetchall()
+            evaluations = {}
+            for row in rows:
+                evaluations[row['cluster_id']] = {
+                    'last_cluster_index': row['last_cluster_index'],
+                    'acceptability': row['acceptability'],
+                    'precision': row['precision'],
+                    'quality': row['quality'],
+                    'notes': row['notes']
+                }
+            return evaluations
+        except Exception as e:
+            st.error(f"Error loading evaluations: {str(e)}")
+            return {}
+        finally:
+            cursor.close()
 
     def save_progress(self, cluster_id, evaluation):
+        self.ensure_connection()
         with self.db_connection.cursor() as cursor:
             cursor.execute('''
                 INSERT INTO evaluations (cluster_id, last_cluster_index, acceptability, `precision`, quality, notes)
@@ -107,6 +114,18 @@ class ClusterComparator:
         self.cluster_ids = sorted(list(set(self.clusters_data.keys())), 
                                 key=lambda x: int(x) if x.isdigit() else float('inf'))
         
+    def ensure_connection(self):
+        try:
+            self.db_connection.ping(reconnect=True, attempts=3, delay=5)
+        except mysql.connector.Error as err:
+            # Reconnect if connection is lost
+            self.db_connection = mysql.connector.connect(
+                host='sql5.freesqldatabase.com',
+                database='sql5742739',
+                user='sql5742739',
+                password='AhvzmKbr2A',
+                port=3306
+            )
 
 def main():
     st.set_page_config(layout="wide")
@@ -120,13 +139,19 @@ def main():
     comparator = st.session_state.comparator  # Access the comparator from session state
 
     # Add a download button for evaluations at the top
-    evaluations_json = json.dumps(comparator.evaluations, indent=2)
-    st.download_button(
-        label="Download Current Evaluations",
-        data=evaluations_json,
-        file_name='evaluations.json',
-        mime='application/json'
-    )
+    if st.button("Download All Evaluations"):
+        # Fetch fresh data from database
+        evaluations = st.session_state.comparator.load_progress()
+        evaluations_json = json.dumps(evaluations, indent=2)
+        if evaluations:
+            st.download_button(
+                label="Click to Download Evaluations",
+                data=evaluations_json,
+                file_name='evaluations.json',
+                mime='application/json'
+            )
+        else:
+            st.warning("No evaluations available to download.")
 
     # Load the last cluster index from progress file
     last_index = comparator.evaluations.get("last_cluster_index", 0)
@@ -215,15 +240,19 @@ def main():
                 submitted = st.form_submit_button("Submit Evaluation")
                 
                 if submitted:
+                    # Save to database
                     comparator.save_progress(current_cluster, {
                         "acceptability": acceptability,
                         "precision": precision,
                         "quality": quality,
                         "notes": notes
                     })
-                    # Move to the next cluster after submission
-                    st.session_state.current_index += 1
-                    st.experimental_rerun()  # Rerun the app to refresh the state
+                    # Move to next cluster
+                    if st.session_state.current_index < len(comparator.cluster_ids) - 1:
+                        st.session_state.current_index += 1
+                        st.experimental_rerun()
+                    else:
+                        st.success("You've reached the end of the clusters!")
         
         # Check if the current cluster has already been evaluated
         if current_cluster in comparator.evaluations:
@@ -234,18 +263,24 @@ def main():
             st.write(f"Quality: {existing_eval['quality']}")
             st.write(f"Notes: {existing_eval['notes']}")
         
-        # Add "Back" and "Next" buttons outside the form
+        # Navigation buttons (outside the form)
         col1, col2 = st.columns(2)
         
         with col1:
-            if st.button("Back"):
-                st.session_state.current_index = max(0, st.session_state.current_index - 1)
-                st.rerun()  # Rerun the app to refresh the state
+            if st.button("← Previous Cluster"):
+                if st.session_state.current_index > 0:
+                    st.session_state.current_index -= 1
+                    st.experimental_rerun()
+                else:
+                    st.warning("Already at the first cluster!")
         
         with col2:
-            if st.button("Next"):
-                st.session_state.current_index += 1
-                st.rerun()  # Rerun the app to refresh the state
+            if st.button("Next Cluster →"):
+                if st.session_state.current_index < len(comparator.cluster_ids) - 1:
+                    st.session_state.current_index += 1
+                    st.experimental_rerun()
+                else:
+                    st.warning("Already at the last cluster!")
         
         st.header("Code Examples")
         if current_cluster in comparator.clusters_data:
@@ -267,18 +302,6 @@ def main():
                     sentence = comparator.java_sentences[sentence_id]
                     st.code(sentence, language="java")
 
-    # Add a download button for evaluations
-    if st.button("Download Evaluations"):
-        evaluations_json = json.dumps(comparator.evaluations, indent=2)
-        if evaluations_json:
-            st.download_button(
-                label="Download Current Evaluations",
-                data=evaluations_json,
-                file_name='evaluations.json',
-                mime='application/json'
-            )
-        else:
-            st.warning("No evaluations available to download.")
-
+    
 if __name__ == "__main__":
     main()
