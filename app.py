@@ -151,23 +151,14 @@ def main():
             # If no evaluations exist, start from 0
             st.session_state.current_index = 0
 
+    # If the current index is 0 and there are evaluations, move to the next cluster
+    if st.session_state.current_index == 0 and evaluations:
+        st.session_state.current_index = 1
+
     comparator = st.session_state.comparator  # Access the comparator from session state
 
-    # Function to find the next unevaluated cluster
-    def find_next_unevaluated_cluster():
-        while st.session_state.current_index < len(comparator.cluster_ids):
-            current_cluster = comparator.cluster_ids[st.session_state.current_index]
-            if current_cluster not in comparator.evaluations:  # Check if evaluated
-                return current_cluster
-            st.session_state.current_index += 1
-        return None  # No more unevaluated clusters
-
-    # Get the current cluster to evaluate
-    current_cluster = find_next_unevaluated_cluster()
-
-    if current_cluster is None:
-        st.success("You've completed all clusters!")
-        return  # Exit if there are no more clusters to evaluate
+    # Display the current cluster
+    current_cluster = comparator.cluster_ids[st.session_state.current_index]
 
     # Inside your evaluation form
     with st.form(key=f"evaluation_form_{current_cluster}"):
@@ -205,8 +196,11 @@ def main():
                 "notes": notes
             })
             # Move to next cluster
-            st.session_state.current_index += 1
-            st.rerun()  # Rerun to refresh the state
+            if st.session_state.current_index < len(comparator.cluster_ids) - 1:
+                st.session_state.current_index += 1
+                st.rerun()  # Rerun to refresh the state
+            else:
+                st.success("You've completed all clusters!")
 
     # Optionally, you can add a download button for evaluations
     if st.button("Download All Evaluations"):
