@@ -210,5 +210,15 @@ def main():
                     sentence = comparator.java_sentences[sentence_id]
                     st.code(sentence, language="java")
 
+    # Add a download button for evaluations
+    if st.button("Download Evaluations"):
+        evaluations_json = json.dumps(comparator.evaluations, indent=2)
+        st.download_button(
+            label="Download Current Evaluations",
+            data=evaluations_json,
+            file_name='evaluations.json',
+            mime='application/json'
+        )
+
 if __name__ == "__main__":
     main()
