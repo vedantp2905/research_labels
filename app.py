@@ -262,9 +262,10 @@ def main():
                         "quality": quality,
                         "notes": notes
                     })
-                    # Move to next cluster
-                    st.session_state.current_index += 1
-                    st.rerun()
+                    # Increment the index before rerun
+                    if st.session_state.current_index < len(comparator.cluster_ids) - 1:
+                        st.session_state.current_index = st.session_state.current_index + 1
+                        st.rerun()
         
         # Check if the current cluster has already been evaluated
         if current_cluster in comparator.evaluations:
