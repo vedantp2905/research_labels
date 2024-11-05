@@ -4,6 +4,7 @@ import csv
 import os
 from supabase import create_client
 from analyze_results import analyze_evaluations
+from datetime import datetime
 
 class ClusterComparator:
     def __init__(self):
@@ -53,16 +54,29 @@ class ClusterComparator:
 
     def save_progress(self, cluster_id, evaluation):
         try:
+            # Check if evaluation already exists
+            existing = self.supabase.table('evaluations').select("*").eq('cluster_id', cluster_id).execute()
+            
+            if existing.data and st.session_state.get('evaluation_start_time', 0) < existing.data[0].get('created_at', 0):
+                # Someone else evaluated this cluster after we loaded it
+                if not st.confirm("This cluster has been evaluated by someone else since you started. Do you want to overwrite their evaluation?"):
+                    return False
+            
+            # Save the evaluation with timestamp
             self.supabase.table('evaluations').upsert({
                 'cluster_id': cluster_id,
                 'last_cluster_index': st.session_state.current_index,
                 'acceptability': evaluation['acceptability'],
                 'precision': evaluation['precision'],
                 'quality': evaluation['quality'],
-                'notes': evaluation['notes']
+                'notes': evaluation['notes'],
+                'created_at': datetime.now().isoformat()
             }).execute()
+            return True
+            
         except Exception as e:
             st.error(f"Error saving evaluation: {str(e)}")
+            return False
 
     def load_data(self):
         v1_labels_path = os.path.join(self.base_path, 'Labels_and_tags_V1.json')
@@ -143,6 +157,15 @@ def main():
 
     current_cluster = comparator.cluster_ids[st.session_state.current_index]
     
+    # Store the time when we start viewing this cluster
+    if 'evaluation_start_time' not in st.session_state:
+        st.session_state.evaluation_start_time = datetime.now().isoformat()
+    
+    # Reset the start time when moving to a new cluster
+    if 'last_viewed_cluster' not in st.session_state or st.session_state.last_viewed_cluster != current_cluster:
+        st.session_state.evaluation_start_time = datetime.now().isoformat()
+        st.session_state.last_viewed_cluster = current_cluster
+
     if current_cluster in comparator.clusters_data:
         tokens = set()
         with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
@@ -214,15 +237,22 @@ def main():
             
             if submitted:
                 # Save to database
-                comparator.save_progress(current_cluster, {
+                if comparator.save_progress(current_cluster, {
                     "acceptability": acceptability,
                     "precision": precision,
                     "quality": quality,
                     "notes": notes
-                })
-                # Increment the index and rerun
-                if st.session_state.current_index < len(comparator.cluster_ids) - 1:
-                    st.session_state.current_index += 1
+                }):
+                    # Get fresh evaluations to find the next unevaluated cluster
+                    fresh_evaluations = comparator.load_progress()
+                    evaluated_cluster_ids = set(fresh_evaluations.keys())
+                    
+                    # Find the next unevaluated cluster
+                    for i, cluster_id in enumerate(comparator.cluster_ids):
+                        if cluster_id not in evaluated_cluster_ids:
+                            st.session_state.current_index = i
+                            break
+                    
                     st.rerun()
         
         # Show previous evaluation if it exists
