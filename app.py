@@ -186,7 +186,7 @@ def main():
     evaluated_clusters = len(comparator.evaluations)
     st.write(f"Clusters remaining: {500 - evaluated_clusters}")
 
-    st.write(f"Current cluster Number: {st.session_state.current_index + 1}")
+    st.write(f"Current cluster Number: {st.session_state.current_index }")
 
     current_cluster = comparator.cluster_ids[st.session_state.current_index]
     
