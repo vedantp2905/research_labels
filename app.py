@@ -12,9 +12,9 @@ class ClusterComparator:
         self.clusters_data = {}
         self.current_cluster_index = 0
         self.cluster_ids = []
-        self.progress_file = 'clusters_data/500-clusters-output/comparison_progress.json'
+        self.progress_file = 'comparison_progress.json'
         self.evaluations = self.load_progress()
-        self.base_path = os.path.dirname(os.path.abspath(__file__))
+        self.base_path = os.getcwd()
         
     def load_progress(self):
         os.makedirs(os.path.dirname(self.progress_file), exist_ok=True)
@@ -47,8 +47,7 @@ class ClusterComparator:
         with open(gpt4_labels_path, 'r') as f:
             self.gpt4_labels = json.load(f)
             
-        project_root = os.path.dirname(os.path.dirname(self.base_path))
-        java_path = os.path.join(project_root, 'ground_truth_data', 'java.in')
+        java_path = os.path.join(self.base_path, 'java.in')
         with open(java_path, 'r') as f:
             lines = f.readlines()
             for i, line in enumerate(lines):
