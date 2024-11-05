@@ -2,6 +2,7 @@ import streamlit as st
 import json
 import csv
 import os
+import mysql.connector
 from analyze_results import analyze_evaluations
 
 class ClusterComparator:
@@ -12,30 +13,53 @@ class ClusterComparator:
         self.clusters_data = {}
         self.current_cluster_index = 0
         self.cluster_ids = []
-        self.progress_file = os.path.join(os.getcwd(), 'comparison_progress.json')
+        
+        # Connect to MySQL database
+        self.db_connection = mysql.connector.connect(
+            host='sql5.freesqldatabase.com',
+            database='sql5742737',
+            user='sql5742737',
+            password='l3IY6dmVEe',
+            port=3306
+        )
+        self.create_table()
         self.evaluations = self.load_progress()
         self.base_path = os.getcwd()
         
+    def create_table(self):
+        with self.db_connection.cursor() as cursor:
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS evaluations (
+                    cluster_id VARCHAR(255) PRIMARY KEY,
+                    last_cluster_index INT,
+                    acceptability VARCHAR(50),
+                    precision VARCHAR(50),
+                    quality VARCHAR(50),
+                    notes TEXT
+                )
+            ''')
+            self.db_connection.commit()
+        
     def load_progress(self):
-        # Ensure the progress file is in the current working directory
-        if not os.path.exists(self.progress_file):
-            initial_progress = {
-                "last_cluster_index": 0,
-                "evaluations": {}
-            }
-            with open(self.progress_file, 'w') as f:
-                json.dump(initial_progress, f, indent=2)
-            return initial_progress
-        
-        with open(self.progress_file, 'r') as f:
-            return json.load(f)
-        
+        cursor = self.db_connection.cursor()
+        cursor.execute("SELECT * FROM evaluations")
+        rows = cursor.fetchall()
+        evaluations = {row[0]: row[1:] for row in rows}  # Convert to a dictionary
+        return evaluations
+
     def save_progress(self, cluster_id, evaluation):
-        self.evaluations["evaluations"][cluster_id] = evaluation
-        self.evaluations["last_cluster_index"] = st.session_state.current_index
-        
-        with open(self.progress_file, 'w') as f:
-            json.dump(self.evaluations, f, indent=2)
+        with self.db_connection.cursor() as cursor:
+            cursor.execute('''
+                INSERT INTO evaluations (cluster_id, last_cluster_index, acceptability, precision, quality, notes)
+                VALUES (%s, %s, %s, %s, %s, %s)
+                ON DUPLICATE KEY UPDATE
+                    last_cluster_index = VALUES(last_cluster_index),
+                    acceptability = VALUES(acceptability),
+                    precision = VALUES(precision),
+                    quality = VALUES(quality),
+                    notes = VALUES(notes)
+            ''', (cluster_id, evaluation['last_cluster_index'], evaluation['acceptability'], evaluation['precision'], evaluation['quality'], evaluation['notes']))
+            self.db_connection.commit()
         
     def load_data(self):
         v1_labels_path = os.path.join(self.base_path, 'Labels_and_tags_V1.json')
@@ -73,11 +97,6 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
 
-    # Initialize the comparator if it doesn't exist
-    if 'comparator' not in st.session_state:
-        st.session_state.comparator = ClusterComparator()
-        st.session_state.comparator.load_data()
-
     # Add a download button for evaluations at the top
     evaluations_json = json.dumps(st.session_state.comparator.evaluations, indent=2)
     st.download_button(
@@ -86,6 +105,29 @@ def main():
         file_name='evaluations.json',
         mime='application/json'
     )
+
+    if 'comparator' not in st.session_state:
+        st.session_state.comparator = ClusterComparator()
+        st.session_state.comparator.load_data()
+        
+        # Add a download button for evaluations at the top
+        evaluations_json = json.dumps(st.session_state.comparator.evaluations, indent=2)
+        st.download_button(
+        label="Download Current Evaluations",
+            data=evaluations_json,
+            file_name='evaluations.json',
+            mime='application/json'
+        )
+        
+        # Load the last cluster index from progress file
+        last_index = st.session_state.comparator.evaluations.get("last_cluster_index", 0)
+        
+        # Check if the last index is already evaluated
+        if last_index in st.session_state.comparator.evaluations["evaluations"]:
+            # Start from the next index if the last one is done
+            st.session_state.current_index = last_index + 1
+        else:
+            st.session_state.current_index = last_index  # Start from the last index if not done
 
     comparator = st.session_state.comparator
     
@@ -209,6 +251,16 @@ def main():
                 if sentence_id in comparator.java_sentences:
                     sentence = comparator.java_sentences[sentence_id]
                     st.code(sentence, language="java")
+
+    # Add a download button for evaluations
+    if st.button("Download Evaluations"):
+        evaluations_json = json.dumps(comparator.evaluations, indent=2)
+        st.download_button(
+            label="Download Current Evaluations",
+            data=evaluations_json,
+            file_name='evaluations.json',
+            mime='application/json'
+        )
 
 if __name__ == "__main__":
     main()
