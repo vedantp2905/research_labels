@@ -117,7 +117,7 @@ class ClusterComparator:
 
                 parts = stripped_line.split('|||')
                 line_number = int(parts[2])
-                cluster_id = parts[4]
+                cluster_id = parts[4].split()[-1]
                 
                 if cluster_id not in self.clusters_data:
                     self.clusters_data[cluster_id] = []
@@ -179,9 +179,22 @@ def main():
         tokens = set()
         with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
             for line in f:
-                parts = line.strip().split('|||')
-                if len(parts) >= 5 and parts[4] == current_cluster:
-                    tokens.add(parts[0])
+                stripped_line = line.strip()
+                pipe_count = stripped_line.count('|')
+                parts = stripped_line.split('|||')
+
+                # Get the token based on pipe count
+                if pipe_count == 13:
+                    token = '|'
+                elif pipe_count == 14:
+                    token = '||'
+                elif pipe_count == 12:
+                    token = parts[0]
+                else:
+                    continue
+
+                if len(parts) >= 5 and parts[4].split()[-1] == current_cluster:
+                    tokens.add(token)
         
         st.header("Unique Tokens")
         st.write(", ".join(sorted(tokens)))
