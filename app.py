@@ -135,14 +135,14 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
     
-    # Add an expander for instructions at the top
-    with st.expander("📖 Instructions (Click to Expand)", expanded=False):
+    # Add an expander for instructions at the top - now expanded by default
+    with st.expander("📖 Instructions", expanded=True):
         st.markdown("""
         ### How to Use This Tool
 
         1. **Getting Started**
-           - Select a batch of 50-100 clusters to evaluate
-           - Let Vedant know which batch you are evaluating
+           - You'll be assigned 50-100 clusters to evaluate
+           - Contact Vedant for your batch assignment
            - Use "Jump to cluster" to go to your assigned batch
 
         2. **For Each Cluster**
@@ -160,8 +160,7 @@ def main():
            - Check example sentences for context
            - Look for both syntactic and semantic accuracy
 
-        ⚠️ **Important**: Avoid evaluating clusters outside your assigned batch to avoid overlap.
-        5. The app might have bugs as I built it in a very short amount of time. Please let me know if you find any issues.
+        ⚠️ **Important**: Avoid evaluating clusters outside your assigned batch
         """)
 
     # Initialize the comparator in session state if it doesn't exist
