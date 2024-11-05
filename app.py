@@ -12,17 +12,13 @@ class ClusterComparator:
         self.clusters_data = {}
         self.current_cluster_index = 0
         self.cluster_ids = []
-        self.progress_file = 'comparison_progress.json'
+        self.progress_file = os.path.join(os.getcwd(), 'comparison_progress.json')
         self.evaluations = self.load_progress()
         self.base_path = os.getcwd()
         
     def load_progress(self):
-        os.makedirs(os.path.dirname(self.progress_file), exist_ok=True)
-        
-        if os.path.exists(self.progress_file):
-            with open(self.progress_file, 'r') as f:
-                return json.load(f)
-        else:
+        # Ensure the progress file is in the current working directory
+        if not os.path.exists(self.progress_file):
             initial_progress = {
                 "last_cluster_index": 0,
                 "evaluations": {}
@@ -30,6 +26,9 @@ class ClusterComparator:
             with open(self.progress_file, 'w') as f:
                 json.dump(initial_progress, f, indent=2)
             return initial_progress
+        
+        with open(self.progress_file, 'r') as f:
+            return json.load(f)
         
     def save_progress(self, cluster_id, evaluation):
         self.evaluations["evaluations"][cluster_id] = evaluation
