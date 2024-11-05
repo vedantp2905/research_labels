@@ -16,10 +16,10 @@ class ClusterComparator:
         
         # Connect to MySQL database with new credentials
         self.db_connection = mysql.connector.connect(
-            host='sql5.freesqldatabase.com',
-            database='sql5742739',
-            user='sql5742739',
-            password='AhvzmKbr2A',
+            host='129.186.193.92',
+            database='labels',
+            user='vedant',
+            password='vedant123',
             port=3306
         )
         self.create_table()
@@ -29,7 +29,7 @@ class ClusterComparator:
     def create_table(self):
         with self.db_connection.cursor() as cursor:
             cursor.execute('''
-                CREATE TABLE IF NOT EXISTS evaluations (
+                CREATE TABLE IF NOT EXISTS hi.evaluations (
                     cluster_id VARCHAR(255) PRIMARY KEY,
                     last_cluster_index INT,
                     acceptability VARCHAR(50),
@@ -43,7 +43,7 @@ class ClusterComparator:
     def load_progress(self):
         try:
             cursor = self.db_connection.cursor(dictionary=True)
-            cursor.execute("SELECT * FROM evaluations")
+            cursor.execute("SELECT * FROM hi.evaluations")
             rows = cursor.fetchall()
             evaluations = {}
             for row in rows:
@@ -65,7 +65,7 @@ class ClusterComparator:
         self.ensure_connection()
         with self.db_connection.cursor() as cursor:
             cursor.execute('''
-                INSERT INTO evaluations (cluster_id, last_cluster_index, acceptability, `precision`, quality, notes)
+                INSERT INTO hi.evaluations (cluster_id, last_cluster_index, acceptability, `precision`, quality, notes)
                 VALUES (%s, %s, %s, %s, %s, %s)
                 ON DUPLICATE KEY UPDATE
                     last_cluster_index = VALUES(last_cluster_index),
@@ -120,10 +120,10 @@ class ClusterComparator:
         except mysql.connector.Error as err:
             # Reconnect if connection is lost
             self.db_connection = mysql.connector.connect(
-                host='sql5.freesqldatabase.com',
-                database='sql5742739',
-                user='sql5742739',
-                password='AhvzmKbr2A',
+                host='129.186.193.92',
+                database='hi',
+                user='vedant',
+                password='vedant123',
                 port=3306
             )
 
