@@ -131,19 +131,17 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
 
-    # Initialize the session state variables if they don't exist
-    if 'current_index' not in st.session_state:
-        st.session_state.current_index = 0
-
+    # Initialize the comparator in session state if it doesn't exist
     if 'comparator' not in st.session_state:
         st.session_state.comparator = ClusterComparator()
-        st.session_state.comparator.load_data()
+        st.session_state.comparator.load_data()  # Load data after initialization
 
-    comparator = st.session_state.comparator
+    comparator = st.session_state.comparator  # Access the comparator from session state
 
-    # Download button logic
+    # Add a download button for evaluations at the top
     if st.button("Download All Evaluations"):
-        evaluations = comparator.load_progress()
+        # Fetch fresh data from database
+        evaluations = st.session_state.comparator.load_progress()
         evaluations_json = json.dumps(evaluations, indent=2)
         if evaluations:
             st.download_button(
@@ -155,83 +153,151 @@ def main():
         else:
             st.warning("No evaluations available to download.")
 
-    # Navigation functions
-    def go_next():
-        if st.session_state.current_index < len(comparator.cluster_ids) - 1:
-            st.session_state.current_index += 1
+    # Load the last cluster index from progress file
+    last_index = comparator.evaluations.get("last_cluster_index", 0)
 
-    def go_back():
-        if st.session_state.current_index > 0:
-            st.session_state.current_index -= 1
+    # Check if the last index is already evaluated
+    if last_index in comparator.evaluations.get("evaluations", {}):
+        # Start from the next index if the last one is done
+        st.session_state.current_index = last_index + 1
+    else:
+        st.session_state.current_index = last_index  # Start from the last index if not done
 
-    # Display current position
-    st.write(f"Current cluster index: {st.session_state.current_index}")
     st.write(f"Total clusters: {len(comparator.cluster_ids)}")
     
-    current_cluster = comparator.cluster_ids[st.session_state.current_index]
-    st.write(f"Current cluster ID: {current_cluster}")
+    # Calculate clusters remaining based on evaluations
+    evaluated_clusters = len(comparator.evaluations)
+    st.write(f"Clusters remaining: {len(comparator.cluster_ids) - evaluated_clusters}")
 
-    # Your existing cluster display code here...
-
-    # Evaluation form
-    with st.form(key=f"evaluation_form_{current_cluster}"):
-        acceptability = st.radio(
-            "Is the GPT-4 label acceptable?",
-            ["Yes", "No"],
-            key=f"acceptability_{current_cluster}"
-        )
-        
-        precision = st.radio(
-            "How precise is the GPT-4 label compared to V1?",
-            ["More Precise", "Less Precise", "Same"],
-            key=f"precision_{current_cluster}"
-        )
-        
-        quality = st.radio(
-            "Is the GPT-4 label better than V1?",
-            ["More Accurate", "Less Accurate", "Same"],
-            key=f"quality_{current_cluster}"
-        )
-        
-        notes = st.text_area(
-            "Additional Notes (optional)",
-            key=f"notes_{current_cluster}"
-        )
-        
-        submitted = st.form_submit_button("Submit Evaluation")
-        
-        if submitted:
-            comparator.save_progress(current_cluster, {
-                "acceptability": acceptability,
-                "precision": precision,
-                "quality": quality,
-                "notes": notes
-            })
-            go_next()  # Move to next cluster after submission
-            st.experimental_rerun()
-
-    # Navigation buttons (outside the form)
-    col1, col2 = st.columns(2)
+    # Entry field for cluster ID
+    cluster_id_input = st.text_input("Enter Cluster ID:", "")
     
-    with col1:
-        if st.button("← Previous", key="prev_button"):
-            go_back()
-            st.experimental_rerun()
+    if cluster_id_input:
+        if cluster_id_input in comparator.cluster_ids:
+            st.session_state.current_index = comparator.cluster_ids.index(cluster_id_input)
+        else:
+            st.warning("Invalid Cluster ID. Please enter a valid ID.")
+
+    st.write(f"Current cluster: {comparator.cluster_ids[st.session_state.current_index]}")
     
-    with col2:
-        if st.button("Next →", key="next_button"):
-            go_next()
-            st.experimental_rerun()
+    if st.session_state.current_index < len(comparator.cluster_ids):
+        current_cluster = comparator.cluster_ids[st.session_state.current_index]
+        
+        if current_cluster in comparator.clusters_data:
+            tokens = set()
+            with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
+                for line in f:
+                    parts = line.strip().split('|||')
+                    if len(parts) >= 5 and parts[4] == current_cluster:
+                        tokens.add(parts[0])
+            
+            st.header("Unique Tokens")
+            st.write(", ".join(sorted(tokens)))
+            st.markdown("---")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.header("CodeConceptNet-V1 Labels")
+            current_cluster_key = f"c{current_cluster}"
+            if current_cluster_key in comparator.v1_labels:
+                st.write("Label:", comparator.v1_labels[current_cluster_key].get("Label", "N/A"))
+                st.write("Semantic Tags:", comparator.v1_labels[current_cluster_key].get("Semantic_Tags", []))
+        
+        with col2:
+            st.header("GPT-4o Labels")
+            gpt4_cluster = next((item[current_cluster_key] for item in comparator.gpt4_labels 
+                               if current_cluster_key in item), {})
+            st.write("Label:", gpt4_cluster.get("Label", "N/A"))
+            st.write("Semantic Tags:", gpt4_cluster.get("Semantic Tags", []))
+        
+        with col3:
+            st.header("Evaluation")
+            with st.form(key=f"evaluation_form_{current_cluster}"):
+                acceptability = st.radio(
+                    "Is the GPT-4 label acceptable?",
+                    ["Yes", "No"],
+                    key=f"acceptability_{current_cluster}"
+                )
+                
+                precision = st.radio(
+                    "How precise is the GPT-4 label compared to V1?",
+                    ["More Precise", "Less Precise", "Same"],
+                    key=f"precision_{current_cluster}"
+                )
+                
+                quality = st.radio(
+                    "Is the GPT-4 label better than V1?",
+                    ["More Accurate", "Less Accurate", "Same"],
+                    key=f"quality_{current_cluster}"
+                )
+                
+                notes = st.text_area(
+                    "Additional Notes (optional)",
+                    key=f"notes_{current_cluster}"
+                )
+                
+                submitted = st.form_submit_button("Submit Evaluation")
+                
+                if submitted:
+                    # Save to database
+                    comparator.save_progress(current_cluster, {
+                        "acceptability": acceptability,
+                        "precision": precision,
+                        "quality": quality,
+                        "notes": notes
+                    })
+                    # Move to next cluster
+                    if st.session_state.current_index < len(comparator.cluster_ids) - 1:
+                        st.session_state.current_index += 1
+                        st.experimental_rerun()
+                    else:
+                        st.success("You've reached the end of the clusters!")
+        
+        # Check if the current cluster has already been evaluated
+        if current_cluster in comparator.evaluations:
+            existing_eval = comparator.evaluations[current_cluster]
+            st.info("Previous evaluation exists:")
+            st.write(f"Acceptability: {existing_eval['acceptability']}")
+            st.write(f"Precision: {existing_eval['precision']}")
+            st.write(f"Quality: {existing_eval['quality']}")
+            st.write(f"Notes: {existing_eval['notes']}")
+        
+        # Navigation buttons (outside the form)
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if st.button("← Previous"):
+                if st.session_state.current_index > 0:
+                    st.session_state.current_index -= 1
+                    st.rerun()
+        
+        with col2:
+            if st.button("Next →"):
+                if st.session_state.current_index < len(comparator.cluster_ids) - 1:
+                    st.session_state.current_index += 1
+                    st.rerun()
+        
+        st.header("Code Examples")
+        if current_cluster in comparator.clusters_data:
+            token_positions = {}
+            with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
+                for line in f:
+                    parts = line.strip().split('|||')
+                    if len(parts) >= 5 and parts[4] == str(current_cluster):
+                        line_num = int(parts[2])
+                        if line_num not in token_positions:
+                            token_positions[line_num] = []
+                        token_positions[line_num].append({
+                            'token': parts[0],
+                            'column': int(parts[3])
+                        })
+            
+            for sentence_id in comparator.clusters_data[current_cluster]:
+                if sentence_id in comparator.java_sentences:
+                    sentence = comparator.java_sentences[sentence_id]
+                    st.code(sentence, language="java")
 
-    # Display current evaluation if it exists
-    if current_cluster in comparator.evaluations:
-        st.markdown("---")
-        st.subheader("Current Evaluation:")
-        existing_eval = comparator.evaluations[current_cluster]
-        st.write(f"Acceptability: {existing_eval['acceptability']}")
-        st.write(f"Precision: {existing_eval['precision']}")
-        st.write(f"Quality: {existing_eval['quality']}")
-        st.write(f"Notes: {existing_eval['notes']}")
-
+    
 if __name__ == "__main__":
     main()
