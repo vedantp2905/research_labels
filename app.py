@@ -165,28 +165,13 @@ def main():
 
     comparator = st.session_state.comparator
 
-    # Add a download button for evaluations at the top
-    if st.button("Download All Evaluations"):
-        # Fetch fresh data from database
-        evaluations = st.session_state.comparator.load_progress()
-        evaluations_json = json.dumps(evaluations, indent=2)
-        if evaluations:
-            st.download_button(
-                label="Click to Download Evaluations",
-                data=evaluations_json,
-                file_name='evaluations.json',
-                mime='application/json'
-            )
-        else:
-            st.warning("No evaluations available to download.")
+    # Fetch fresh evaluations data for the count
+    fresh_evaluations = comparator.load_progress()
+    evaluated_clusters = len(fresh_evaluations)
 
     st.write(f"Total clusters: {len(comparator.cluster_ids)}")
-    
-    # Calculate clusters remaining based on evaluations
-    evaluated_clusters = len(comparator.evaluations)
     st.write(f"Clusters remaining: {500 - evaluated_clusters}")
-
-    st.write(f"Current cluster Number: {st.session_state.current_index }")
+    st.write(f"Current cluster Number: {st.session_state.current_index}")
 
     current_cluster = comparator.cluster_ids[st.session_state.current_index]
     
