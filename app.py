@@ -33,7 +33,7 @@ class ClusterComparator:
                     cluster_id VARCHAR(255) PRIMARY KEY,
                     last_cluster_index INT,
                     acceptability VARCHAR(50),
-                    precision VARCHAR(50),
+                    `precision` VARCHAR(50),
                     quality VARCHAR(50),
                     notes TEXT
                 )
