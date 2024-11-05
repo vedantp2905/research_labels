@@ -73,6 +73,11 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
 
+    # Initialize the comparator if it doesn't exist
+    if 'comparator' not in st.session_state:
+        st.session_state.comparator = ClusterComparator()
+        st.session_state.comparator.load_data()
+
     # Add a download button for evaluations at the top
     evaluations_json = json.dumps(st.session_state.comparator.evaluations, indent=2)
     st.download_button(
@@ -81,20 +86,6 @@ def main():
         file_name='evaluations.json',
         mime='application/json'
     )
-
-    if 'comparator' not in st.session_state:
-        st.session_state.comparator = ClusterComparator()
-        st.session_state.comparator.load_data()
-        
-        # Load the last cluster index from progress file
-        last_index = st.session_state.comparator.evaluations.get("last_cluster_index", 0)
-        
-        # Check if the last index is already evaluated
-        if last_index in st.session_state.comparator.evaluations["evaluations"]:
-            # Start from the next index if the last one is done
-            st.session_state.current_index = last_index + 1
-        else:
-            st.session_state.current_index = last_index  # Start from the last index if not done
 
     comparator = st.session_state.comparator
     
