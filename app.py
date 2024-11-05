@@ -240,12 +240,12 @@ def main():
         with col1:
             if st.button("Back"):
                 st.session_state.current_index = max(0, st.session_state.current_index - 1)
-                st.experimental_rerun()  # Rerun the app to refresh the state
+                st.rerun()  # Rerun the app to refresh the state
         
         with col2:
             if st.button("Next"):
                 st.session_state.current_index += 1
-                st.experimental_rerun()  # Rerun the app to refresh the state
+                st.rerun()  # Rerun the app to refresh the state
         
         st.header("Code Examples")
         if current_cluster in comparator.clusters_data:
