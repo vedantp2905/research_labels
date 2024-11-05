@@ -1,0 +1,4994 @@
+{
+    "c0": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Function Call",
+            "Expression Termination",
+            "Syntax Structure",
+            "Code Parsing"
+        ]
+    },
+    "c1": {
+        "Label": "HTTP Request and Response Handling",
+        "Semantic_Tags": [
+            "HTTP Protocol",
+            "Request Processing",
+            "Response Management",
+            "Error Handling",
+            "Servlet Communication"
+        ]
+    },
+    "c2": {
+        "Label": "Dot Notation",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Property Access",
+            "Object Interaction",
+            "Chained Calls",
+            "Field Access"
+        ]
+    },
+    "c3": {
+        "Label": "Method and Resource Management",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Resource Management",
+            "Data Transformation",
+            "Concurrency",
+            "String Manipulation"
+        ]
+    },
+    "c4": {
+        "Label": "Value Handling and Manipulation",
+        "Semantic_Tags": [
+            "Data Type Conversion",
+            "Conditional Logic",
+            "Object Instantiation",
+            "Collection Management",
+            "Instance Checking"
+        ]
+    },
+    "c5": {
+        "Label": "Method and Property Access Operator",
+        "Semantic_Tags": [
+            "Object Method Invocation",
+            "Property Access",
+            "Chained Method Calls",
+            "Dot Notation",
+            "Object-Oriented Programming"
+        ]
+    },
+    "c6": {
+        "Label": "Object Instantiation and Configuration",
+        "Semantic_Tags": [
+            "Object Creation",
+            "Dependency Injection",
+            "Configuration Management",
+            "Data Handling",
+            "Resource Management"
+        ]
+    },
+    "c7": {
+        "Label": "Object Property Access",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Object-Oriented Programming",
+            "Method Invocation",
+            "Property Access",
+            "Conditional Logic"
+        ]
+    },
+    "c8": {
+        "Label": "Object Property Access and Assignment",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Object Property Access",
+            "Assignment Operation",
+            "Data Mapping",
+            "Error Handling"
+        ]
+    },
+    "c9": {
+        "Label": "Java Class and Object Management",
+        "Semantic_Tags": [
+            "Object Instantiation",
+            "Class Reflection",
+            "Proxy Pattern",
+            "Stream Handling",
+            "Dependency Injection"
+        ]
+    },
+    "c10": {
+        "Label": "Field Management and Configuration",
+        "Semantic_Tags": [
+            "Field Operations",
+            "Data Manipulation",
+            "Configuration Management",
+            "Type Handling",
+            "Annotation Processing"
+        ]
+    },
+    "c11": {
+        "Label": "Data Handling and Transformation",
+        "Semantic_Tags": [
+            "Data Serialization",
+            "Object Manipulation",
+            "Data Encryption",
+            "Network Communication",
+            "Collection Management"
+        ]
+    },
+    "c12": {
+        "Label": "Exception Handling and Annotation Usage",
+        "Semantic_Tags": [
+            "Exception Declaration",
+            "Annotation Processing",
+            "Conditional Logic",
+            "String Containment Check",
+            "Comparison Operators"
+        ]
+    },
+    "c13": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax",
+            "Method Invocation",
+            "Control Structures",
+            "Expression Termination",
+            "Java Syntax"
+        ]
+    },
+    "c14": {
+        "Label": "Value Handling and Manipulation",
+        "Semantic_Tags": [
+            "Value Retrieval",
+            "Value Assignment",
+            "Data Access",
+            "Method Invocation",
+            "Conditional Logic"
+        ]
+    },
+    "c15": {
+        "Label": "Property and Method Access",
+        "Semantic_Tags": [
+            "Reflection",
+            "Property Management",
+            "Method Invocation",
+            "Header Manipulation",
+            "Thread Management"
+        ]
+    },
+    "c16": {
+        "Label": "Object Manipulation and Type Casting",
+        "Semantic_Tags": [
+            "Type Casting",
+            "Dictionary Operations",
+            "Stream Handling",
+            "Link Management",
+            "String Manipulation"
+        ]
+    },
+    "c17": {
+        "Label": "Opening Parenthesis",
+        "Semantic_Tags": [
+            "Control Structures",
+            "Method Invocation",
+            "Expression Grouping",
+            "Conditional Statements",
+            "Loop Constructs"
+        ]
+    },
+    "c18": {
+        "Label": "Conditional Expression",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Conditional Logic",
+            "Instance Checking",
+            "Null Checking",
+            "Loop Control"
+        ]
+    },
+    "c19": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Property Access",
+            "Object Interaction",
+            "Java Syntax"
+        ]
+    },
+    "c20": {
+        "Label": "Access Modifiers and Synchronization",
+        "Semantic_Tags": [
+            "Concurrency Control",
+            "Immutable Variables",
+            "Thread Safety",
+            "Method Access",
+            "Data Consistency"
+        ]
+    },
+    "c21": {
+        "Label": "Variable and Method Identifiers",
+        "Semantic_Tags": [
+            "Variable Declaration",
+            "Method Invocation",
+            "Object Manipulation",
+            "Data Handling",
+            "Conditional Logic"
+        ]
+    },
+    "c22": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax Structure",
+            "Expression Termination",
+            "Method Invocation",
+            "Conditional Logic",
+            "Loop Control"
+        ]
+    },
+    "c23": {
+        "Label": "Method and Property Access",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Property Access",
+            "Data Retrieval",
+            "Configuration Management",
+            "String Manipulation"
+        ]
+    },
+    "c24": {
+        "Label": "Arithmetic and Logical Operations",
+        "Semantic_Tags": [
+            "Comparison Operations",
+            "Bitwise Operations",
+            "Increment and Decrement",
+            "Arithmetic Calculations",
+            "Conditional Logic"
+        ]
+    },
+    "c25": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Data Passing",
+            "Function Arguments",
+            "Variable Declaration",
+            "Parameter Manipulation"
+        ]
+    },
+    "c26": {
+        "Label": "Assignment Operator Usage",
+        "Semantic_Tags": [
+            "Variable Initialization",
+            "Value Assignment",
+            "Expression Evaluation",
+            "Data Storage",
+            "State Management"
+        ]
+    },
+    "c27": {
+        "Label": "Logging and Conditional Operations",
+        "Semantic_Tags": [
+            "Logging Levels",
+            "Conditional Logic",
+            "Switch Statement",
+            "String Manipulation",
+            "Database Interaction"
+        ]
+    },
+    "c28": {
+        "Label": "Java Identifiers and Constants",
+        "Semantic_Tags": [
+            "Data Types",
+            "HTTP Methods",
+            "JSON Handling",
+            "Error Codes",
+            "Instance Types"
+        ]
+    },
+    "c29": {
+        "Label": "Field and Count Management",
+        "Semantic_Tags": [
+            "Field Type Handling",
+            "Count Operations",
+            "Text Processing",
+            "Base64 Decoding",
+            "Data Retrieval"
+        ]
+    },
+    "c30": {
+        "Label": "Parameter Handling and Method Invocation",
+        "Semantic_Tags": [
+            "Lambda Expressions",
+            "Method References",
+            "Parameter Passing",
+            "Data Transformation",
+            "Java Streams"
+        ]
+    },
+    "c31": {
+        "Label": "Data Handling and Processing",
+        "Semantic_Tags": [
+            "Data Transformation",
+            "JSON Manipulation",
+            "Cryptographic Operations",
+            "Error Handling",
+            "Concurrency Management"
+        ]
+    },
+    "c32": {
+        "Label": "Byte Array Handling",
+        "Semantic_Tags": [
+            "Cryptography",
+            "Data Encoding",
+            "Array Manipulation",
+            "Data Transformation",
+            "Security"
+        ]
+    },
+    "c33": {
+        "Label": "Opening Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Conditional Logic",
+            "Loop Structure",
+            "String Manipulation",
+            "Type Casting"
+        ]
+    },
+    "c34": {
+        "Label": "Dot Notation",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Property Access",
+            "Object Interaction",
+            "Class Hierarchy",
+            "Field Access"
+        ]
+    },
+    "c35": {
+        "Label": "Name and Attribute Handling",
+        "Semantic_Tags": [
+            "Attribute Access",
+            "Naming Conventions",
+            "Field Retrieval",
+            "Object Identification",
+            "Method Invocation"
+        ]
+    },
+    "c36": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Expression Termination",
+            "Syntax Structure",
+            "Function Call",
+            "Code Block Closure"
+        ]
+    },
+    "c37": {
+        "Label": "Member Access and Method Invocation",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Property Access",
+            "Object Interaction",
+            "Class Reflection"
+        ]
+    },
+    "c38": {
+        "Label": "Generic Type Parameter",
+        "Semantic_Tags": [
+            "Generics",
+            "Type Safety",
+            "Type Casting",
+            "Method Overloading",
+            "Reflection"
+        ]
+    },
+    "c39": {
+        "Label": "Method and Property Access Operator",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Property Access",
+            "String Manipulation",
+            "Conditional Checks",
+            "Data Retrieval"
+        ]
+    },
+    "c40": {
+        "Label": "Reflection and Field Manipulation",
+        "Semantic_Tags": [
+            "Reflection API",
+            "Field Access",
+            "Method Handling",
+            "Class Introspection",
+            "Dynamic Invocation"
+        ]
+    },
+    "c41": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax",
+            "Method Invocation",
+            "Expression Termination",
+            "Code Structure",
+            "Java Syntax"
+        ]
+    },
+    "c42": {
+        "Label": "Data Retrieval and Manipulation",
+        "Semantic_Tags": [
+            "Collection Handling",
+            "Data Access",
+            "Method Invocation",
+            "Object Properties",
+            "Data Structures"
+        ]
+    },
+    "c43": {
+        "Label": "Type Enumeration Handling",
+        "Semantic_Tags": [
+            "Type Safety",
+            "Data Type Management",
+            "Enumeration",
+            "Content Negotiation",
+            "Parameter Handling"
+        ]
+    },
+    "c44": {
+        "Label": "Collection and Stream Operations",
+        "Semantic_Tags": [
+            "Collection Manipulation",
+            "Stream Processing",
+            "Functional Programming",
+            "Immutable Collections",
+            "Annotation Handling"
+        ]
+    },
+    "c45": {
+        "Label": "Synchronization and State Management",
+        "Semantic_Tags": [
+            "Concurrency Control",
+            "State Management",
+            "Date Handling",
+            "HTTP Status Codes",
+            "Data Synchronization"
+        ]
+    },
+    "c46": {
+        "Label": "Exception Handling",
+        "Semantic_Tags": [
+            "Error Handling",
+            "Exception Management",
+            "Control Flow",
+            "Java Exceptions",
+            "Try-Catch Block"
+        ]
+    },
+    "c47": {
+        "Label": "Property and Annotation Handling",
+        "Semantic_Tags": [
+            "Property Management",
+            "Annotation Processing",
+            "System Configuration",
+            "Geolocation Handling",
+            "Decimal Type Management"
+        ]
+    },
+    "c48": {
+        "Label": "String Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "String Manipulation",
+            "Data Handling",
+            "Function Arguments",
+            "Input Processing"
+        ]
+    },
+    "c49": {
+        "Label": "Conditional Expression Opening",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Conditional Logic",
+            "Null Check",
+            "Instance Check",
+            "Method Invocation"
+        ]
+    },
+    "c50": {
+        "Label": "Variable and Object Usage",
+        "Semantic_Tags": [
+            "Data Handling",
+            "Object Manipulation",
+            "Network Communication",
+            "Cryptography",
+            "Reflection"
+        ]
+    },
+    "c51": {
+        "Label": "Error Handling and Data Manipulation",
+        "Semantic_Tags": [
+            "Error Codes",
+            "Data Splitting",
+            "Header Management",
+            "String Concatenation",
+            "Contextual Logging"
+        ]
+    },
+    "c52": {
+        "Label": "Method Invocation with Parameters",
+        "Semantic_Tags": [
+            "Method Calls",
+            "Parameter Passing",
+            "Object Instantiation",
+            "Data Processing",
+            "API Interaction"
+        ]
+    },
+    "c53": {
+        "Label": "Dot Notation for Access and Invocation",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Property Access",
+            "Enum Handling",
+            "Class Constants",
+            "Logging"
+        ]
+    },
+    "c54": {
+        "Label": "Stream Handling",
+        "Semantic_Tags": [
+            "InputStream Management",
+            "OutputStream Operations",
+            "File I/O",
+            "Data Streaming",
+            "Resource Management"
+        ]
+    },
+    "c55": {
+        "Label": "Opening Parenthesis",
+        "Semantic_Tags": [
+            "Control Structures",
+            "Method Invocation",
+            "Object Instantiation",
+            "Parameter Passing",
+            "Logical Expressions"
+        ]
+    },
+    "c56": {
+        "Label": "Integer Declaration and Initialization",
+        "Semantic_Tags": [
+            "Variable Declaration",
+            "Loop Control",
+            "Method Return Type",
+            "Data Type Handling",
+            "Arithmetic Operations"
+        ]
+    },
+    "c57": {
+        "Label": "Method Invocation",
+        "Semantic_Tags": [
+            "Method Call",
+            "Function Execution",
+            "Runtime Operations",
+            "Object Interaction",
+            "Java API Usage"
+        ]
+    },
+    "c58": {
+        "Label": "Object and Method Interaction",
+        "Semantic_Tags": [
+            "Proxy Pattern",
+            "Data Serialization",
+            "Method Invocation",
+            "Object Manipulation",
+            "Exception Handling"
+        ]
+    },
+    "c59": {
+        "Label": "API Versioning",
+        "Semantic_Tags": [
+            "Web Services",
+            "API Management",
+            "Version Control",
+            "Endpoint Invocation",
+            "Service Layer"
+        ]
+    },
+    "c60": {
+        "Label": "Key-Value Pair Separator",
+        "Semantic_Tags": [
+            "Data Mapping",
+            "Key-Value Association",
+            "Data Structure",
+            "JSON Handling",
+            "Parameter Passing"
+        ]
+    },
+    "c61": {
+        "Label": "Generic Type Declaration",
+        "Semantic_Tags": [
+            "Generics",
+            "Type Safety",
+            "Collection Initialization",
+            "Data Structures",
+            "Java Collections Framework"
+        ]
+    },
+    "c62": {
+        "Label": "Domain-Specific Object Management",
+        "Semantic_Tags": [
+            "User Management",
+            "Configuration Handling",
+            "Role Management",
+            "Flow Control",
+            "Error Handling"
+        ]
+    },
+    "c63": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax Structure",
+            "Method Invocation",
+            "Conditional Expression",
+            "Parameter Handling",
+            "Logical Operations"
+        ]
+    },
+    "c64": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Conditional Statements",
+            "Syntax Structure",
+            "Code Block Delimitation",
+            "Control Flow",
+            "Logical Operations"
+        ]
+    },
+    "c65": {
+        "Label": "Java Class and Interface Usage",
+        "Semantic_Tags": [
+            "Object Instantiation",
+            "Interface Implementation",
+            "Data Processing",
+            "Configuration Management",
+            "XML Parsing"
+        ]
+    },
+    "c66": {
+        "Label": "Builder Pattern and String Manipulation",
+        "Semantic_Tags": [
+            "Builder Pattern",
+            "String Manipulation",
+            "Request Construction",
+            "Object Creation",
+            "Data Aggregation"
+        ]
+    },
+    "c67": {
+        "Label": "Generic Object Handling",
+        "Semantic_Tags": [
+            "Dynamic Typing",
+            "Method Overloading",
+            "Parameter Passing",
+            "Data Abstraction",
+            "Object Manipulation"
+        ]
+    },
+    "c68": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Data Access",
+            "Configuration Management",
+            "String Manipulation",
+            "Conditional Logic"
+        ]
+    },
+    "c69": {
+        "Label": "Attribute and Method Access",
+        "Semantic_Tags": [
+            "XML Parsing",
+            "Database Interaction",
+            "File Handling",
+            "HTTP Communication",
+            "Annotation Processing"
+        ]
+    },
+    "c70": {
+        "Label": "Form Management",
+        "Semantic_Tags": [
+            "Form Handling",
+            "Data Retrieval",
+            "Object Manipulation",
+            "Method Parameters",
+            "Collection Iteration"
+        ]
+    },
+    "c71": {
+        "Label": "Index Management",
+        "Semantic_Tags": [
+            "Array Indexing",
+            "Database Column Access",
+            "String Manipulation",
+            "Data Retrieval",
+            "Collection Handling"
+        ]
+    },
+    "c72": {
+        "Label": "Data Retrieval and Validation",
+        "Semantic_Tags": [
+            "Data Access",
+            "Null Check",
+            "Collection Handling",
+            "Conditional Logic",
+            "Method Invocation"
+        ]
+    },
+    "c73": {
+        "Label": "XML Schema Element Handling",
+        "Semantic_Tags": [
+            "XML Parsing",
+            "Element Manipulation",
+            "Annotation Processing",
+            "Schema Validation",
+            "Reference Resolution"
+        ]
+    },
+    "c74": {
+        "Label": "Conditional Evaluation",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Null Check",
+            "Type Checking",
+            "Logical Conditions",
+            "Instanceof Usage"
+        ]
+    },
+    "c75": {
+        "Label": "JSON Key Mapping",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Mapping",
+            "Key-Value Storage",
+            "Configuration Management",
+            "Data Serialization"
+        ]
+    },
+    "c76": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Parameter Management",
+            "Data Manipulation",
+            "Service Interaction",
+            "Field Configuration",
+            "SQL Query Handling"
+        ]
+    },
+    "c77": {
+        "Label": "String and Type Operations",
+        "Semantic_Tags": [
+            "String Manipulation",
+            "Type Checking",
+            "Character Access",
+            "Index Searching",
+            "Enum Conversion"
+        ]
+    },
+    "c78": {
+        "Label": "Name Handling and Retrieval",
+        "Semantic_Tags": [
+            "Identifier Management",
+            "String Manipulation",
+            "Reflection",
+            "Configuration Access",
+            "Data Retrieval"
+        ]
+    },
+    "c79": {
+        "Label": "Map Population",
+        "Semantic_Tags": [
+            "Data Structure Manipulation",
+            "Key-Value Storage",
+            "JSON Mapping",
+            "Configuration Management",
+            "Dynamic Data Assignment"
+        ]
+    },
+    "c80": {
+        "Label": "Generic Type and Collection Initialization",
+        "Semantic_Tags": [
+            "Generics",
+            "Collection Framework",
+            "Type Safety",
+            "Data Structures",
+            "Java Util"
+        ]
+    },
+    "c81": {
+        "Label": "Data Structure and Collection Management",
+        "Semantic_Tags": [
+            "Collection Initialization",
+            "Data Retrieval",
+            "Data Manipulation",
+            "Schema Validation",
+            "String Handling"
+        ]
+    },
+    "c82": {
+        "Label": "Method and Function Invocation",
+        "Semantic_Tags": [
+            "Logging",
+            "Data Encryption",
+            "Stream Handling",
+            "Random Generation",
+            "Serialization"
+        ]
+    },
+    "c83": {
+        "Label": "Factory and Builder Pattern Usage",
+        "Semantic_Tags": [
+            "Object Creation",
+            "Design Patterns",
+            "Dependency Injection",
+            "Stream Handling",
+            "Data Conversion"
+        ]
+    },
+    "c84": {
+        "Label": "Length and Size Retrieval",
+        "Semantic_Tags": [
+            "Array Length",
+            "Collection Size",
+            "String Manipulation",
+            "Data Structure Measurement",
+            "Conditional Logic"
+        ]
+    },
+    "c85": {
+        "Label": "Return Statement",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Method Termination",
+            "Value Return",
+            "Function Output",
+            "Program Execution"
+        ]
+    },
+    "c86": {
+        "Label": "Object Instantiation",
+        "Semantic_Tags": [
+            "Object Creation",
+            "Constructor Invocation",
+            "Instance Initialization",
+            "Memory Allocation",
+            "Class Instantiation"
+        ]
+    },
+    "c87": {
+        "Label": "Method Invocation and Expression Closure",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Expression Evaluation",
+            "Syntax Closure",
+            "Function Call",
+            "Code Structure"
+        ]
+    },
+    "c88": {
+        "Label": "Opening Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Function Parameters",
+            "Expression Evaluation",
+            "Control Structures",
+            "Array Initialization"
+        ]
+    },
+    "c89": {
+        "Label": "Numeric Comparison and Indexing",
+        "Semantic_Tags": [
+            "Array Indexing",
+            "Conditional Logic",
+            "Loop Control",
+            "Numeric Comparison",
+            "String Manipulation"
+        ]
+    },
+    "c90": {
+        "Label": "State and Property Check",
+        "Semantic_Tags": [
+            "State Management",
+            "Property Access",
+            "Modifier Check",
+            "Boolean Evaluation",
+            "Text Handling"
+        ]
+    },
+    "c91": {
+        "Label": "Conditional Expression and Type Casting",
+        "Semantic_Tags": [
+            "Conditional Operator",
+            "Type Casting",
+            "Instanceof Check",
+            "Null Handling",
+            "Generic Type Handling"
+        ]
+    },
+    "c92": {
+        "Label": "Variable Assignment",
+        "Semantic_Tags": [
+            "Variable Initialization",
+            "Data Assignment",
+            "Object Instantiation",
+            "Type Casting",
+            "Conditional Assignment"
+        ]
+    },
+    "c93": {
+        "Label": "String Type Usage",
+        "Semantic_Tags": [
+            "Data Type Handling",
+            "String Manipulation",
+            "Type Checking",
+            "Map Operations",
+            "Validation"
+        ]
+    },
+    "c94": {
+        "Label": "Method and Object Interaction",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Object Manipulation",
+            "Resource Management",
+            "Data Retrieval",
+            "Session Handling"
+        ]
+    },
+    "c95": {
+        "Label": "Key Management and Access",
+        "Semantic_Tags": [
+            "Key Retrieval",
+            "Data Access",
+            "Security",
+            "Mapping",
+            "Instance Management"
+        ]
+    },
+    "c96": {
+        "Label": "Logical AND Operator",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Boolean Evaluation",
+            "Control Flow",
+            "Logical Operations"
+        ]
+    },
+    "c97": {
+        "Label": "Method Parameter Declaration",
+        "Semantic_Tags": [
+            "Method Signature",
+            "Parameter Handling",
+            "Function Definition",
+            "Java Syntax",
+            "Code Structure"
+        ]
+    },
+    "c98": {
+        "Label": "Array Initialization",
+        "Semantic_Tags": [
+            "Array Declaration",
+            "Inline Initialization",
+            "Data Structure",
+            "Memory Allocation",
+            "Java Syntax"
+        ]
+    },
+    "c99": {
+        "Label": "Data Handling and Transformation",
+        "Semantic_Tags": [
+            "String Manipulation",
+            "Data Encoding",
+            "Entity Management",
+            "Security",
+            "HTTP Response"
+        ]
+    },
+    "c100": {
+        "Label": "Listing Management",
+        "Semantic_Tags": [
+            "Data Retrieval",
+            "Object Instantiation",
+            "Collection Handling",
+            "JSON Processing",
+            "Error Handling"
+        ]
+    },
+    "c101": {
+        "Label": "Form Management and Manipulation",
+        "Semantic_Tags": [
+            "Form Handling",
+            "Data Retrieval",
+            "Object Instantiation",
+            "Method Invocation",
+            "Data Transformation"
+        ]
+    },
+    "c102": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax",
+            "Method Invocation",
+            "Expression Termination",
+            "Parameter Handling",
+            "Code Structure"
+        ]
+    },
+    "c103": {
+        "Label": "JSON Object Construction",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Aggregation",
+            "Key-Value Mapping",
+            "Object Population",
+            "Data Serialization"
+        ]
+    },
+    "c104": {
+        "Label": "Method Invocation and Object Instantiation",
+        "Semantic_Tags": [
+            "Method Calls",
+            "Object Creation",
+            "Parameter Passing",
+            "Logging",
+            "HTTP Operations"
+        ]
+    },
+    "c105": {
+        "Label": "Variable Initialization and Assignment",
+        "Semantic_Tags": [
+            "Variable Declaration",
+            "Object Instantiation",
+            "Conditional Assignment",
+            "Data Structure Initialization",
+            "Null Assignment"
+        ]
+    },
+    "c106": {
+        "Label": "Data Structure and Object Manipulation",
+        "Semantic_Tags": [
+            "Object Instantiation",
+            "Data Processing",
+            "Collection Iteration",
+            "String Manipulation",
+            "JSON Handling"
+        ]
+    },
+    "c107": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Object Method Calls",
+            "Dot Notation",
+            "Method Chaining",
+            "Object Property Access",
+            "Java Syntax"
+        ]
+    },
+    "c108": {
+        "Label": "Statement Terminator",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Java Programming",
+            "Statement Separation",
+            "Code Execution"
+        ]
+    },
+    "c109": {
+        "Label": "Method Invocation and Resource Management",
+        "Semantic_Tags": [
+            "Resource Cleanup",
+            "Method Execution",
+            "Connection Management",
+            "Data Retrieval",
+            "Object Lifecycle"
+        ]
+    },
+    "c110": {
+        "Label": "Loop Control Structure",
+        "Semantic_Tags": [
+            "Iteration",
+            "Collection Traversal",
+            "Control Flow",
+            "Loop Variable Declaration",
+            "Enhanced For Loop"
+        ]
+    },
+    "c111": {
+        "Label": "Context Management",
+        "Semantic_Tags": [
+            "Servlet Context",
+            "Application Context",
+            "Extension Context",
+            "Parameter Handling",
+            "Logging Context"
+        ]
+    },
+    "c112": {
+        "Label": "Method Invocation and Control Structures",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Control Flow",
+            "Object Instantiation",
+            "Exception Handling",
+            "Data Manipulation"
+        ]
+    },
+    "c113": {
+        "Label": "Unsolved Reference Handling",
+        "Semantic_Tags": [
+            "Reference Management",
+            "Data Structure Manipulation",
+            "Conditional Logic",
+            "Type Checking",
+            "Attribute Access"
+        ]
+    },
+    "c114": {
+        "Label": "Method Closing Brace",
+        "Semantic_Tags": [
+            "Method Definition",
+            "Code Block Termination",
+            "Syntax Structure",
+            "Java Syntax",
+            "Code Organization"
+        ]
+    },
+    "c115": {
+        "Label": "Access Modifiers",
+        "Semantic_Tags": [
+            "Visibility Control",
+            "Encapsulation",
+            "Access Restriction",
+            "Class Design",
+            "Method Access"
+        ]
+    },
+    "c116": {
+        "Label": "Method Invocation Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Function Call",
+            "Parameter Passing",
+            "Object Method Access",
+            "Java Syntax"
+        ]
+    },
+    "c117": {
+        "Label": "Return Statement",
+        "Semantic_Tags": [
+            "Function Return",
+            "Data Retrieval",
+            "Conditional Return",
+            "Type Casting",
+            "Object Creation"
+        ]
+    },
+    "c118": {
+        "Label": "Instance Reference",
+        "Semantic_Tags": [
+            "Object Context",
+            "Instance Variables",
+            "Method Access",
+            "Encapsulation",
+            "Object-Oriented Programming"
+        ]
+    },
+    "c119": {
+        "Label": "Zero Value Comparison and Initialization",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Loop Control",
+            "Array Length Check",
+            "Default Initialization",
+            "Numeric Comparison"
+        ]
+    },
+    "c120": {
+        "Label": "Conditional Checks",
+        "Semantic_Tags": [
+            "Null Check",
+            "Empty Check",
+            "Type Check",
+            "Equality Check",
+            "Instance Check"
+        ]
+    },
+    "c121": {
+        "Label": "Object Instantiation",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Data Structures",
+            "Stream Handling",
+            "Object Creation",
+            "Array Initialization"
+        ]
+    },
+    "c122": {
+        "Label": "String Manipulation and Conversion",
+        "Semantic_Tags": [
+            "String Conversion",
+            "JSON Handling",
+            "SQL Result Processing",
+            "Data Formatting",
+            "Method Invocation"
+        ]
+    },
+    "c123": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Expression Termination",
+            "Syntax Structure",
+            "Function Call",
+            "Logical Grouping"
+        ]
+    },
+    "c124": {
+        "Label": "HTTP Request Handling",
+        "Semantic_Tags": [
+            "Servlet API",
+            "HTTP Methods",
+            "Request Processing",
+            "Header Management",
+            "URI Manipulation"
+        ]
+    },
+    "c125": {
+        "Label": "List and Collection Manipulation",
+        "Semantic_Tags": [
+            "Collection Framework",
+            "Data Aggregation",
+            "Query Execution",
+            "Data Transformation",
+            "Type Casting"
+        ]
+    },
+    "c126": {
+        "Label": "Method Management and Invocation",
+        "Semantic_Tags": [
+            "Method Reflection",
+            "HTTP Method Handling",
+            "Asynchronous Processing",
+            "Access Control",
+            "Proxy Invocation"
+        ]
+    },
+    "c127": {
+        "Label": "Void Method Declaration",
+        "Semantic_Tags": [
+            "Method Definition",
+            "Procedure",
+            "No Return Value",
+            "Method Signature",
+            "Java Syntax"
+        ]
+    },
+    "c128": {
+        "Label": "Class and Method Access",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Class Reference",
+            "Method Invocation",
+            "Annotation Handling",
+            "Type Checking"
+        ]
+    },
+    "c129": {
+        "Label": "Java Object and Method Usage",
+        "Semantic_Tags": [
+            "Object Instantiation",
+            "Method Invocation",
+            "Annotation Processing",
+            "Data Handling",
+            "Type Casting"
+        ]
+    },
+    "c130": {
+        "Label": "Array Declaration and Initialization",
+        "Semantic_Tags": [
+            "Array Handling",
+            "Data Structure",
+            "Memory Allocation",
+            "Type Safety",
+            "Collection Management"
+        ]
+    },
+    "c131": {
+        "Label": "Conditional Branching",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Conditional Logic",
+            "Decision Making",
+            "Branching",
+            "Flow Control"
+        ]
+    },
+    "c132": {
+        "Label": "Null Check and Conditional Assignment",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Conditional Logic",
+            "Error Prevention",
+            "Data Validation",
+            "Ternary Operator"
+        ]
+    },
+    "c133": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Conditional Check",
+            "Lambda Expression",
+            "UUID Generation",
+            "Exception Handling"
+        ]
+    },
+    "c134": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Control Structures",
+            "Logical Operations",
+            "Conditional Checks",
+            "Data Retrieval"
+        ]
+    },
+    "c135": {
+        "Label": "JSON Object Population",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Serialization",
+            "Key-Value Mapping",
+            "Object Construction",
+            "Data Aggregation"
+        ]
+    },
+    "c136": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Object Instantiation",
+            "JSON Handling",
+            "Data Transfer"
+        ]
+    },
+    "c137": {
+        "Label": "Null Check and Conditional Logic",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Conditional Statements",
+            "Error Prevention",
+            "Data Validation",
+            "Control Flow"
+        ]
+    },
+    "c138": {
+        "Label": "Exception Handling and Lambda Expressions",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Lambda Expressions",
+            "Stream API",
+            "File Operations",
+            "Asynchronous Programming"
+        ]
+    },
+    "c139": {
+        "Label": "Statement Termination",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Java Semantics",
+            "Control Flow",
+            "Statement Separation"
+        ]
+    },
+    "c140": {
+        "Label": "Java Standard Library Utilization",
+        "Semantic_Tags": [
+            "File Handling",
+            "System Properties",
+            "Cryptography",
+            "Data Structures",
+            "URI Manipulation"
+        ]
+    },
+    "c141": {
+        "Label": "Identifier and ID Management",
+        "Semantic_Tags": [
+            "Identifier Handling",
+            "ID Retrieval",
+            "Data Mapping",
+            "Form Management",
+            "User Identification"
+        ]
+    },
+    "c142": {
+        "Label": "Database Interaction",
+        "Semantic_Tags": [
+            "SQL Query Execution",
+            "ResultSet Processing",
+            "PreparedStatement Handling",
+            "Data Retrieval",
+            "Database Access"
+        ]
+    },
+    "c143": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax Structure",
+            "Method Invocation",
+            "Conditional Logic",
+            "Loop Control",
+            "Expression Evaluation"
+        ]
+    },
+    "c144": {
+        "Label": "Variable Initialization",
+        "Semantic_Tags": [
+            "Object Instantiation",
+            "Data Structure Initialization",
+            "Type Declaration",
+            "Assignment Operation",
+            "Memory Allocation"
+        ]
+    },
+    "c145": {
+        "Label": "Parentheses and String Literal Usage",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Expression Grouping",
+            "String Handling",
+            "Logical Operations",
+            "Data Conversion"
+        ]
+    },
+    "c146": {
+        "Label": "Method Invocation and Conditional Check",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Conditional Logic",
+            "Null Check",
+            "String Manipulation",
+            "Collection Handling"
+        ]
+    },
+    "c147": {
+        "Label": "Instance Creation and Retrieval",
+        "Semantic_Tags": [
+            "Factory Pattern",
+            "Object Instantiation",
+            "Singleton Pattern",
+            "Reflection",
+            "Dependency Injection"
+        ]
+    },
+    "c148": {
+        "Label": "Index Management",
+        "Semantic_Tags": [
+            "Loop Control",
+            "Array Traversal",
+            "String Parsing",
+            "Conditional Logic",
+            "Data Extraction"
+        ]
+    },
+    "c149": {
+        "Label": "Type Bound Specification",
+        "Semantic_Tags": [
+            "Generics",
+            "Type Safety",
+            "Inheritance",
+            "Polymorphism",
+            "Type Constraints"
+        ]
+    },
+    "c150": {
+        "Label": "Lambda Expressions and Stream Operations",
+        "Semantic_Tags": [
+            "Functional Programming",
+            "Stream API",
+            "Lambda Expressions",
+            "Collection Processing",
+            "Predicate Filtering"
+        ]
+    },
+    "c151": {
+        "Label": "JSON Object Handling",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Serialization",
+            "Object Parsing",
+            "API Communication",
+            "Data Transformation"
+        ]
+    },
+    "c152": {
+        "Label": "Exception Handling",
+        "Semantic_Tags": [
+            "Error Management",
+            "Exception Propagation",
+            "Custom Exceptions",
+            "Java Exception Hierarchy",
+            "Error Reporting"
+        ]
+    },
+    "c153": {
+        "Label": "Method Invocation with Parameters",
+        "Semantic_Tags": [
+            "Object Manipulation",
+            "Setter Methods",
+            "Parameter Assignment",
+            "Method Chaining",
+            "Data Configuration"
+        ]
+    },
+    "c154": {
+        "Label": "JSON Data Handling",
+        "Semantic_Tags": [
+            "HTTP Operations",
+            "JSON Manipulation",
+            "Data Retrieval",
+            "Data Conversion",
+            "API Interaction"
+        ]
+    },
+    "c155": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Expression Termination",
+            "Method Invocation",
+            "Conditional Check",
+            "Loop Control",
+            "Logical Operations"
+        ]
+    },
+    "c156": {
+        "Label": "Instance Method and Field Access",
+        "Semantic_Tags": [
+            "Object-Oriented Programming",
+            "Instance Context",
+            "Method Invocation",
+            "Field Access",
+            "Encapsulation"
+        ]
+    },
+    "c157": {
+        "Label": "Instance Method Invocation",
+        "Semantic_Tags": [
+            "Object-Oriented Programming",
+            "Method Invocation",
+            "Instance Context",
+            "Object Manipulation",
+            "Encapsulation"
+        ]
+    },
+    "c158": {
+        "Label": "Instance Method Invocation",
+        "Semantic_Tags": [
+            "Object-Oriented Programming",
+            "Method Access",
+            "Instance Context",
+            "Data Retrieval",
+            "Encapsulation"
+        ]
+    },
+    "c159": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Data Transfer",
+            "Function Arguments",
+            "Input Handling",
+            "Configuration"
+        ]
+    },
+    "c160": {
+        "Label": "Logging Message Formatting",
+        "Semantic_Tags": [
+            "Logging",
+            "Message Formatting",
+            "Error Reporting",
+            "Debugging",
+            "String Interpolation"
+        ]
+    },
+    "c161": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Property Access",
+            "Object Interaction",
+            "Java Syntax"
+        ]
+    },
+    "c162": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Service Layer Interaction",
+            "API Endpoint Access",
+            "Version Control"
+        ]
+    },
+    "c163": {
+        "Label": "Conditional Evaluation",
+        "Semantic_Tags": [
+            "Null Check",
+            "Conditional Logic",
+            "Data Validation",
+            "Boolean Expression",
+            "Control Flow"
+        ]
+    },
+    "c164": {
+        "Label": "Class and File Operations",
+        "Semantic_Tags": [
+            "Class Reflection",
+            "File Management",
+            "Parameter Parsing",
+            "Collection Handling",
+            "Object Instantiation"
+        ]
+    },
+    "c165": {
+        "Label": "Complex System Integration",
+        "Semantic_Tags": [
+            "Web Services",
+            "Data Structures",
+            "XML Parsing",
+            "Form Management",
+            "Security"
+        ]
+    },
+    "c166": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "REST API Calls",
+            "Service Layer Interaction",
+            "Method Chaining",
+            "Dot Notation",
+            "Web Service Path Access"
+        ]
+    },
+    "c167": {
+        "Label": "Null Handling and Output Operations",
+        "Semantic_Tags": [
+            "Null Check",
+            "Conditional Logic",
+            "Output Stream",
+            "Error Handling",
+            "Data Validation"
+        ]
+    },
+    "c168": {
+        "Label": "Member Access and Method Invocation",
+        "Semantic_Tags": [
+            "Object Property Access",
+            "Method Invocation",
+            "Dot Notation",
+            "Object-Oriented Programming",
+            "Java Syntax"
+        ]
+    },
+    "c169": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Command Execution",
+            "Method Parameters",
+            "Type Checking",
+            "Array Handling",
+            "Stream Processing"
+        ]
+    },
+    "c170": {
+        "Label": "Array and JSON Manipulation",
+        "Semantic_Tags": [
+            "JSON Handling",
+            "Array Conversion",
+            "Data Serialization",
+            "Character Array",
+            "Logging"
+        ]
+    },
+    "c171": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Function Arguments",
+            "Data Passing",
+            "Parameter Validation",
+            "API Interaction"
+        ]
+    },
+    "c172": {
+        "Label": "Entity Instantiation and JSON Handling",
+        "Semantic_Tags": [
+            "Object Creation",
+            "JSON Manipulation",
+            "Data Transfer Objects",
+            "Entity Management",
+            "API Interaction"
+        ]
+    },
+    "c173": {
+        "Label": "Conditional Evaluation",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Conditional Logic",
+            "Instance Checking",
+            "Null Checking",
+            "Type Comparison"
+        ]
+    },
+    "c174": {
+        "Label": "Assignment Operator Usage",
+        "Semantic_Tags": [
+            "Variable Initialization",
+            "Object Assignment",
+            "State Management",
+            "Data Binding",
+            "Conditional Assignment"
+        ]
+    },
+    "c175": {
+        "Label": "Listing Management",
+        "Semantic_Tags": [
+            "Data Structure",
+            "Object Instantiation",
+            "Method Invocation",
+            "Collection Handling",
+            "Data Retrieval"
+        ]
+    },
+    "c176": {
+        "Label": "Interface and Annotation Usage",
+        "Semantic_Tags": [
+            "Interface Implementation",
+            "Annotation Processing",
+            "Access Control",
+            "Concurrency Management",
+            "Security"
+        ]
+    },
+    "c177": {
+        "Label": "Method Invocation and Property Access",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "API Interaction",
+            "Service Layer",
+            "Version Control",
+            "Method Chaining"
+        ]
+    },
+    "c178": {
+        "Label": "Method and Property Access Operator",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Property Access",
+            "Object Interaction",
+            "Dot Notation",
+            "Java Syntax"
+        ]
+    },
+    "c179": {
+        "Label": "Configuration and Attribute Handling",
+        "Semantic_Tags": [
+            "Configuration Management",
+            "Attribute Access",
+            "File Handling",
+            "Encoding",
+            "JSON Processing"
+        ]
+    },
+    "c180": {
+        "Label": "Service Provider Interface (SPI) Usage",
+        "Semantic_Tags": [
+            "Dependency Injection",
+            "Service Abstraction",
+            "Interface Implementation",
+            "Object Management",
+            "Container Management"
+        ]
+    },
+    "c181": {
+        "Label": "Class Reference",
+        "Semantic_Tags": [
+            "Reflection",
+            "Annotation Processing",
+            "Type Checking",
+            "Class Loading",
+            "Dependency Injection"
+        ]
+    },
+    "c182": {
+        "Label": "Array Element Access and Assignment",
+        "Semantic_Tags": [
+            "Array Manipulation",
+            "Indexing",
+            "Data Assignment",
+            "Type Casting",
+            "Conditional Checks"
+        ]
+    },
+    "c183": {
+        "Label": "Field and TableField Handling",
+        "Semantic_Tags": [
+            "Field Management",
+            "TableField Operations",
+            "Data Retrieval",
+            "Type Checking",
+            "Object Casting"
+        ]
+    },
+    "c184": {
+        "Label": "Opening Parenthesis",
+        "Semantic_Tags": [
+            "StringBuffer",
+            "StringBuilder",
+            "Data Aggregation",
+            "String Manipulation",
+            "Parameter Handling"
+        ]
+    },
+    "c185": {
+        "Label": "Boolean Literal Usage",
+        "Semantic_Tags": [
+            "Boolean Assignment",
+            "Conditional Logic",
+            "Method Parameters",
+            "Access Control",
+            "Flag Management"
+        ]
+    },
+    "c186": {
+        "Label": "Logging and Message Formatting",
+        "Semantic_Tags": [
+            "Logging",
+            "Message Formatting",
+            "Debugging",
+            "Error Reporting",
+            "Log Level Management"
+        ]
+    },
+    "c187": {
+        "Label": "Array Indexing",
+        "Semantic_Tags": [
+            "Array Access",
+            "Data Storage",
+            "Index Manipulation",
+            "Collection Handling",
+            "Memory Allocation"
+        ]
+    },
+    "c188": {
+        "Label": "JSON Key Mapping",
+        "Semantic_Tags": [
+            "JSON Serialization",
+            "Data Mapping",
+            "Key-Value Storage",
+            "Data Transformation",
+            "Object Serialization"
+        ]
+    },
+    "c189": {
+        "Label": "Element and Child Retrieval",
+        "Semantic_Tags": [
+            "XML Parsing",
+            "Tree Navigation",
+            "Data Structure Traversal",
+            "Hierarchy Management",
+            "Element Access"
+        ]
+    },
+    "c190": {
+        "Label": "Class Reflection and Type Handling",
+        "Semantic_Tags": [
+            "Reflection",
+            "Type Safety",
+            "Generic Programming",
+            "Class Retrieval",
+            "Dynamic Typing"
+        ]
+    },
+    "c191": {
+        "Label": "Custom Data Structures and Validation",
+        "Semantic_Tags": [
+            "Custom Class Instantiation",
+            "Data Validation",
+            "Rule Management",
+            "Restriction Handling",
+            "Name-Value Pair Management"
+        ]
+    },
+    "c192": {
+        "Label": "Data Access and Manipulation",
+        "Semantic_Tags": [
+            "Database Interaction",
+            "URI Handling",
+            "Iterator Usage",
+            "File Processing",
+            "User Notification"
+        ]
+    },
+    "c193": {
+        "Label": "Method Invocation and Property Access",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Object Property Access",
+            "JSON Manipulation",
+            "Data Retrieval"
+        ]
+    },
+    "c194": {
+        "Label": "Type Handling and Classification",
+        "Semantic_Tags": [
+            "Type Identification",
+            "Data Typing",
+            "Type Conversion",
+            "Content Type Management",
+            "Instance Management"
+        ]
+    },
+    "c195": {
+        "Label": "Metadata and Encryption Handling",
+        "Semantic_Tags": [
+            "Metadata Management",
+            "Data Encryption",
+            "Data Decryption",
+            "Form Data Processing",
+            "Security"
+        ]
+    },
+    "c196": {
+        "Label": "Null Check and Conditional Logic",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Conditional Expressions",
+            "Error Prevention",
+            "Data Validation",
+            "Ternary Operator"
+        ]
+    },
+    "c197": {
+        "Label": "Map and HashMap Usage",
+        "Semantic_Tags": [
+            "Data Structure",
+            "Key-Value Mapping",
+            "Collection Framework",
+            "Generic Types",
+            "Data Storage"
+        ]
+    },
+    "c198": {
+        "Label": "Query Construction and Execution",
+        "Semantic_Tags": [
+            "Query Building",
+            "StringBuffer Usage",
+            "Database Interaction",
+            "Query Execution",
+            "Data Retrieval"
+        ]
+    },
+    "c199": {
+        "Label": "Statement Terminator",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Statement Separation",
+            "Java Syntax",
+            "Code Parsing"
+        ]
+    },
+    "c200": {
+        "Label": "Instance Reference",
+        "Semantic_Tags": [
+            "Object Context",
+            "Method Access",
+            "Field Access",
+            "Instance Methods",
+            "Class Instance"
+        ]
+    },
+    "c201": {
+        "Label": "Instance Method Invocation",
+        "Semantic_Tags": [
+            "Object Context",
+            "Method Chaining",
+            "JSON Handling",
+            "Instance Reference",
+            "Object Construction"
+        ]
+    },
+    "c202": {
+        "Label": "JSON Object Manipulation",
+        "Semantic_Tags": [
+            "JSON Handling",
+            "Data Mapping",
+            "Object Construction",
+            "Field Assignment",
+            "Data Retrieval"
+        ]
+    },
+    "c203": {
+        "Label": "Variable Initialization",
+        "Semantic_Tags": [
+            "Variable Declaration",
+            "Default Assignment",
+            "Data Type Initialization",
+            "Object Instantiation",
+            "Control Variables"
+        ]
+    },
+    "c204": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Data Passing",
+            "Function Arguments",
+            "Input Validation",
+            "Dynamic Invocation"
+        ]
+    },
+    "c205": {
+        "Label": "Varargs Parameter Handling",
+        "Semantic_Tags": [
+            "Variable Arguments",
+            "Method Overloading",
+            "Parameter Processing",
+            "Dynamic Argument Handling",
+            "Java Varargs"
+        ]
+    },
+    "c206": {
+        "Label": "Entity Retrieval by ID",
+        "Semantic_Tags": [
+            "Data Access",
+            "Entity Management",
+            "ID-Based Retrieval",
+            "Service Layer",
+            "Method Definition"
+        ]
+    },
+    "c207": {
+        "Label": "Instance Method Access",
+        "Semantic_Tags": [
+            "Object-Oriented Programming",
+            "Instance Context",
+            "Method Invocation",
+            "Null Check",
+            "Conditional Logic"
+        ]
+    },
+    "c208": {
+        "Label": "Entity and Syntax Retrieval",
+        "Semantic_Tags": [
+            "Entity Management",
+            "Syntax Retrieval",
+            "Data Access",
+            "Service Interaction",
+            "Object Initialization"
+        ]
+    },
+    "c209": {
+        "Label": "Time and String Utilities",
+        "Semantic_Tags": [
+            "Time Conversion",
+            "String Manipulation",
+            "Array Operations",
+            "Parameter Validation",
+            "Concurrency Control"
+        ]
+    },
+    "c210": {
+        "Label": "Object Instantiation",
+        "Semantic_Tags": [
+            "Object Creation",
+            "Constructor Invocation",
+            "Instance Initialization",
+            "Memory Allocation",
+            "Class Instantiation"
+        ]
+    },
+    "c211": {
+        "Label": "Class Handling and Annotation Processing",
+        "Semantic_Tags": [
+            "Class Reflection",
+            "Annotation Retrieval",
+            "Dependency Management",
+            "Proxy Creation",
+            "Type Handling"
+        ]
+    },
+    "c212": {
+        "Label": "Field Management",
+        "Semantic_Tags": [
+            "Field Operations",
+            "Data Handling",
+            "Method Definition",
+            "Parameter Passing",
+            "Object Manipulation"
+        ]
+    },
+    "c213": {
+        "Label": "Array Length Access",
+        "Semantic_Tags": [
+            "Array Handling",
+            "Conditional Logic",
+            "Loop Control",
+            "Data Structure Manipulation",
+            "Indexing"
+        ]
+    },
+    "c214": {
+        "Label": "Error Handling and Reporting",
+        "Semantic_Tags": [
+            "Exception Management",
+            "Error Logging",
+            "Error Propagation",
+            "Error Checking",
+            "Error Response"
+        ]
+    },
+    "c215": {
+        "Label": "Comma Separator",
+        "Semantic_Tags": [
+            "List Separation",
+            "Parameter Handling",
+            "Data Aggregation",
+            "Syntax Structure"
+        ]
+    },
+    "c216": {
+        "Label": "Parameter Null Check",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Parameter Validation",
+            "Conditional Logic",
+            "Error Prevention",
+            "Input Handling"
+        ]
+    },
+    "c217": {
+        "Label": "Control Flow Structures",
+        "Semantic_Tags": [
+            "Looping Constructs",
+            "Conditional Logic",
+            "Iteration",
+            "Control Statements",
+            "Data Processing"
+        ]
+    },
+    "c218": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Expression Termination",
+            "Method Invocation",
+            "Conditional Logic",
+            "Type Casting",
+            "Ternary Operator"
+        ]
+    },
+    "c219": {
+        "Label": "Method Invocation and Object Instantiation",
+        "Semantic_Tags": [
+            "Method Call",
+            "Object Creation",
+            "Conditional Logic",
+            "Type Checking",
+            "Data Parsing"
+        ]
+    },
+    "c220": {
+        "Label": "Data Type Handling and Conversion",
+        "Semantic_Tags": [
+            "Type Checking",
+            "Date Manipulation",
+            "Instanceof Usage",
+            "Data Conversion",
+            "Field Update"
+        ]
+    },
+    "c221": {
+        "Label": "JSON Mapping and Data Retrieval",
+        "Semantic_Tags": [
+            "JSON Handling",
+            "Data Mapping",
+            "Method Invocation",
+            "String Manipulation",
+            "Conditional Logic"
+        ]
+    },
+    "c222": {
+        "Label": "String Emptiness Check",
+        "Semantic_Tags": [
+            "String Validation",
+            "Null Check",
+            "Conditional Logic",
+            "Data Integrity",
+            "Input Validation"
+        ]
+    },
+    "c223": {
+        "Label": "Method and Property Access Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Invocation",
+            "Property Access",
+            "Object Interaction",
+            "Attribute Retrieval"
+        ]
+    },
+    "c224": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Object Manipulation",
+            "Data Transfer",
+            "Function Arguments",
+            "API Interaction"
+        ]
+    },
+    "c225": {
+        "Label": "String Variable Declaration",
+        "Semantic_Tags": [
+            "Variable Initialization",
+            "String Handling",
+            "Data Storage",
+            "Parameter Passing",
+            "Attribute Retrieval"
+        ]
+    },
+    "c226": {
+        "Label": "Access Modifier Declaration",
+        "Semantic_Tags": [
+            "Method Visibility",
+            "API Design",
+            "Encapsulation",
+            "Class Interface",
+            "Java Access Control"
+        ]
+    },
+    "c227": {
+        "Label": "JSON Object Instantiation",
+        "Semantic_Tags": [
+            "JSON Handling",
+            "Data Structure",
+            "Object Creation",
+            "Data Parsing",
+            "API Response Processing"
+        ]
+    },
+    "c228": {
+        "Label": "Method Parameter Handling",
+        "Semantic_Tags": [
+            "Method Definition",
+            "Parameter Passing",
+            "Exception Handling",
+            "Generic Types",
+            "HTTP Handling"
+        ]
+    },
+    "c229": {
+        "Label": "Node Manipulation and Parsing",
+        "Semantic_Tags": [
+            "JSON Processing",
+            "XML Parsing",
+            "Data Structure",
+            "Tree Navigation",
+            "Character Handling"
+        ]
+    },
+    "c230": {
+        "Label": "Data Type Conversion and Validation",
+        "Semantic_Tags": [
+            "Type Casting",
+            "Data Retrieval",
+            "Value Parsing",
+            "Data Validation",
+            "Field Access"
+        ]
+    },
+    "c231": {
+        "Label": "Block Termination",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Control Flow",
+            "Conditional Logic",
+            "Error Management",
+            "Java Syntax"
+        ]
+    },
+    "c232": {
+        "Label": "Array Declaration and Initialization",
+        "Semantic_Tags": [
+            "Array Handling",
+            "Data Structure",
+            "Memory Allocation",
+            "Type Safety",
+            "Java Generics"
+        ]
+    },
+    "c233": {
+        "Label": "Conditional Logic Evaluation",
+        "Semantic_Tags": [
+            "Instance Checking",
+            "Null Checking",
+            "Type Comparison",
+            "Conditional Branching",
+            "Control Flow"
+        ]
+    },
+    "c234": {
+        "Label": "Data Transformation and Retrieval",
+        "Semantic_Tags": [
+            "Data Mapping",
+            "Field Access",
+            "Instance Creation",
+            "Date Handling",
+            "Type Checking"
+        ]
+    },
+    "c235": {
+        "Label": "Argument Processing and Manipulation",
+        "Semantic_Tags": [
+            "Parameter Handling",
+            "Method Invocation",
+            "Type Reflection",
+            "Array Manipulation",
+            "Data Initialization"
+        ]
+    },
+    "c236": {
+        "Label": "Object Instantiation",
+        "Semantic_Tags": [
+            "Collection Initialization",
+            "Array Creation",
+            "Data Structure Allocation",
+            "Memory Allocation",
+            "Object Creation"
+        ]
+    },
+    "c237": {
+        "Label": "Throwable Parameter Handling",
+        "Semantic_Tags": [
+            "Logging",
+            "Error Handling",
+            "Exception Management",
+            "Debugging",
+            "Throwable"
+        ]
+    },
+    "c238": {
+        "Label": "State Management",
+        "Semantic_Tags": [
+            "State Retrieval",
+            "State Assignment",
+            "Conditional State Handling",
+            "Flow Control",
+            "State Preparation"
+        ]
+    },
+    "c239": {
+        "Label": "Identifier Management and Mapping",
+        "Semantic_Tags": [
+            "Identifier Retrieval",
+            "Data Mapping",
+            "Object Identification",
+            "Parameter Handling",
+            "JSON Serialization"
+        ]
+    },
+    "c240": {
+        "Label": "Method Parameter Handling",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Parameter Passing",
+            "String Manipulation",
+            "Data Retrieval",
+            "Conditional Logic"
+        ]
+    },
+    "c241": {
+        "Label": "Client Management and Invocation",
+        "Semantic_Tags": [
+            "Client Initialization",
+            "Service Invocation",
+            "Resource Management",
+            "WebSocket Communication",
+            "HTTP Client Handling"
+        ]
+    },
+    "c242": {
+        "Label": "Dot Notation for Property Access",
+        "Semantic_Tags": [
+            "Object Property Access",
+            "Class Member Access",
+            "Namespace Resolution",
+            "Hierarchical Data Structure",
+            "Data Mapping"
+        ]
+    },
+    "c243": {
+        "Label": "Dependency Injection and Interception",
+        "Semantic_Tags": [
+            "Dependency Injection",
+            "Interception",
+            "Reflection",
+            "Class Processing",
+            "Constructor Handling"
+        ]
+    },
+    "c244": {
+        "Label": "Method Parameter Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Declaration",
+            "Parameter Handling",
+            "Syntax Structure",
+            "Exception Handling",
+            "Java Syntax"
+        ]
+    },
+    "c245": {
+        "Label": "Error and Status Code Handling",
+        "Semantic_Tags": [
+            "Error Management",
+            "Status Code Evaluation",
+            "Exception Handling",
+            "Unicode Processing",
+            "HTTP Response"
+        ]
+    },
+    "c246": {
+        "Label": "User and Form Management",
+        "Semantic_Tags": [
+            "User Operations",
+            "Form Handling",
+            "Validation",
+            "Command Execution",
+            "Date Management"
+        ]
+    },
+    "c247": {
+        "Label": "Parameter Handling for Web Service Operations",
+        "Semantic_Tags": [
+            "Web Service Interaction",
+            "Parameter Passing",
+            "CRUD Operations",
+            "API Method Invocation",
+            "Data Management"
+        ]
+    },
+    "c248": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "API Interaction",
+            "Data Retrieval",
+            "CRUD Operations",
+            "Web Service Calls",
+            "Parameter Passing"
+        ]
+    },
+    "c249": {
+        "Label": "Class and Interface Management",
+        "Semantic_Tags": [
+            "Class Reflection",
+            "Interface Handling",
+            "Factory Pattern",
+            "Proxy Creation",
+            "Data Structure Manipulation"
+        ]
+    },
+    "c250": {
+        "Label": "XSD Restriction Management",
+        "Semantic_Tags": [
+            "XML Schema",
+            "Data Validation",
+            "Restriction Comparison",
+            "Schema Update",
+            "Enumeration Handling"
+        ]
+    },
+    "c251": {
+        "Label": "Generic Type Inference",
+        "Semantic_Tags": [
+            "Generics",
+            "Type Inference",
+            "Collection Initialization",
+            "Java 7 Diamond Operator",
+            "Data Structures"
+        ]
+    },
+    "c252": {
+        "Label": "Statement Terminator",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Java Semantics",
+            "Code Parsing",
+            "Control Flow"
+        ]
+    },
+    "c253": {
+        "Label": "Assignment Operator",
+        "Semantic_Tags": [
+            "Variable Initialization",
+            "State Management",
+            "Object Assignment",
+            "Conditional Assignment",
+            "Data Binding"
+        ]
+    },
+    "c254": {
+        "Label": "Method and Property Access Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Invocation",
+            "Property Access",
+            "Object-Oriented Programming",
+            "Java Syntax"
+        ]
+    },
+    "c255": {
+        "Label": "Utility Class Utilization",
+        "Semantic_Tags": [
+            "Utility Classes",
+            "Data Access",
+            "Form Handling",
+            "Command Execution",
+            "Caching Mechanism"
+        ]
+    },
+    "c256": {
+        "Label": "Generic Type Inference",
+        "Semantic_Tags": [
+            "Type Safety",
+            "Generics",
+            "Collection Initialization",
+            "Java 7 Features",
+            "Type Inference"
+        ]
+    },
+    "c257": {
+        "Label": "Attribute Management",
+        "Semantic_Tags": [
+            "Attribute Access",
+            "Configuration Handling",
+            "Data Retrieval",
+            "Conditional Logic",
+            "Object Manipulation"
+        ]
+    },
+    "c258": {
+        "Label": "Object Instantiation with JSON Handling",
+        "Semantic_Tags": [
+            "Object Creation",
+            "JSON Processing",
+            "Data Transfer",
+            "API Interaction",
+            "Constructor Invocation"
+        ]
+    },
+    "c259": {
+        "Label": "Multi-Catch Exception Handling",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Error Management",
+            "Java 7 Features",
+            "Control Flow",
+            "Robustness"
+        ]
+    },
+    "c260": {
+        "Label": "Enhanced For Loop Iteration",
+        "Semantic_Tags": [
+            "Collection Traversal",
+            "Iteration",
+            "Data Structures",
+            "Loop Control",
+            "Java Syntax"
+        ]
+    },
+    "c261": {
+        "Label": "Type Casting",
+        "Semantic_Tags": [
+            "Type Conversion",
+            "Object Casting",
+            "Generics Handling",
+            "Instance Checking",
+            "Polymorphism"
+        ]
+    },
+    "c262": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "API Interaction",
+            "Service Layer",
+            "Version Control"
+        ]
+    },
+    "c263": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax",
+            "Method Invocation",
+            "Expression Termination",
+            "Code Structure",
+            "Java Syntax"
+        ]
+    },
+    "c264": {
+        "Label": "Statement Terminator",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Statement Delimitation",
+            "Java Syntax",
+            "Code Parsing"
+        ]
+    },
+    "c265": {
+        "Label": "String Conversion and Encoding",
+        "Semantic_Tags": [
+            "String Representation",
+            "Data Conversion",
+            "Base64 Encoding",
+            "UUID Generation",
+            "Logging"
+        ]
+    },
+    "c266": {
+        "Label": "Negative Index Usage",
+        "Semantic_Tags": [
+            "Index Checking",
+            "String Manipulation",
+            "Loop Control",
+            "Conditional Logic",
+            "Error Handling"
+        ]
+    },
+    "c267": {
+        "Label": "JSON Object Manipulation",
+        "Semantic_Tags": [
+            "JSON Handling",
+            "Data Serialization",
+            "Object Instantiation",
+            "Conditional Logic",
+            "Method Invocation"
+        ]
+    },
+    "c268": {
+        "Label": "Iteration Control Structure",
+        "Semantic_Tags": [
+            "Looping",
+            "Collection Traversal",
+            "Iteration",
+            "Control Flow",
+            "Data Processing"
+        ]
+    },
+    "c269": {
+        "Label": "Lambda Expression and Stream Iteration",
+        "Semantic_Tags": [
+            "Lambda Expressions",
+            "Stream API",
+            "Functional Programming",
+            "Collection Processing",
+            "Java 8 Features"
+        ]
+    },
+    "c270": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Object Access",
+            "Conditional Checks",
+            "Null Checks"
+        ]
+    },
+    "c271": {
+        "Label": "Method Parameter Declaration",
+        "Semantic_Tags": [
+            "Method Signature",
+            "Parameter Handling",
+            "Function Definition",
+            "Java Syntax",
+            "Code Structure"
+        ]
+    },
+    "c272": {
+        "Label": "Enum Type Management",
+        "Semantic_Tags": [
+            "Enum Handling",
+            "Type Assignment",
+            "Method Invocation",
+            "Field Configuration",
+            "Conditional Logic"
+        ]
+    },
+    "c273": {
+        "Label": "Annotation Retrieval and Checking",
+        "Semantic_Tags": [
+            "Reflection",
+            "Annotation Processing",
+            "Metadata Access",
+            "Type Checking",
+            "Code Introspection"
+        ]
+    },
+    "c274": {
+        "Label": "Lambda Expression Iteration",
+        "Semantic_Tags": [
+            "Functional Programming",
+            "Collection Processing",
+            "Lambda Expressions",
+            "Stream API",
+            "Iteration"
+        ]
+    },
+    "c275": {
+        "Label": "Conditional Check",
+        "Semantic_Tags": [
+            "Comparison Operations",
+            "Control Flow",
+            "Null Check",
+            "Array Length",
+            "Method Invocation"
+        ]
+    },
+    "c276": {
+        "Label": "Generic Type Handling",
+        "Semantic_Tags": [
+            "Generics",
+            "Type Safety",
+            "Reflection",
+            "Parameterized Types",
+            "Type Casting"
+        ]
+    },
+    "c277": {
+        "Label": "Exception Handling",
+        "Semantic_Tags": [
+            "Error Management",
+            "Exception Catching",
+            "Throwable Objects",
+            "Error Propagation",
+            "Exception Hierarchy"
+        ]
+    },
+    "c278": {
+        "Label": "Configuration and Data Handling",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Builder Pattern",
+            "Data Validation",
+            "Enumeration Management",
+            "Profile Management"
+        ]
+    },
+    "c279": {
+        "Label": "Array Length Access",
+        "Semantic_Tags": [
+            "Array Handling",
+            "Conditional Logic",
+            "Loop Control",
+            "Data Structure Manipulation",
+            "Control Flow"
+        ]
+    },
+    "c280": {
+        "Label": "Dot Notation for Method and Property Access",
+        "Semantic_Tags": [
+            "Object Property Access",
+            "Method Invocation",
+            "Collection Operations",
+            "Conditional Checks",
+            "Data Retrieval"
+        ]
+    },
+    "c281": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "JSON Manipulation",
+            "Data Insertion",
+            "Object Property Access",
+            "Method Call"
+        ]
+    },
+    "c282": {
+        "Label": "Value Handling and Manipulation",
+        "Semantic_Tags": [
+            "Field Management",
+            "Value Retrieval",
+            "Value Comparison",
+            "Default Value Handling",
+            "Method Invocation"
+        ]
+    },
+    "c283": {
+        "Label": "Web Service Path Access",
+        "Semantic_Tags": [
+            "REST API",
+            "Endpoint Management",
+            "Service Invocation",
+            "Version Control",
+            "Path Configuration"
+        ]
+    },
+    "c284": {
+        "Label": "Class and Annotation Identification",
+        "Semantic_Tags": [
+            "Class Instantiation",
+            "Annotation Handling",
+            "Type Checking",
+            "Field Management",
+            "User Management"
+        ]
+    },
+    "c285": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax",
+            "Expression Termination",
+            "Method Invocation",
+            "Parameter Handling",
+            "Code Structure"
+        ]
+    },
+    "c286": {
+        "Label": "Dot Notation for Access and Invocation",
+        "Semantic_Tags": [
+            "Object Property Access",
+            "Method Invocation",
+            "Namespace Resolution",
+            "Chained Calls",
+            "Field Access"
+        ]
+    },
+    "c287": {
+        "Label": "Conditional Evaluation",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Boolean Logic",
+            "Decision Making",
+            "Null Check",
+            "Logical Operators"
+        ]
+    },
+    "c288": {
+        "Label": "Method Parameter Handling",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Varargs Usage",
+            "Logging",
+            "Reflection",
+            "Generic Methods"
+        ]
+    },
+    "c289": {
+        "Label": "Statement Terminator",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Java Semantics",
+            "Statement Completion",
+            "Code Parsing"
+        ]
+    },
+    "c290": {
+        "Label": "Generic Type Usage",
+        "Semantic_Tags": [
+            "Generics",
+            "Type Safety",
+            "Parameterized Types",
+            "Java Collections",
+            "Reflection"
+        ]
+    },
+    "c291": {
+        "Label": "Boolean Variable Declaration",
+        "Semantic_Tags": [
+            "Boolean Logic",
+            "Variable Initialization",
+            "Conditional Evaluation",
+            "Flag Management",
+            "Type Checking"
+        ]
+    },
+    "c292": {
+        "Label": "Parameter Null and Empty Check",
+        "Semantic_Tags": [
+            "Null Check",
+            "Input Validation",
+            "Parameter Handling",
+            "String Operations",
+            "Conditional Logic"
+        ]
+    },
+    "c293": {
+        "Label": "Web Service Path Invocation",
+        "Semantic_Tags": [
+            "REST API",
+            "Endpoint Management",
+            "Service Invocation",
+            "User Management",
+            "Configuration Handling"
+        ]
+    },
+    "c294": {
+        "Label": "String Case Manipulation",
+        "Semantic_Tags": [
+            "String Transformation",
+            "Case Conversion",
+            "Text Comparison",
+            "String Normalization",
+            "Text Processing"
+        ]
+    },
+    "c295": {
+        "Label": "Access Modifier Declaration",
+        "Semantic_Tags": [
+            "Method Declaration",
+            "Access Control",
+            "Static Methods",
+            "Public API",
+            "Visibility"
+        ]
+    },
+    "c296": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Loop Control",
+            "Syntax Structure",
+            "Iteration",
+            "Code Block Delimitation",
+            "Java Syntax"
+        ]
+    },
+    "c297": {
+        "Label": "Long Data Type Usage",
+        "Semantic_Tags": [
+            "Data Type Handling",
+            "Parameter Definition",
+            "Database Interaction",
+            "Type Conversion",
+            "Numeric Operations"
+        ]
+    },
+    "c298": {
+        "Label": "Date and Time Management",
+        "Semantic_Tags": [
+            "Date Handling",
+            "Time Calculation",
+            "Field Update",
+            "Keep-Alive Configuration",
+            "Polling Mechanism"
+        ]
+    },
+    "c299": {
+        "Label": "Exception Handling and Conditional Logic",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Conditional Statements",
+            "Error Management",
+            "Control Flow",
+            "Java Exceptions"
+        ]
+    },
+    "c300": {
+        "Label": "HTTP Response Handling",
+        "Semantic_Tags": [
+            "HTTP Communication",
+            "Response Management",
+            "Web Services",
+            "Data Serialization",
+            "Error Handling"
+        ]
+    },
+    "c301": {
+        "Label": "Exception Handling",
+        "Semantic_Tags": [
+            "Error Handling",
+            "Exception Propagation",
+            "Catch Block",
+            "Exception Logging",
+            "Exception Chaining"
+        ]
+    },
+    "c302": {
+        "Label": "User Management Operations",
+        "Semantic_Tags": [
+            "User Authentication",
+            "User Profile Management",
+            "Access Control",
+            "Data Retrieval",
+            "Account Activation"
+        ]
+    },
+    "c303": {
+        "Label": "Conditional Statement Closing Parenthesis",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Conditional Logic",
+            "Syntax Structure",
+            "Code Block Delimitation",
+            "Java Syntax"
+        ]
+    },
+    "c304": {
+        "Label": "Web Service Path and Entity Management",
+        "Semantic_Tags": [
+            "Web Service Interaction",
+            "Entity CRUD Operations",
+            "Data Retrieval",
+            "Form Management",
+            "Notification Handling"
+        ]
+    },
+    "c305": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Object Property Access",
+            "Method Chaining",
+            "Object-Oriented Programming",
+            "Field Assignment",
+            "Data Manipulation"
+        ]
+    },
+    "c306": {
+        "Label": "Collection Element Retrieval",
+        "Semantic_Tags": [
+            "Collection Access",
+            "Data Retrieval",
+            "Index-Based Access",
+            "Map Lookup",
+            "List Access"
+        ]
+    },
+    "c307": {
+        "Label": "Statement Terminator",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Statement Separation",
+            "Java Syntax",
+            "Code Parsing"
+        ]
+    },
+    "c308": {
+        "Label": "Type Casting and Method Invocation",
+        "Semantic_Tags": [
+            "Type Casting",
+            "Method Invocation",
+            "Collection Manipulation",
+            "Data Retrieval",
+            "Conditional Logic"
+        ]
+    },
+    "c309": {
+        "Label": "Method Invocation and Parameter Handling",
+        "Semantic_Tags": [
+            "Web Service Interaction",
+            "API Method Calls",
+            "Parameter Passing",
+            "Version Control",
+            "Data Retrieval"
+        ]
+    },
+    "c310": {
+        "Label": "Ternary Conditional Operator",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Null Handling",
+            "Value Assignment",
+            "Short-Circuit Evaluation",
+            "Control Flow"
+        ]
+    },
+    "c311": {
+        "Label": "Static Method Declaration",
+        "Semantic_Tags": [
+            "Method Declaration",
+            "Static Context",
+            "Utility Methods",
+            "Class-Level Operations",
+            "Shared Resources"
+        ]
+    },
+    "c312": {
+        "Label": "Method Block Closure",
+        "Semantic_Tags": [
+            "Method Definition",
+            "Code Block",
+            "Syntax Structure",
+            "Java Methods",
+            "Function Closure"
+        ]
+    },
+    "c313": {
+        "Label": "Long Data Type Handling",
+        "Semantic_Tags": [
+            "Data Type Conversion",
+            "Database Interaction",
+            "Numeric Parsing",
+            "SQL Parameter Binding",
+            "ResultSet Processing"
+        ]
+    },
+    "c314": {
+        "Label": "Method and Constructor Reference",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Constructor Reference",
+            "Stream API",
+            "Functional Programming",
+            "Object Property Access"
+        ]
+    },
+    "c315": {
+        "Label": "Form and Field Management",
+        "Semantic_Tags": [
+            "Form Handling",
+            "Field Manipulation",
+            "Data Retrieval",
+            "SQL Interaction",
+            "Object Conversion"
+        ]
+    },
+    "c316": {
+        "Label": "Procedure Mapping Interface",
+        "Semantic_Tags": [
+            "Interface Usage",
+            "Procedure Mapping",
+            "Data Retrieval",
+            "Form Handling",
+            "SQL Interaction"
+        ]
+    },
+    "c317": {
+        "Label": "Logical OR and Bitwise Shift Operations",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Null Check",
+            "Instance Checking",
+            "Bit Manipulation",
+            "Data Validation"
+        ]
+    },
+    "c318": {
+        "Label": "Instance Field and Method Access",
+        "Semantic_Tags": [
+            "Object-Oriented Programming",
+            "Instance Variables",
+            "Method Invocation",
+            "State Management",
+            "Class Encapsulation"
+        ]
+    },
+    "c319": {
+        "Label": "Exception Declaration",
+        "Semantic_Tags": [
+            "Error Handling",
+            "Exception Propagation",
+            "Checked Exceptions",
+            "Method Signature",
+            "Java Exceptions"
+        ]
+    },
+    "c320": {
+        "Label": "Object Initialization and Usage",
+        "Semantic_Tags": [
+            "Object Creation",
+            "Data Handling",
+            "Parameter Passing",
+            "Collection Management",
+            "Conditional Logic"
+        ]
+    },
+    "c321": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Signature",
+            "Parameter Handling",
+            "Syntax Structure",
+            "Code Block Delimitation"
+        ]
+    },
+    "c322": {
+        "Label": "String Construction and Request Execution",
+        "Semantic_Tags": [
+            "StringBuilder",
+            "String Concatenation",
+            "Request Execution",
+            "Data Aggregation",
+            "Method Chaining"
+        ]
+    },
+    "c323": {
+        "Label": "Null Check Operator",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Null Safety",
+            "Control Flow",
+            "Logical Operations"
+        ]
+    },
+    "c324": {
+        "Label": "Object Instantiation Closing Parenthesis",
+        "Semantic_Tags": [
+            "Object Creation",
+            "Constructor Invocation",
+            "Syntax",
+            "Java Collections",
+            "JSON Handling"
+        ]
+    },
+    "c325": {
+        "Label": "Field Type Enumeration",
+        "Semantic_Tags": [
+            "Enum Usage",
+            "Field Configuration",
+            "Data Type Specification",
+            "Form Field Handling",
+            "Type Safety"
+        ]
+    },
+    "c326": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Control Structures",
+            "Method Invocation",
+            "Condition Evaluation",
+            "Loop Constructs",
+            "Syntax"
+        ]
+    },
+    "c327": {
+        "Label": "Service Ticket Validation",
+        "Semantic_Tags": [
+            "Authentication",
+            "Conditional Logic",
+            "Null Check",
+            "Service Access",
+            "Security"
+        ]
+    },
+    "c328": {
+        "Label": "Conditional Expression Parenthesis",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Null Check",
+            "Collection Handling",
+            "String Validation",
+            "Conditional Logic"
+        ]
+    },
+    "c329": {
+        "Label": "JSON Data Insertion",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Insertion",
+            "Collection Handling",
+            "Key-Value Storage",
+            "Data Serialization"
+        ]
+    },
+    "c330": {
+        "Label": "Nested Property Access",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Field Type Identification",
+            "JSON Mapping",
+            "Procedure Mapping",
+            "Error Code Management"
+        ]
+    },
+    "c331": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Syntax Structure",
+            "Code Termination",
+            "Expression Closure",
+            "Java Syntax"
+        ]
+    },
+    "c332": {
+        "Label": "String Case Transformation",
+        "Semantic_Tags": [
+            "String Manipulation",
+            "Case Conversion",
+            "Data Normalization",
+            "Text Processing",
+            "Naming Conventions"
+        ]
+    },
+    "c333": {
+        "Label": "Collection and String Emptiness Check",
+        "Semantic_Tags": [
+            "Collection Handling",
+            "String Validation",
+            "Conditional Logic",
+            "Null Safety",
+            "Data Integrity"
+        ]
+    },
+    "c334": {
+        "Label": "String Type Usage",
+        "Semantic_Tags": [
+            "Data Type Specification",
+            "Collection Framework",
+            "Type Casting",
+            "Generics",
+            "String Manipulation"
+        ]
+    },
+    "c335": {
+        "Label": "Parameter Declaration",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Variable Initialization",
+            "Data Types",
+            "Function Signature",
+            "Parameter Handling"
+        ]
+    },
+    "c336": {
+        "Label": "Exception Handling and Method Declaration",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Method Declaration",
+            "Java Syntax",
+            "Error Propagation",
+            "Method Signature"
+        ]
+    },
+    "c337": {
+        "Label": "Event and Component Handling",
+        "Semantic_Tags": [
+            "Event Management",
+            "Component Interaction",
+            "Instance Checking",
+            "Error Handling",
+            "Data Processing"
+        ]
+    },
+    "c338": {
+        "Label": "Data Type Handling",
+        "Semantic_Tags": [
+            "Primitive Types",
+            "Wrapper Classes",
+            "Type Conversion",
+            "Data Validation",
+            "Date Manipulation"
+        ]
+    },
+    "c339": {
+        "Label": "Web Service Path Invocation",
+        "Semantic_Tags": [
+            "Web Service",
+            "API Endpoint",
+            "Service Method Call",
+            "Versioning",
+            "Path Management"
+        ]
+    },
+    "c340": {
+        "Label": "Loop Control Structure",
+        "Semantic_Tags": [
+            "Iteration",
+            "Array Traversal",
+            "Indexing",
+            "Control Flow",
+            "Loop Initialization"
+        ]
+    },
+    "c341": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Conditional Check",
+            "Method Invocation",
+            "Null Check",
+            "Control Flow",
+            "Syntax Structure"
+        ]
+    },
+    "c342": {
+        "Label": "Collection Element Addition",
+        "Semantic_Tags": [
+            "Collection Manipulation",
+            "Data Aggregation",
+            "Dynamic Data Structures",
+            "Object Management",
+            "List Operations"
+        ]
+    },
+    "c343": {
+        "Label": "String Concatenation Operator",
+        "Semantic_Tags": [
+            "String Manipulation",
+            "Data Aggregation",
+            "Expression Evaluation",
+            "Index Calculation",
+            "Output Formatting"
+        ]
+    },
+    "c344": {
+        "Label": "Access Modifier Specification",
+        "Semantic_Tags": [
+            "Encapsulation",
+            "Access Control",
+            "Method Visibility",
+            "Object-Oriented Design",
+            "Code Security"
+        ]
+    },
+    "c345": {
+        "Label": "Loop and Index Variable",
+        "Semantic_Tags": [
+            "Iteration Control",
+            "Array Indexing",
+            "Loop Counter",
+            "Data Access",
+            "Control Flow"
+        ]
+    },
+    "c346": {
+        "Label": "Variable Initialization",
+        "Semantic_Tags": [
+            "Variable Declaration",
+            "Default Assignment",
+            "Object Instantiation",
+            "Primitive Initialization",
+            "Null Assignment"
+        ]
+    },
+    "c347": {
+        "Label": "Access Modifier",
+        "Semantic_Tags": [
+            "Encapsulation",
+            "Method Visibility",
+            "Inheritance",
+            "Access Control",
+            "Class Design"
+        ]
+    },
+    "c348": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax Structure",
+            "Expression Termination",
+            "Method Invocation",
+            "Parameter Grouping",
+            "Code Block Closure"
+        ]
+    },
+    "c349": {
+        "Label": "Wildcard Type Usage",
+        "Semantic_Tags": [
+            "Generics",
+            "Type Safety",
+            "Type Inference",
+            "Reflection",
+            "Parameterized Types"
+        ]
+    },
+    "c350": {
+        "Label": "Conditional Expression",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Conditional Logic",
+            "Boolean Evaluation",
+            "Decision Making",
+            "Comparison Operations"
+        ]
+    },
+    "c351": {
+        "Label": "Field and Method Access Operator",
+        "Semantic_Tags": [
+            "Object Property Access",
+            "Method Invocation",
+            "Field Assignment",
+            "Conditional Logic",
+            "Data Manipulation"
+        ]
+    },
+    "c352": {
+        "Label": "MultiChoice Field Handling",
+        "Semantic_Tags": [
+            "Form Field Management",
+            "Data Type Casting",
+            "Choice Selection",
+            "Field Value Retrieval",
+            "Title Case Conversion"
+        ]
+    },
+    "c353": {
+        "Label": "Null Check Operator",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Conditional Logic",
+            "Control Flow",
+            "Error Prevention",
+            "Data Validation"
+        ]
+    },
+    "c354": {
+        "Label": "Variable Initialization and Assignment",
+        "Semantic_Tags": [
+            "Loop Control",
+            "Variable Assignment",
+            "Iteration",
+            "Indexing",
+            "Control Structures"
+        ]
+    },
+    "c355": {
+        "Label": "Method Invocation and Property Access",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Property Access",
+            "Null Check",
+            "String Manipulation"
+        ]
+    },
+    "c356": {
+        "Label": "Logical Negation",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Boolean Evaluation",
+            "Control Flow",
+            "Negation Operator",
+            "Decision Making"
+        ]
+    },
+    "c357": {
+        "Label": "Method Invocation",
+        "Semantic_Tags": [
+            "Method Calls",
+            "Object-Oriented Programming",
+            "Data Retrieval",
+            "Client-Server Interaction",
+            "Utility Methods"
+        ]
+    },
+    "c358": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax Structure",
+            "Code Block Delimitation",
+            "Expression Termination",
+            "Control Flow",
+            "Method Invocation"
+        ]
+    },
+    "c359": {
+        "Label": "Exception Handling",
+        "Semantic_Tags": [
+            "Error Propagation",
+            "Exception Hierarchy",
+            "Error Logging",
+            "Throwable Interface",
+            "Exception Chaining"
+        ]
+    },
+    "c360": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Type Casting",
+            "Conditional Expression",
+            "Method Invocation",
+            "Instance Check",
+            "Null Handling"
+        ]
+    },
+    "c361": {
+        "Label": "Generic Type Declaration",
+        "Semantic_Tags": [
+            "Collection Framework",
+            "Generics",
+            "Type Safety",
+            "Data Structures",
+            "Java Syntax"
+        ]
+    },
+    "c362": {
+        "Label": "Statement Terminator",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Java Semantics",
+            "Control Flow",
+            "Code Execution"
+        ]
+    },
+    "c363": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Data Handling",
+            "Encryption",
+            "Database Operations",
+            "Flow Control"
+        ]
+    },
+    "c364": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Logging",
+            "Comparison",
+            "Conditional Logic",
+            "Object Handling"
+        ]
+    },
+    "c365": {
+        "Label": "Object Construction and Return",
+        "Semantic_Tags": [
+            "Object Instantiation",
+            "Return Statement",
+            "Data Transfer",
+            "JSON Handling",
+            "Method Chaining"
+        ]
+    },
+    "c366": {
+        "Label": "Variable Assignment",
+        "Semantic_Tags": [
+            "Variable Initialization",
+            "Data Storage",
+            "Object Creation",
+            "Type Casting",
+            "Collection Initialization"
+        ]
+    },
+    "c367": {
+        "Label": "Null and Empty Check",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Input Validation",
+            "Conditional Logic",
+            "Data Integrity",
+            "Error Prevention"
+        ]
+    },
+    "c368": {
+        "Label": "Loop Control and Increment Operations",
+        "Semantic_Tags": [
+            "Loop Iteration",
+            "Increment Operator",
+            "Control Flow",
+            "Index Management",
+            "Loop Continuation"
+        ]
+    },
+    "c369": {
+        "Label": "Boolean Type Usage",
+        "Semantic_Tags": [
+            "Primitive Data Type",
+            "Wrapper Class",
+            "Conditional Logic",
+            "Method Return Type",
+            "Boolean Operations"
+        ]
+    },
+    "c370": {
+        "Label": "Service Ticket Management",
+        "Semantic_Tags": [
+            "Authentication",
+            "Session Management",
+            "Parameter Handling",
+            "Method Invocation",
+            "Data Transfer"
+        ]
+    },
+    "c371": {
+        "Label": "Conditional Evaluation",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Conditional Logic",
+            "Null Checking",
+            "Instance Verification",
+            "Boundary Checking"
+        ]
+    },
+    "c372": {
+        "Label": "Web Service Path Access",
+        "Semantic_Tags": [
+            "Web Service Integration",
+            "API Endpoint Access",
+            "Path Management",
+            "Version Control",
+            "Data Retrieval"
+        ]
+    },
+    "c373": {
+        "Label": "JSON Object Population",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Mapping",
+            "Key-Value Assignment",
+            "Data Serialization",
+            "Configuration Management"
+        ]
+    },
+    "c374": {
+        "Label": "Dot Notation for Method and Property Access",
+        "Semantic_Tags": [
+            "Object Property Access",
+            "Method Invocation",
+            "JSON Manipulation",
+            "Data Mapping",
+            "Object-Oriented Programming"
+        ]
+    },
+    "c375": {
+        "Label": "Method and Property Access",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Invocation",
+            "Property Access",
+            "Equality Check",
+            "Instance Comparison"
+        ]
+    },
+    "c376": {
+        "Label": "Exception Handling",
+        "Semantic_Tags": [
+            "Error Handling",
+            "Exception Management",
+            "Runtime Errors",
+            "Checked Exceptions",
+            "Unchecked Exceptions"
+        ]
+    },
+    "c377": {
+        "Label": "Exception Handling",
+        "Semantic_Tags": [
+            "Error Handling",
+            "Checked Exceptions",
+            "Java Exception Hierarchy",
+            "Exception Propagation",
+            "Exception Declaration"
+        ]
+    },
+    "c378": {
+        "Label": "Base64 and SHA-256 Encoding/Decoding",
+        "Semantic_Tags": [
+            "Base64 Encoding",
+            "SHA-256 Hashing",
+            "Data Encryption",
+            "Hexadecimal Conversion",
+            "Data Integrity"
+        ]
+    },
+    "c379": {
+        "Label": "Null Check",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Conditional Logic",
+            "Data Validation",
+            "Error Prevention",
+            "Object State Checking"
+        ]
+    },
+    "c380": {
+        "Label": "Index Access and Conditional Checks",
+        "Semantic_Tags": [
+            "Indexing",
+            "Conditional Logic",
+            "String Manipulation",
+            "Null Check",
+            "Array Handling"
+        ]
+    },
+    "c381": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Data Transfer Objects",
+            "Configuration Parameters",
+            "Input Handling",
+            "Parameter Naming Convention"
+        ]
+    },
+    "c382": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Conditional Statements",
+            "Method Invocation",
+            "Syntax Structure",
+            "Logical Evaluation",
+            "Control Flow"
+        ]
+    },
+    "c383": {
+        "Label": "Switch Case Handling",
+        "Semantic_Tags": [
+            "Control Flow",
+            "HTTP Status Codes",
+            "Field Type Identification",
+            "Conditional Logic",
+            "Enumeration"
+        ]
+    },
+    "c384": {
+        "Label": "Field Metadata Specification",
+        "Semantic_Tags": [
+            "Data Typing",
+            "Field Configuration",
+            "Metadata Management",
+            "Form Field Handling",
+            "Parameter Specification"
+        ]
+    },
+    "c385": {
+        "Label": "Instance Management",
+        "Semantic_Tags": [
+            "Object Creation",
+            "Factory Pattern",
+            "Proxy Pattern",
+            "Dependency Injection",
+            "Lifecycle Management"
+        ]
+    },
+    "c386": {
+        "Label": "Web Service Endpoint Operations",
+        "Semantic_Tags": [
+            "CRUD Operations",
+            "Web Services",
+            "REST API",
+            "Endpoint Management",
+            "Data Manipulation"
+        ]
+    },
+    "c387": {
+        "Label": "Null and Empty Check",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Input Validation",
+            "Conditional Logic",
+            "Data Integrity",
+            "Error Prevention"
+        ]
+    },
+    "c388": {
+        "Label": "Logging and Configuration Management",
+        "Semantic_Tags": [
+            "Logging Levels",
+            "State Management",
+            "Type Configuration",
+            "Access Control",
+            "Mode Setting"
+        ]
+    },
+    "c389": {
+        "Label": "Conditional Expression Parenthesis",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Null Check",
+            "Conditional Logic",
+            "Method Invocation",
+            "Object State Validation"
+        ]
+    },
+    "c390": {
+        "Label": "Logical AND Operator",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Boolean Evaluation",
+            "Control Flow",
+            "Decision Making"
+        ]
+    },
+    "c391": {
+        "Label": "Path and URL Management",
+        "Semantic_Tags": [
+            "File Path Handling",
+            "URL Construction",
+            "Configuration Management",
+            "Resource Access",
+            "Conditional Logic"
+        ]
+    },
+    "c392": {
+        "Label": "JSON Object Population",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Insertion",
+            "Key-Value Mapping",
+            "Data Serialization",
+            "Collection Handling"
+        ]
+    },
+    "c393": {
+        "Label": "Loop Control Structure",
+        "Semantic_Tags": [
+            "Iteration",
+            "Control Flow",
+            "Loop Initialization",
+            "Loop Condition",
+            "Loop Increment"
+        ]
+    },
+    "c394": {
+        "Label": "Method and Property Access Operator",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Property Access",
+            "Object Interaction",
+            "Dot Notation",
+            "Class Method Usage"
+        ]
+    },
+    "c395": {
+        "Label": "Iterator Pattern Usage",
+        "Semantic_Tags": [
+            "Iteration Control",
+            "Collection Traversal",
+            "Data Retrieval",
+            "Looping Mechanism",
+            "Java Collections"
+        ]
+    },
+    "c396": {
+        "Label": "Method Invocation and Parameter Handling",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Parameter Handling",
+            "Object Method Calls",
+            "Instance Method Access",
+            "Code Structure"
+        ]
+    },
+    "c397": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Syntax",
+            "Error Management",
+            "Control Flow",
+            "Java Language"
+        ]
+    },
+    "c398": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Form Management",
+            "Service Ticket Assignment",
+            "Field Manipulation",
+            "Conditional Checks",
+            "Data Storage"
+        ]
+    },
+    "c399": {
+        "Label": "String Concatenation",
+        "Semantic_Tags": [
+            "StringBuilder",
+            "StringBuffer",
+            "Data Aggregation",
+            "Dynamic String Construction",
+            "Buffer Manipulation"
+        ]
+    },
+    "c400": {
+        "Label": "Generic Type Parameterization",
+        "Semantic_Tags": [
+            "Generics",
+            "Type Safety",
+            "Method Signature",
+            "Type Inference",
+            "Code Reusability"
+        ]
+    },
+    "c401": {
+        "Label": "Primitive Type Conversion",
+        "Semantic_Tags": [
+            "Type Casting",
+            "Wrapper Classes",
+            "Numeric Conversion",
+            "Boolean Conversion",
+            "Data Type Handling"
+        ]
+    },
+    "c402": {
+        "Label": "Byte Array Handling",
+        "Semantic_Tags": [
+            "Cryptography",
+            "Data Encoding",
+            "Data Decoding",
+            "Array Manipulation",
+            "Security"
+        ]
+    },
+    "c403": {
+        "Label": "Collection Manipulation",
+        "Semantic_Tags": [
+            "Collection Operations",
+            "Data Aggregation",
+            "UUID Generation",
+            "JSON Conversion",
+            "Instance Processing"
+        ]
+    },
+    "c404": {
+        "Label": "Boolean Value Assignment",
+        "Semantic_Tags": [
+            "Boolean Initialization",
+            "Conditional Logic",
+            "Default Values",
+            "Flag Management",
+            "State Control"
+        ]
+    },
+    "c405": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "String Manipulation",
+            "Object Property Access",
+            "Data Aggregation"
+        ]
+    },
+    "c406": {
+        "Label": "Method and Property Access Operator",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Property Access",
+            "Object Interaction",
+            "Dot Notation",
+            "Java Syntax"
+        ]
+    },
+    "c407": {
+        "Label": "Parameter Declaration",
+        "Semantic_Tags": [
+            "Method Parameters",
+            "Function Signature",
+            "Input Handling",
+            "Data Types",
+            "Variable Naming"
+        ]
+    },
+    "c408": {
+        "Label": "String Trimming",
+        "Semantic_Tags": [
+            "Whitespace Removal",
+            "String Manipulation",
+            "Input Validation",
+            "Data Cleaning",
+            "String Comparison"
+        ]
+    },
+    "c409": {
+        "Label": "Class Type Identification",
+        "Semantic_Tags": [
+            "Class Reflection",
+            "Dependency Injection",
+            "Annotation Processing",
+            "Interface Handling",
+            "Proxy Management"
+        ]
+    },
+    "c410": {
+        "Label": "Equality Comparison",
+        "Semantic_Tags": [
+            "String Comparison",
+            "Object Comparison",
+            "Conditional Logic",
+            "Data Validation",
+            "Control Flow"
+        ]
+    },
+    "c411": {
+        "Label": "Conditional Expression",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Null Check",
+            "Logical Operators",
+            "Conditional Logic",
+            "Data Validation"
+        ]
+    },
+    "c412": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Object Property Access",
+            "JSON Manipulation",
+            "Data Mapping"
+        ]
+    },
+    "c413": {
+        "Label": "Method Invocation Operator",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Method Call",
+            "Object Property Access",
+            "Null Check",
+            "Collection Handling"
+        ]
+    },
+    "c414": {
+        "Label": "Array Element Access",
+        "Semantic_Tags": [
+            "Array Indexing",
+            "Data Retrieval",
+            "Parameter Handling",
+            "Collection Manipulation",
+            "Zero-Based Indexing"
+        ]
+    },
+    "c415": {
+        "Label": "Byte Array Operations",
+        "Semantic_Tags": [
+            "Cryptography",
+            "Data Encoding",
+            "Data Decryption",
+            "Data Encryption",
+            "Hashing"
+        ]
+    },
+    "c416": {
+        "Label": "Exception Handling in Method Signatures",
+        "Semantic_Tags": [
+            "Checked Exceptions",
+            "Method Declaration",
+            "Error Propagation",
+            "IOException",
+            "ConfigException"
+        ]
+    },
+    "c417": {
+        "Label": "Parameter Handling",
+        "Semantic_Tags": [
+            "Function Parameters",
+            "Data Passing",
+            "Method Arguments",
+            "Configuration",
+            "Input Handling"
+        ]
+    },
+    "c418": {
+        "Label": "Message Handling and Exception Management",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Error Messaging",
+            "Logging",
+            "Encryption",
+            "Method Invocation"
+        ]
+    },
+    "c419": {
+        "Label": "Map and Pool Management",
+        "Semantic_Tags": [
+            "Data Structure Management",
+            "Map Operations",
+            "Object Pooling",
+            "Immutable Collections",
+            "Instance Management"
+        ]
+    },
+    "c420": {
+        "Label": "Statement Terminator",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Java Semantics",
+            "Statement Separation",
+            "Control Flow"
+        ]
+    },
+    "c421": {
+        "Label": "JSON Object Manipulation",
+        "Semantic_Tags": [
+            "JSON Serialization",
+            "Data Transformation",
+            "Object Conversion",
+            "Data Storage",
+            "API Interaction"
+        ]
+    },
+    "c422": {
+        "Label": "Exception Declaration",
+        "Semantic_Tags": [
+            "Exception Handling",
+            "Error Propagation",
+            "Method Signature",
+            "Checked Exceptions",
+            "Java Exceptions"
+        ]
+    },
+    "c423": {
+        "Label": "Exception Throwing",
+        "Semantic_Tags": [
+            "Error Handling",
+            "Exception Propagation",
+            "Control Flow",
+            "Runtime Exception",
+            "Custom Exceptions"
+        ]
+    },
+    "c424": {
+        "Label": "Null and Empty Check",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Input Validation",
+            "Data Integrity",
+            "Conditional Logic",
+            "Error Prevention"
+        ]
+    },
+    "c425": {
+        "Label": "Logical Negation",
+        "Semantic_Tags": [
+            "Boolean Logic",
+            "Condition Evaluation",
+            "Negation Operator",
+            "Control Flow"
+        ]
+    },
+    "c426": {
+        "Label": "Type Checking",
+        "Semantic_Tags": [
+            "Instance Verification",
+            "Conditional Logic",
+            "Polymorphism",
+            "Type Safety",
+            "Runtime Type Identification"
+        ]
+    },
+    "c427": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Function Call",
+            "Syntax Structure",
+            "Code Termination",
+            "Parameter Closure"
+        ]
+    },
+    "c428": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "String Manipulation",
+            "Null Check",
+            "Logical Operations",
+            "Conditional Evaluation"
+        ]
+    },
+    "c429": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Loop Control",
+            "Iteration",
+            "Collection Traversal",
+            "Syntax Structure",
+            "Code Block Delimitation"
+        ]
+    },
+    "c430": {
+        "Label": "DateTime Handling and Metadata Management",
+        "Semantic_Tags": [
+            "DateTime Operations",
+            "Metadata Configuration",
+            "Data Validation",
+            "File Timestamp Management",
+            "Synchronization"
+        ]
+    },
+    "c431": {
+        "Label": "Mapping and Transformation Utilities",
+        "Semantic_Tags": [
+            "Data Mapping",
+            "Field Transformation",
+            "JSON Handling",
+            "Database Interaction",
+            "Procedure Mapping"
+        ]
+    },
+    "c432": {
+        "Label": "Type Casting and Object Instantiation",
+        "Semantic_Tags": [
+            "Type Casting",
+            "Object Instantiation",
+            "Conditional Expressions",
+            "Method Invocation",
+            "Data Conversion"
+        ]
+    },
+    "c433": {
+        "Label": "Switch Case Statement",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Conditional Logic",
+            "Switch Statement",
+            "Enumeration Handling",
+            "HTTP Status Codes"
+        ]
+    },
+    "c434": {
+        "Label": "Method Parameter Opening Parenthesis",
+        "Semantic_Tags": [
+            "Method Declaration",
+            "Parameter Handling",
+            "Function Signature",
+            "Java Syntax",
+            "Code Structure"
+        ]
+    },
+    "c435": {
+        "Label": "Logical AND Operator",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Boolean Evaluation",
+            "Control Flow",
+            "Logical Operations"
+        ]
+    },
+    "c436": {
+        "Label": "JSON Object Population",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Mapping",
+            "Key-Value Storage",
+            "Object Construction",
+            "Data Serialization"
+        ]
+    },
+    "c437": {
+        "Label": "Factory and Handler Management",
+        "Semantic_Tags": [
+            "Factory Pattern",
+            "Dependency Injection",
+            "Event Handling",
+            "HTTP Operations",
+            "Data Parsing"
+        ]
+    },
+    "c438": {
+        "Label": "Object Property Access and Method Invocation",
+        "Semantic_Tags": [
+            "Dot Notation",
+            "Collection Manipulation",
+            "Method Call",
+            "Object Interaction",
+            "Data Structure Operations"
+        ]
+    },
+    "c439": {
+        "Label": "Type Handling and Manipulation",
+        "Semantic_Tags": [
+            "Type Checking",
+            "Type Casting",
+            "Type Assignment",
+            "Type Comparison",
+            "Type Retrieval"
+        ]
+    },
+    "c440": {
+        "Label": "Method Signature Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Declaration",
+            "Syntax Structure",
+            "Java Methods",
+            "Code Structure",
+            "Function Definition"
+        ]
+    },
+    "c441": {
+        "Label": "Method and Property Access",
+        "Semantic_Tags": [
+            "Object-Oriented Programming",
+            "Method Chaining",
+            "Property Access",
+            "Dot Notation",
+            "Fluent Interface"
+        ]
+    },
+    "c442": {
+        "Label": "XML Schema Restriction Handling",
+        "Semantic_Tags": [
+            "XML Schema",
+            "Data Validation",
+            "Range Constraints",
+            "Object Property Management",
+            "Conditional Logic"
+        ]
+    },
+    "c443": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Method Declaration",
+            "Parameter Handling",
+            "Syntax Structure",
+            "Function Signature",
+            "Java Syntax"
+        ]
+    },
+    "c444": {
+        "Label": "Field Value Retrieval",
+        "Semantic_Tags": [
+            "Null Check",
+            "Type Conversion",
+            "Field Access",
+            "Conditional Return",
+            "Data Extraction"
+        ]
+    },
+    "c445": {
+        "Label": "Instance Reference",
+        "Semantic_Tags": [
+            "Object Context",
+            "Instance Variable Access",
+            "Object-Oriented Programming",
+            "Conditional Logic"
+        ]
+    },
+    "c446": {
+        "Label": "String Substring Extraction",
+        "Semantic_Tags": [
+            "String Manipulation",
+            "Substring Extraction",
+            "Indexing",
+            "Data Trimming",
+            "String Processing"
+        ]
+    },
+    "c447": {
+        "Label": "Loop Control Structure",
+        "Semantic_Tags": [
+            "Iteration",
+            "Control Flow",
+            "Loop Initialization",
+            "Loop Condition",
+            "Loop Increment"
+        ]
+    },
+    "c448": {
+        "Label": "Method Parameter Delimiter",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Mapping",
+            "Object Serialization",
+            "Method Invocation",
+            "Parameter Handling"
+        ]
+    },
+    "c449": {
+        "Label": "Multi-Choice Selection Management",
+        "Semantic_Tags": [
+            "Choice Handling",
+            "List Management",
+            "Method Invocation",
+            "Data Retrieval",
+            "Conditional Logic"
+        ]
+    },
+    "c450": {
+        "Label": "JSONArray Initialization",
+        "Semantic_Tags": [
+            "JSON Handling",
+            "Data Structure",
+            "Array Management",
+            "Data Initialization",
+            "Data Storage"
+        ]
+    },
+    "c451": {
+        "Label": "List Initialization",
+        "Semantic_Tags": [
+            "Collection Framework",
+            "Data Structure",
+            "Generics",
+            "Object Instantiation",
+            "Type Safety"
+        ]
+    },
+    "c452": {
+        "Label": "Object Instantiation",
+        "Semantic_Tags": [
+            "Constructor Invocation",
+            "Object Creation",
+            "Data Transfer",
+            "Class Instantiation",
+            "Factory Pattern"
+        ]
+    },
+    "c453": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Conditional Statements",
+            "Method Invocation",
+            "Null Check",
+            "String Manipulation",
+            "Collection Handling"
+        ]
+    },
+    "c454": {
+        "Label": "Synchronous Execution and Retrieval",
+        "Semantic_Tags": [
+            "Asynchronous Operations",
+            "Result Retrieval",
+            "Method Invocation",
+            "Concurrency",
+            "Data Access"
+        ]
+    },
+    "c455": {
+        "Label": "Type Checking Utility",
+        "Semantic_Tags": [
+            "Type Identification",
+            "Reflection",
+            "Type Safety",
+            "Conditional Logic",
+            "Utility Methods"
+        ]
+    },
+    "c456": {
+        "Label": "Exception Handling",
+        "Semantic_Tags": [
+            "Error Handling",
+            "Exception Catching",
+            "Control Flow",
+            "Multi-Catch Block",
+            "Checked Exceptions"
+        ]
+    },
+    "c457": {
+        "Label": "HTTP Status Code Handling",
+        "Semantic_Tags": [
+            "HTTP Protocol",
+            "Error Handling",
+            "Response Status",
+            "Conditional Logic",
+            "Web Development"
+        ]
+    },
+    "c458": {
+        "Label": "Map Declaration and Initialization",
+        "Semantic_Tags": [
+            "Data Structure",
+            "Key-Value Mapping",
+            "Collection Framework",
+            "Generic Types",
+            "Data Storage"
+        ]
+    },
+    "c459": {
+        "Label": "Null Check Ternary Operator",
+        "Semantic_Tags": [
+            "Conditional Expression",
+            "Null Safety",
+            "Ternary Operator",
+            "Default Assignment",
+            "Null Handling"
+        ]
+    },
+    "c460": {
+        "Label": "Field Creation and Update with Plain Type",
+        "Semantic_Tags": [
+            "Field Management",
+            "Data Type Handling",
+            "Method Definition",
+            "Metadata Assignment",
+            "Boolean Check"
+        ]
+    },
+    "c461": {
+        "Label": "JSON Key Management",
+        "Semantic_Tags": [
+            "JSON Serialization",
+            "Data Mapping",
+            "Configuration Management",
+            "Key-Value Storage",
+            "Data Organization"
+        ]
+    },
+    "c462": {
+        "Label": "String Parameter Handling",
+        "Semantic_Tags": [
+            "Parameter Passing",
+            "String Manipulation",
+            "Method Signature",
+            "Data Parsing",
+            "Array Handling"
+        ]
+    },
+    "c463": {
+        "Label": "Negation Operator",
+        "Semantic_Tags": [
+            "Null Check",
+            "Collection Validation",
+            "Conditional Logic",
+            "Data Integrity",
+            "Control Flow"
+        ]
+    },
+    "c464": {
+        "Label": "Echo Property Management",
+        "Semantic_Tags": [
+            "Property Access",
+            "UUID Generation",
+            "Conditional Logic",
+            "String Manipulation",
+            "Data Consistency"
+        ]
+    },
+    "c465": {
+        "Label": "String and Command Syntax Handling",
+        "Semantic_Tags": [
+            "String Concatenation",
+            "Command Line Parsing",
+            "Configuration Management",
+            "Logging",
+            "URL Handling"
+        ]
+    },
+    "c466": {
+        "Label": "Type Handling and Checking",
+        "Semantic_Tags": [
+            "Type Checking",
+            "Class Identification",
+            "Type Conversion",
+            "Reflection",
+            "Conditional Logic"
+        ]
+    },
+    "c467": {
+        "Label": "Null Check and Conditional Return",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Conditional Logic",
+            "Ternary Operator",
+            "Error Prevention",
+            "Data Validation"
+        ]
+    },
+    "c468": {
+        "Label": "String Manipulation and Indexing",
+        "Semantic_Tags": [
+            "String Substring",
+            "Index Calculation",
+            "String Length",
+            "Character Extraction",
+            "String Trimming"
+        ]
+    },
+    "c469": {
+        "Label": "Conditional Branching",
+        "Semantic_Tags": [
+            "Control Flow",
+            "Conditional Logic",
+            "Decision Making",
+            "Instance Checking",
+            "Equality Comparison"
+        ]
+    },
+    "c470": {
+        "Label": "Null Check and Conditional Assignment",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Conditional Logic",
+            "Ternary Operator",
+            "Default Value Assignment",
+            "Error Prevention"
+        ]
+    },
+    "c471": {
+        "Label": "Equality Comparison",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Null Check",
+            "Array Length Check",
+            "Error Handling",
+            "Control Flow"
+        ]
+    },
+    "c472": {
+        "Label": "Type Casting",
+        "Semantic_Tags": [
+            "Type Conversion",
+            "Instanceof Check",
+            "Generic Handling",
+            "Object Casting",
+            "Polymorphism"
+        ]
+    },
+    "c473": {
+        "Label": "Null Check and Inequality",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Conditional Logic",
+            "Inequality Check",
+            "Control Flow",
+            "Boolean Evaluation"
+        ]
+    },
+    "c474": {
+        "Label": "String Return Type Declaration",
+        "Semantic_Tags": [
+            "Method Signature",
+            "Return Type",
+            "String Manipulation",
+            "Data Representation",
+            "Method Definition"
+        ]
+    },
+    "c475": {
+        "Label": "Utility Class Usage",
+        "Semantic_Tags": [
+            "Base64 Encoding",
+            "Field Type Identification",
+            "String Manipulation",
+            "Utility Methods",
+            "Data Handling"
+        ]
+    },
+    "c476": {
+        "Label": "String Initialization and Manipulation",
+        "Semantic_Tags": [
+            "String Conversion",
+            "String Manipulation",
+            "Method Invocation",
+            "Data Transformation",
+            "Case Conversion"
+        ]
+    },
+    "c477": {
+        "Label": "String Concatenation",
+        "Semantic_Tags": [
+            "String Manipulation",
+            "Data Aggregation",
+            "URI Construction",
+            "File Path Generation",
+            "Parameter Handling"
+        ]
+    },
+    "c478": {
+        "Label": "File and Path Handling",
+        "Semantic_Tags": [
+            "File Creation",
+            "Path Manipulation",
+            "File Operations",
+            "Directory Management",
+            "IOException Handling"
+        ]
+    },
+    "c479": {
+        "Label": "Closing Parenthesis",
+        "Semantic_Tags": [
+            "Syntax Structure",
+            "Method Invocation",
+            "Expression Termination",
+            "Control Flow",
+            "Logical Grouping"
+        ]
+    },
+    "c480": {
+        "Label": "Search and Numeric Precision Handling",
+        "Semantic_Tags": [
+            "Search Operations",
+            "Numeric Precision",
+            "Method Invocation",
+            "Data Retrieval",
+            "Conditional Logic"
+        ]
+    },
+    "c481": {
+        "Label": "Null Check Condition",
+        "Semantic_Tags": [
+            "Null Safety",
+            "Conditional Logic",
+            "Parameter Validation",
+            "Service Ticket Verification",
+            "Control Flow"
+        ]
+    },
+    "c482": {
+        "Label": "Variable Initialization to Null",
+        "Semantic_Tags": [
+            "Default Initialization",
+            "Memory Management",
+            "Null Assignment",
+            "Object References",
+            "Variable Declaration"
+        ]
+    },
+    "c483": {
+        "Label": "Parameter Handling in Logging and Comparison",
+        "Semantic_Tags": [
+            "Logging",
+            "Parameter Passing",
+            "Comparison",
+            "Method Invocation",
+            "Object Manipulation"
+        ]
+    },
+    "c484": {
+        "Label": "Buffer Manipulation",
+        "Semantic_Tags": [
+            "StringBuilder",
+            "StringBuffer",
+            "String Concatenation",
+            "Data Aggregation",
+            "URI Processing"
+        ]
+    },
+    "c485": {
+        "Label": "Custom Exception Handling",
+        "Semantic_Tags": [
+            "Error Codes",
+            "Exception Management",
+            "Custom Exceptions",
+            "Error Handling",
+            "Java Exceptions"
+        ]
+    },
+    "c486": {
+        "Label": "JSON Object Population",
+        "Semantic_Tags": [
+            "JSON Manipulation",
+            "Data Mapping",
+            "Key-Value Storage",
+            "Configuration Management",
+            "Data Serialization"
+        ]
+    },
+    "c487": {
+        "Label": "Generic List Usage",
+        "Semantic_Tags": [
+            "Collection Framework",
+            "Data Storage",
+            "Type Safety",
+            "Generics",
+            "Data Retrieval"
+        ]
+    },
+    "c488": {
+        "Label": "Conditional and Method Invocation",
+        "Semantic_Tags": [
+            "Conditional Logic",
+            "Method Invocation",
+            "Logging",
+            "Data Comparison",
+            "Cryptographic Operations"
+        ]
+    },
+    "c489": {
+        "Label": "Assignment Operator",
+        "Semantic_Tags": [
+            "Variable Initialization",
+            "State Management",
+            "Object Assignment",
+            "Data Handling",
+            "Configuration"
+        ]
+    },
+    "c490": {
+        "Label": "Annotation Handling",
+        "Semantic_Tags": [
+            "Annotation Processing",
+            "Reflection",
+            "Metadata Retrieval",
+            "Code Analysis",
+            "Conditional Logic"
+        ]
+    },
+    "c491": {
+        "Label": "Statement Terminator",
+        "Semantic_Tags": [
+            "Syntax",
+            "Code Structure",
+            "Java Semantics",
+            "Control Flow",
+            "Code Execution"
+        ]
+    },
+    "c492": {
+        "Label": "Argument Handling",
+        "Semantic_Tags": [
+            "Method Invocation",
+            "Parameter Processing",
+            "Dynamic Invocation",
+            "VarArgs Handling",
+            "Reflection"
+        ]
+    },
+    "c493": {
+        "Label": "JSONArray Management",
+        "Semantic_Tags": [
+            "Data Storage",
+            "JSON Handling",
+            "Array Manipulation",
+            "Data Serialization",
+            "Collection Management"
+        ]
+    },
+    "c494": {
+        "Label": "Token Management and Generation",
+        "Semantic_Tags": [
+            "Token Generation",
+            "Authentication",
+            "Access Control",
+            "Security",
+            "API Integration"
+        ]
+    },
+    "c495": {
+        "Label": "Varargs Parameter Handling",
+        "Semantic_Tags": [
+            "Method Overloading",
+            "Generic Programming",
+            "Varargs Usage",
+            "Dynamic Argument Handling",
+            "Type Safety"
+        ]
+    },
+    "c496": {
+        "Label": "Generic Object Handling",
+        "Semantic_Tags": [
+            "Dynamic Typing",
+            "Polymorphism",
+            "Type Abstraction",
+            "Object Instantiation",
+            "Data Retrieval"
+        ]
+    },
+    "c497": {
+        "Label": "Generic Type Method Declaration",
+        "Semantic_Tags": [
+            "Generics",
+            "Type Safety",
+            "Method Overloading",
+            "Type Inference",
+            "Reflection"
+        ]
+    },
+    "c498": {
+        "Label": "Loop Control Structure",
+        "Semantic_Tags": [
+            "Iteration",
+            "Control Flow",
+            "Conditional Evaluation",
+            "Data Processing",
+            "Stream Reading"
+        ]
+    },
+    "c499": {
+        "Label": "UUID Generation and Time Unit Conversion",
+        "Semantic_Tags": [
+            "UUID Generation",
+            "Time Conversion",
+            "Unique Identifier",
+            "Time Measurement",
+            "Percentage Unit"
+        ]
+    }
+}
