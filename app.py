@@ -184,9 +184,9 @@ def main():
     
     # Calculate clusters remaining based on evaluations
     evaluated_clusters = len(comparator.evaluations)
-    st.write(f"Clusters remaining: {len(comparator.cluster_ids) - evaluated_clusters}")
+    st.write(f"Clusters remaining: {500 - evaluated_clusters}")
 
-    st.write(f"Current cluster: {comparator.cluster_ids[st.session_state.current_index]}")
+    st.write(f"Current cluster Number: {st.session_state.current_index + 1}")
 
     current_cluster = comparator.cluster_ids[st.session_state.current_index]
     
