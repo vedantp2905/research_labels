@@ -16,7 +16,7 @@ class ClusterComparator:
         
         # Connect to MySQL database with new credentials
         self.db_connection = mysql.connector.connect(
-            host='http://coms-3090-010.class.las.iastate.edu:3306',
+            host='http://coms-3090-010.class.las.iastate.edu',
             database='TravelBuddy',
             user='vedant',
             password='vedant123',
