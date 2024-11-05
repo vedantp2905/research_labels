@@ -73,6 +73,15 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
 
+    # Add a download button for evaluations at the top
+    evaluations_json = json.dumps(st.session_state.comparator.evaluations, indent=2)
+    st.download_button(
+        label="Download Current Evaluations",
+        data=evaluations_json,
+        file_name='evaluations.json',
+        mime='application/json'
+    )
+
     if 'comparator' not in st.session_state:
         st.session_state.comparator = ClusterComparator()
         st.session_state.comparator.load_data()
@@ -209,16 +218,6 @@ def main():
                 if sentence_id in comparator.java_sentences:
                     sentence = comparator.java_sentences[sentence_id]
                     st.code(sentence, language="java")
-
-    # Add a download button for evaluations
-    if st.button("Download Evaluations"):
-        evaluations_json = json.dumps(comparator.evaluations, indent=2)
-        st.download_button(
-            label="Download Current Evaluations",
-            data=evaluations_json,
-            file_name='evaluations.json',
-            mime='application/json'
-        )
 
 if __name__ == "__main__":
     main()
