@@ -135,20 +135,50 @@ class ClusterComparator:
         self.cluster_ids = sorted(list(set(self.clusters_data.keys())), 
                                 key=lambda x: int(x) if x.isdigit() else float('inf'))
         
-def find_next_unevaluated_cluster(comparator, start_index=0):
-    """Find the next unevaluated cluster starting from given index"""
+def find_next_unevaluated_cluster(comparator, start_index=0, batch_size=100):
+    """Find the next unevaluated cluster within the user's assigned batch"""
     fresh_evaluations = comparator.load_progress()
     evaluated_cluster_ids = set(fresh_evaluations.keys())
     
-    for i in range(start_index, len(comparator.cluster_ids)):
+    # Calculate batch boundaries
+    batch_number = start_index // batch_size
+    batch_start = batch_number * batch_size
+    batch_end = (batch_number + 1) * batch_size
+    
+    # Only search within the current batch
+    for i in range(start_index, min(batch_end, len(comparator.cluster_ids))):
         if comparator.cluster_ids[i] not in evaluated_cluster_ids:
             return i
+            
+    # If no unevaluated clusters in current batch, return None
     return None
 
 def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
     
+    # Add batch selection at the top
+    if 'batch_number' not in st.session_state:
+        st.session_state.batch_number = 0
+        
+    # Add batch selector in the sidebar
+    with st.sidebar:
+        st.header("Batch Selection")
+        batch_size = 100
+        total_batches = (len(st.session_state.comparator.cluster_ids) + batch_size - 1) // batch_size
+        
+        new_batch = st.selectbox(
+            "Select your batch (100 clusters each)",
+            range(total_batches),
+            index=st.session_state.batch_number,
+            format_func=lambda x: f"Batch {x} (clusters {x*100}-{min((x+1)*100-1, len(st.session_state.comparator.cluster_ids)-1)})"
+        )
+        
+        if new_batch != st.session_state.batch_number:
+            st.session_state.batch_number = new_batch
+            st.session_state.current_index = new_batch * batch_size
+            st.rerun()
+
     # Add an expander for instructions at the top - now expanded by default
     with st.expander("📖 Instructions", expanded=True):
         st.markdown("""
@@ -384,12 +414,23 @@ def main():
                 }
                 
                 if comparator.save_progress(current_cluster, evaluation_data):
-                    next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index + 1)
+                    # Find next unevaluated cluster within the same batch
+                    next_index = find_next_unevaluated_cluster(
+                        comparator, 
+                        st.session_state.current_index + 1,
+                        batch_size=100
+                    )
+                    
                     if next_index is not None:
-                        st.session_state.current_index = next_index
-                        st.rerun()
+                        # Check if next index is still within current batch
+                        current_batch = st.session_state.batch_number
+                        if next_index // 100 == current_batch:
+                            st.session_state.current_index = next_index
+                            st.rerun()
+                        else:
+                            st.success(f"Batch {current_batch} completed!")
                     else:
-                        st.success("All clusters have been evaluated!")
+                        st.success(f"Batch {st.session_state.batch_number} completed!")
 
         # Show previous evaluation if it exists
         if current_cluster in comparator.evaluations:
