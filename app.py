@@ -299,13 +299,13 @@ def main():
         
         # Radio buttons and their error fields
         acceptability = st.radio(
-            "Is the GPT-4o label acceptable?",
+            "Is the GPT-4o label acceptable? (If the label and description fits some aspect of the cluster correctly)",
             ["Yes", "No"],
             key=f"acceptability_{current_cluster}"
         )
         
         precision = st.radio(
-            "How precise is the GPT-4o label compared to V1?",
+            "How precise is the GPT-4o label compared to V1? (If it’s to  the point and not overly vague, no extra information)",
             ["More Precise", "Less Precise", "Same"],
             key=f"precision_{current_cluster}"
         )
@@ -319,7 +319,7 @@ def main():
             )
         
         quality = st.radio(
-            "Is the GPT-4o label superior?",
+            "Is the GPT-4o label superior? (Based on precision and accuracy take your judgement)",
             ["Superior", "Inferior", "Same"],
             key=f"quality_{current_cluster}"
         )
