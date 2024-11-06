@@ -150,8 +150,13 @@ def find_next_unevaluated_cluster(comparator, start_index=0, batch_size=100):
         if comparator.cluster_ids[i] not in evaluated_cluster_ids:
             return i
             
-    # If no unevaluated clusters in current batch, return None
-    return None
+    # If no unevaluated clusters found, find the last evaluated cluster in this batch
+    for i in range(min(batch_end - 1, len(comparator.cluster_ids) - 1), batch_start - 1, -1):
+        if comparator.cluster_ids[i] in evaluated_cluster_ids:
+            return i
+            
+    # If no clusters found at all, return batch start
+    return batch_start
 
 def main():
     st.set_page_config(layout="wide")
@@ -241,7 +246,10 @@ def main():
             
             if new_batch != st.session_state.batch_number:
                 st.session_state.batch_number = new_batch
-                st.session_state.current_index = new_batch * batch_size
+                # Find the last evaluated cluster in the new batch or start at beginning of batch
+                batch_start = new_batch * batch_size
+                next_index = find_next_unevaluated_cluster(st.session_state.comparator, batch_start)
+                st.session_state.current_index = next_index
                 st.rerun()
 
         comparator = st.session_state.comparator
