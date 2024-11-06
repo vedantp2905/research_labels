@@ -303,16 +303,23 @@ def main():
                 key=f"acceptability_{current_cluster}"
             )
             
+            # Initialize variables for error descriptions
+            precision_error = ""
+            quality_error = ""
+            semantic_error = ""
+            
             precision = st.radio(
                 "How precise is the GPT-4o label compared to V1?",
                 ["More Precise", "Less Precise", "Same"],
                 key=f"precision_{current_cluster}"
             )
             
+            # Move this outside the if statement
+            precision_error_key = f"precision_error_{current_cluster}"
             if precision == "Less Precise":
-                error_description = st.text_area(
+                precision_error = st.text_area(
                     "Please describe why GPT-4o's label is less precise",
-                    key=f"error_description_text_{current_cluster}"
+                    key=precision_error_key
                 )
             
             quality = st.radio(
@@ -321,10 +328,12 @@ def main():
                 key=f"quality_{current_cluster}"
             )
             
+            # Move this outside the if statement
+            quality_error_key = f"quality_error_{current_cluster}"
             if quality == "Inferior":
                 quality_error = st.text_area(
                     "Please describe why GPT-4o's label is inferior",
-                    key=f"quality_error_text_{current_cluster}"
+                    key=quality_error_key
                 )
             
             semantic_tags = st.radio(
@@ -333,10 +342,12 @@ def main():
                 key=f"semantic_tags_{current_cluster}"
             )
             
+            # Move this outside the if statement
+            semantic_error_key = f"semantic_error_{current_cluster}"
             if semantic_tags == "No":
                 semantic_error = st.text_area(
                     "Please describe the error in GPT-4o's semantic tags",
-                    key=f"semantic_error_text_{current_cluster}"
+                    key=semantic_error_key
                 )
             
             notes = st.text_area(
@@ -351,7 +362,11 @@ def main():
                 if comparator.save_progress(current_cluster, {
                     "acceptability": acceptability,
                     "precision": precision,
+                    "precision_error": precision_error,
                     "quality": quality,
+                    "quality_error": quality_error,
+                    "semantic_tags": semantic_tags,
+                    "semantic_error": semantic_error,
                     "notes": notes
                 }):
                     # Find next unevaluated cluster
