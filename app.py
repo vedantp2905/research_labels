@@ -296,6 +296,12 @@ def main():
     
     with col3:
         st.header("Evaluation")
+        
+        # Create containers for error fields
+        precision_container = st.empty()
+        quality_container = st.empty()
+        semantic_container = st.empty()
+        
         with st.form(key=f"evaluation_form_{current_cluster}"):
             acceptability = st.radio(
                 "Is the GPT-4o label acceptable?",
@@ -303,24 +309,11 @@ def main():
                 key=f"acceptability_{current_cluster}"
             )
             
-            # Initialize variables for error descriptions
-            precision_error = ""
-            quality_error = ""
-            semantic_error = ""
-            
             precision = st.radio(
                 "How precise is the GPT-4o label compared to V1?",
                 ["More Precise", "Less Precise", "Same"],
                 key=f"precision_{current_cluster}"
             )
-            
-            # Move this outside the if statement
-            precision_error_key = f"precision_error_{current_cluster}"
-            if precision == "Less Precise":
-                precision_error = st.text_area(
-                    "Please describe why GPT-4o's label is less precise",
-                    key=precision_error_key
-                )
             
             quality = st.radio(
                 "Is the GPT-4o label superior?",
@@ -328,27 +321,11 @@ def main():
                 key=f"quality_{current_cluster}"
             )
             
-            # Move this outside the if statement
-            quality_error_key = f"quality_error_{current_cluster}"
-            if quality == "Inferior":
-                quality_error = st.text_area(
-                    "Please describe why GPT-4o's label is inferior",
-                    key=quality_error_key
-                )
-            
             semantic_tags = st.radio(
                 "Does the GPT-4o have the precise and accurate semantic tags? (Atleast 3 out of 5)",
                 ["Yes", "No"],
                 key=f"semantic_tags_{current_cluster}"
             )
-            
-            # Move this outside the if statement
-            semantic_error_key = f"semantic_error_{current_cluster}"
-            if semantic_tags == "No":
-                semantic_error = st.text_area(
-                    "Please describe the error in GPT-4o's semantic tags",
-                    key=semantic_error_key
-                )
             
             notes = st.text_area(
                 "Additional Notes (optional)",
@@ -356,27 +333,55 @@ def main():
             )
             
             submitted = st.form_submit_button("Submit Evaluation")
+
+        # Show/hide error fields based on selection
+        precision_error = ""
+        if precision == "Less Precise":
+            precision_error = precision_container.text_area(
+                "Please describe why GPT-4o's label is less precise",
+                key=f"precision_error_{current_cluster}"
+            )
+        else:
+            precision_container.empty()
             
-            if submitted:
-                # Save to database
-                if comparator.save_progress(current_cluster, {
-                    "acceptability": acceptability,
-                    "precision": precision,
-                    "precision_error": precision_error,
-                    "quality": quality,
-                    "quality_error": quality_error,
-                    "semantic_tags": semantic_tags,
-                    "semantic_error": semantic_error,
-                    "notes": notes
-                }):
-                    # Find next unevaluated cluster
-                    next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index + 1)
-                    if next_index is not None:
-                        st.session_state.current_index = next_index
-                        st.rerun()
-                    else:
-                        st.success("All clusters have been evaluated!")
+        quality_error = ""
+        if quality == "Inferior":
+            quality_error = quality_container.text_area(
+                "Please describe why GPT-4o's label is inferior",
+                key=f"quality_error_{current_cluster}"
+            )
+        else:
+            quality_container.empty()
             
+        semantic_error = ""
+        if semantic_tags == "No":
+            semantic_error = semantic_container.text_area(
+                "Please describe the error in GPT-4o's semantic tags",
+                key=f"semantic_error_{current_cluster}"
+            )
+        else:
+            semantic_container.empty()
+            
+        if submitted:
+            # Save to database
+            if comparator.save_progress(current_cluster, {
+                "acceptability": acceptability,
+                "precision": precision,
+                "precision_error": precision_error,
+                "quality": quality,
+                "quality_error": quality_error,
+                "semantic_tags": semantic_tags,
+                "semantic_error": semantic_error,
+                "notes": notes
+            }):
+                # Find next unevaluated cluster
+                next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index + 1)
+                if next_index is not None:
+                    st.session_state.current_index = next_index
+                    st.rerun()
+                else:
+                    st.success("All clusters have been evaluated!")
+
         # Show previous evaluation if it exists
         if current_cluster in comparator.evaluations:
             existing_eval = comparator.evaluations[current_cluster]
