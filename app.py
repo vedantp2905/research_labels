@@ -221,6 +221,8 @@ def main():
            - Add notes to justify your choices
            - Check example sentences for context
            - Look for both syntactic and semantic accuracy
+           - So First evaluate the GPT40 abel ad semantic tags and then compare it. 
+           
 
         ⚠️ **Important**: Avoid evaluating clusters outside your assigned batch
         """)
