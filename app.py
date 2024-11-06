@@ -291,28 +291,15 @@ def main():
             st.session_state.last_viewed_cluster = current_cluster
 
         if current_cluster in comparator.clusters_data:
-            tokens = set()
-            with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
-                for line in f:
-                    stripped_line = line.strip()
-                    pipe_count = stripped_line.count('|')
-                    parts = stripped_line.split('|||')
-
-                    # Get the token based on pipe count
-                    if pipe_count == 13:
-                        token = '|'
-                    elif pipe_count == 14:
-                        token = '||'
-                    elif pipe_count == 12:
-                        token = parts[0]
-                    else:
-                        continue
-
-                    if len(parts) >= 5 and parts[4].split()[-1] == current_cluster:
-                        tokens.add(token)
+            # Replace the token extraction logic with direct access from GPT4o labels
+            current_cluster_key = f"c{current_cluster}"
+            gpt4_cluster = next((item[current_cluster_key] for item in comparator.gpt4_labels 
+                               if current_cluster_key in item), {})
+            
+            tokens = gpt4_cluster.get("Unique Tokens", [])
             
             st.header("Unique Tokens")
-            st.write(", ".join(sorted(tokens)))
+            st.write(", ".join(sorted(tokens)) if tokens else "No tokens found")
             st.markdown("---")
         
         col1, col2, col3 = st.columns(3)
