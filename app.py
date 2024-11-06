@@ -211,21 +211,7 @@ def main():
     if 'comparator' not in st.session_state:
         st.session_state.comparator = ClusterComparator()
         st.session_state.comparator.load_data()
-        
-        # Get all evaluations
-        evaluations = st.session_state.comparator.load_progress()
-        
-        # Find the highest cluster index that has been evaluated
-        if evaluations:
-            last_evaluated_index = max(
-                st.session_state.comparator.cluster_ids.index(cluster_id)
-                for cluster_id in evaluations.keys()
-            )
-            # Start from the next unevaluated cluster
-            st.session_state.current_index = last_evaluated_index + 1
-        else:
-            # If no evaluations exist, start from 0
-            st.session_state.current_index = 0
+        st.session_state.current_index = st.session_state.batch_number * 100
 
     comparator = st.session_state.comparator
 
@@ -233,7 +219,7 @@ def main():
     fresh_evaluations = comparator.load_progress()
     evaluated_clusters = len(fresh_evaluations)
 
-    col1, col2, col3, col4, col5 = st.columns([1,1,1,1,1])
+    col1, col2, col3 = st.columns([1,1,1])
     
     with col1:
         st.write(f"Total clusters: {len(comparator.cluster_ids)}")
@@ -241,24 +227,6 @@ def main():
         st.write(f"Clusters remaining: {500 - evaluated_clusters}")
     with col3:
         st.write(f"Current cluster Number: {st.session_state.current_index}")
-    with col4:
-        # Add jump to cluster functionality
-        jump_to = st.number_input(
-            "Jump to cluster",
-            min_value=0,
-            max_value=len(comparator.cluster_ids) - 1,
-            value=st.session_state.current_index,
-            key="jump_to_cluster"
-        )
-        if st.button("Go"):
-            # Find next unevaluated cluster from the jumped position
-            next_index = find_next_unevaluated_cluster(comparator, int(jump_to))
-            if next_index is not None:
-                st.session_state.current_index = next_index
-                st.session_state.evaluation_start_time = datetime.now().isoformat()
-                st.rerun()
-            else:
-                st.error("No unevaluated clusters found after this position!")
 
     # Check if current cluster is already evaluated
     current_cluster = comparator.cluster_ids[st.session_state.current_index]
