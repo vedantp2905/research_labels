@@ -157,15 +157,9 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
     
-    # Initialize the comparator first
-    if 'comparator' not in st.session_state:
-        st.session_state.comparator = ClusterComparator()
-        st.session_state.comparator.load_data()
-    
-    # Then initialize batch number and current index
+    # Add batch selection at the top
     if 'batch_number' not in st.session_state:
         st.session_state.batch_number = 0
-        st.session_state.current_index = 0
         
     # Add batch selector in the sidebar
     with st.sidebar:
@@ -185,26 +179,76 @@ def main():
             st.session_state.current_index = new_batch * batch_size
             st.rerun()
 
+    # Add an expander for instructions at the top - now expanded by default
+    with st.expander("📖 Instructions", expanded=True):
+        st.markdown("""
+        ### How to Use This Tool
+
+        1. **Getting Started**
+           - Choose a batch of clusters to evaluate
+           - Use "Jump to cluster" to go to your assigned batch
+
+        2. **For Each Cluster**
+           - Review the tokens shown
+           - Compare V1 and GPT-4o labels side by side
+           - Look at example sentences for context
+           
+        3. **Evaluation Criteria**
+           - Acceptable : if label and description fits some aspect of the cluster correctly
+           - Precise: if it’s to  the point and not overly vague, no extra information
+           - Superior: based on precision and accuracy take your judgement
+           - Error description: if the label and semantic tags are not correct give a one-two sentence description of the error
+
+        4. **Tips**
+           - Add notes to justify your choices
+           - Check example sentences for context
+           - Look for both syntactic and semantic accuracy
+
+        ⚠️ **Important**: Avoid evaluating clusters outside your assigned batch
+        """)
+
+    # Initialize the comparator in session state if it doesn't exist
+    if 'comparator' not in st.session_state:
+        st.session_state.comparator = ClusterComparator()
+        st.session_state.comparator.load_data()
+        
+        # Get all evaluations
+        evaluations = st.session_state.comparator.load_progress()
+        
+        # Find the highest cluster index that has been evaluated
+        if evaluations:
+            last_evaluated_index = max(
+                st.session_state.comparator.cluster_ids.index(cluster_id)
+                for cluster_id in evaluations.keys()
+            )
+            # Start from the next unevaluated cluster
+            st.session_state.current_index = last_evaluated_index + 1
+        else:
+            # If no evaluations exist, start from 0
+            st.session_state.current_index = 0
+
+    comparator = st.session_state.comparator
+
     # Fetch fresh evaluations data for the count
-    fresh_evaluations = st.session_state.comparator.load_progress()
+    fresh_evaluations = comparator.load_progress()
     evaluated_clusters = len(fresh_evaluations)
 
-    # Display counts
     col1, col2, col3 = st.columns([1,1,1])
+    
     with col1:
-        st.write(f"Total clusters: {len(st.session_state.comparator.cluster_ids)}")
+        st.write(f"Total clusters: {len(comparator.cluster_ids)}")
     with col2:
         st.write(f"Clusters remaining: {500 - evaluated_clusters}")
     with col3:
         st.write(f"Current cluster Number: {st.session_state.current_index}")
 
     # Check if current cluster is already evaluated
-    current_cluster = st.session_state.comparator.cluster_ids[st.session_state.current_index]
-    fresh_evaluations = st.session_state.comparator.load_progress()
+    current_cluster = comparator.cluster_ids[st.session_state.current_index]
+    fresh_evaluations = comparator.load_progress()
     
     if current_cluster in fresh_evaluations:
         # Find next unevaluated cluster
-        next_index = find_next_unevaluated_cluster(st.session_state.comparator, st.session_state.current_index)
+        next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index)
         if next_index is not None:
             st.session_state.current_index = next_index
             st.rerun()
@@ -221,9 +265,9 @@ def main():
         st.session_state.evaluation_start_time = datetime.now().isoformat()
         st.session_state.last_viewed_cluster = current_cluster
 
-    if current_cluster in st.session_state.comparator.clusters_data:
+    if current_cluster in comparator.clusters_data:
         tokens = set()
-        with open(os.path.join(st.session_state.comparator.base_path, 'clusters-500.txt'), 'r') as f:
+        with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
             for line in f:
                 stripped_line = line.strip()
                 pipe_count = stripped_line.count('|')
@@ -251,13 +295,13 @@ def main():
     with col1:
         st.header("CodeConceptNet-V1 Labels")
         current_cluster_key = f"c{current_cluster}"
-        if current_cluster_key in st.session_state.comparator.v1_labels:
-            st.write("Label:", st.session_state.comparator.v1_labels[current_cluster_key].get("Label", "N/A"))
-            st.write("Semantic Tags:", st.session_state.comparator.v1_labels[current_cluster_key].get("Semantic_Tags", []))
+        if current_cluster_key in comparator.v1_labels:
+            st.write("Label:", comparator.v1_labels[current_cluster_key].get("Label", "N/A"))
+            st.write("Semantic Tags:", comparator.v1_labels[current_cluster_key].get("Semantic_Tags", []))
     
     with col2:
         st.header("GPT-4o Labels")
-        gpt4_cluster = next((item[current_cluster_key] for item in st.session_state.comparator.gpt4_labels 
+        gpt4_cluster = next((item[current_cluster_key] for item in comparator.gpt4_labels 
                            if current_cluster_key in item), {})
         st.write("Label:", gpt4_cluster.get("Label", "N/A"))
         st.write("Semantic Tags:", gpt4_cluster.get("Semantic Tags", []))
@@ -351,10 +395,10 @@ def main():
                     "semantic_error": semantic_error
                 }
                 
-                if st.session_state.comparator.save_progress(current_cluster, evaluation_data):
+                if comparator.save_progress(current_cluster, evaluation_data):
                     # Find next unevaluated cluster within the same batch
                     next_index = find_next_unevaluated_cluster(
-                        st.session_state.comparator, 
+                        comparator, 
                         st.session_state.current_index + 1,
                         batch_size=100
                     )
@@ -371,8 +415,8 @@ def main():
                         st.success(f"Batch {st.session_state.batch_number} completed!")
 
         # Show previous evaluation if it exists
-        if current_cluster in st.session_state.comparator.evaluations:
-            existing_eval = st.session_state.comparator.evaluations[current_cluster]
+        if current_cluster in comparator.evaluations:
+            existing_eval = comparator.evaluations[current_cluster]
             st.info("Previous evaluation exists:")
             st.write(f"Acceptability: {existing_eval['acceptability']}")
             st.write(f"Precision: {existing_eval['precision']}")
@@ -381,9 +425,9 @@ def main():
 
     # Display code examples section
     st.header("Sentences where the token appears")
-    if current_cluster in st.session_state.comparator.clusters_data:
+    if current_cluster in comparator.clusters_data:
         token_positions = {}
-        with open(os.path.join(st.session_state.comparator.base_path, 'clusters-500.txt'), 'r') as f:
+        with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
             for line in f:
                 parts = line.strip().split('|||')
                 if len(parts) >= 5 and parts[4] == str(current_cluster):
@@ -395,9 +439,9 @@ def main():
                         'column': int(parts[3])
                     })
             
-        for sentence_id in st.session_state.comparator.clusters_data[current_cluster]:
-            if sentence_id in st.session_state.comparator.java_sentences:
-                sentence = st.session_state.comparator.java_sentences[sentence_id]
+        for sentence_id in comparator.clusters_data[current_cluster]:
+            if sentence_id in comparator.java_sentences:
+                sentence = comparator.java_sentences[sentence_id]
                 st.code(sentence, language="java")
 
     
