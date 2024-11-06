@@ -1,6 +1,5 @@
 import streamlit as st
 import json
-import csv
 import os
 from supabase import create_client
 from analyze_results import analyze_evaluations
@@ -62,16 +61,31 @@ class ClusterComparator:
                 if not st.confirm("This cluster has been evaluated by someone else since you started. Do you want to overwrite their evaluation?"):
                     return False
             
-            # Save the evaluation with timestamp
-            self.supabase.table('evaluations').upsert({
+            # Prepare evaluation data
+            eval_data = {
                 'cluster_id': cluster_id,
                 'last_cluster_index': st.session_state.current_index,
                 'acceptability': evaluation['acceptability'],
                 'precision': evaluation['precision'],
                 'quality': evaluation['quality'],
-                'notes': evaluation['notes'],
+                'notes': evaluation.get('notes', ''),
                 'created_at': datetime.now().isoformat()
-            }).execute()
+            }
+
+            # Add error descriptions if they exist
+            if evaluation['precision'] == 'Less Precise':
+                eval_data['precision_error'] = evaluation.get('precision_error', '')
+                
+            if evaluation['quality'] == 'Inferior':
+                eval_data['quality_error'] = evaluation.get('quality_error', '')
+                
+            if evaluation.get('semantic_tags'):
+                eval_data['semantic_tags'] = evaluation['semantic_tags']
+                if evaluation['semantic_tags'] == 'No':
+                    eval_data['semantic_error'] = evaluation.get('semantic_error', '')
+
+            # Save the evaluation
+            self.supabase.table('evaluations').upsert(eval_data).execute()
             return True
             
         except Exception as e:
@@ -141,19 +155,19 @@ def main():
         ### How to Use This Tool
 
         1. **Getting Started**
-           - You'll be assigned 50-100 clusters to evaluate
-           - Contact Vedant for your batch assignment
+           - Choose a batch of clusters to evaluate
            - Use "Jump to cluster" to go to your assigned batch
 
         2. **For Each Cluster**
            - Review the tokens shown
            - Compare V1 and GPT-4o labels side by side
            - Look at example sentences for context
-
-        3. **Evaluation Questions**
-           - **Acceptability**: Is GPT-4o's label valid for these tokens?
-           - **Precision**: Compare GPT-4o vs V1 label specificity
-           - **Quality**: Which label better describes the tokens?
+           
+        3. **Evaluation Criteria**
+           - Acceptable : if label and description fits some aspect of the cluster correctly
+           - Precise: if it’s to  the point and not overly vague, no extra information
+           - Superior: based on precision and accuracy take your judgement
+           - Error description: if the label and semantic tags are not correct give a one-two sentence description of the error
 
         4. **Tips**
            - Add notes to justify your choices
@@ -284,22 +298,46 @@ def main():
         st.header("Evaluation")
         with st.form(key=f"evaluation_form_{current_cluster}"):
             acceptability = st.radio(
-                "Is the GPT-4 label acceptable?",
+                "Is the GPT-4o label acceptable?",
                 ["Yes", "No"],
                 key=f"acceptability_{current_cluster}"
             )
             
             precision = st.radio(
-                "How precise is the GPT-4 label compared to V1?",
+                "How precise is the GPT-4o label compared to V1?",
                 ["More Precise", "Less Precise", "Same"],
                 key=f"precision_{current_cluster}"
             )
             
+            if precision == "Less Precise":
+                error_description = st.text_area(
+                    "Please describe why GPT-4o's label is less precise",
+                    key=f"error_description_text_{current_cluster}"
+                )
+            
             quality = st.radio(
-                "Is the GPT-4 label better than V1?",
-                ["More Accurate", "Less Accurate", "Same"],
+                "Is the GPT-4o label superior?",
+                ["Superior", "Inferior", "Same"],
                 key=f"quality_{current_cluster}"
             )
+            
+            if quality == "Inferior":
+                quality_error = st.text_area(
+                    "Please describe why GPT-4o's label is inferior",
+                    key=f"quality_error_text_{current_cluster}"
+                )
+            
+            semantic_tags = st.radio(
+                "Does the GPT-4o have the precise and accurate semantic tags? (Atleast 3 out of 5)",
+                ["Yes", "No"],
+                key=f"semantic_tags_{current_cluster}"
+            )
+            
+            if semantic_tags == "No":
+                semantic_error = st.text_area(
+                    "Please describe the error in GPT-4o's semantic tags",
+                    key=f"semantic_error_text_{current_cluster}"
+                )
             
             notes = st.text_area(
                 "Additional Notes (optional)",
