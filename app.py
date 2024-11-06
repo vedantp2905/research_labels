@@ -297,11 +297,24 @@ def main():
     with col3:
         st.header("Evaluation")
         
-        # Create containers for error fields
-        precision_container = st.empty()
-        quality_container = st.empty()
-        semantic_container = st.empty()
-        
+        # Initialize session state variables if they don't exist
+        if 'precision_value' not in st.session_state:
+            st.session_state.precision_value = "More Precise"
+        if 'quality_value' not in st.session_state:
+            st.session_state.quality_value = "Superior"
+        if 'semantic_value' not in st.session_state:
+            st.session_state.semantic_value = "Yes"
+
+        # Callback functions to update session state
+        def update_precision():
+            st.session_state.precision_value = st.session_state[f"precision_{current_cluster}"]
+            
+        def update_quality():
+            st.session_state.quality_value = st.session_state[f"quality_{current_cluster}"]
+            
+        def update_semantic():
+            st.session_state.semantic_value = st.session_state[f"semantic_tags_{current_cluster}"]
+
         with st.form(key=f"evaluation_form_{current_cluster}"):
             acceptability = st.radio(
                 "Is the GPT-4o label acceptable?",
@@ -312,20 +325,44 @@ def main():
             precision = st.radio(
                 "How precise is the GPT-4o label compared to V1?",
                 ["More Precise", "Less Precise", "Same"],
-                key=f"precision_{current_cluster}"
+                key=f"precision_{current_cluster}",
+                on_change=update_precision
             )
+            
+            # Show precision error field if needed
+            if st.session_state.precision_value == "Less Precise":
+                precision_error = st.text_area(
+                    "Please describe why GPT-4o's label is less precise",
+                    key=f"precision_error_{current_cluster}"
+                )
             
             quality = st.radio(
                 "Is the GPT-4o label superior?",
                 ["Superior", "Inferior", "Same"],
-                key=f"quality_{current_cluster}"
+                key=f"quality_{current_cluster}",
+                on_change=update_quality
             )
+            
+            # Show quality error field if needed
+            if st.session_state.quality_value == "Inferior":
+                quality_error = st.text_area(
+                    "Please describe why GPT-4o's label is inferior",
+                    key=f"quality_error_{current_cluster}"
+                )
             
             semantic_tags = st.radio(
                 "Does the GPT-4o have the precise and accurate semantic tags? (Atleast 3 out of 5)",
                 ["Yes", "No"],
-                key=f"semantic_tags_{current_cluster}"
+                key=f"semantic_tags_{current_cluster}",
+                on_change=update_semantic
             )
+            
+            # Show semantic error field if needed
+            if st.session_state.semantic_value == "No":
+                semantic_error = st.text_area(
+                    "Please describe the error in GPT-4o's semantic tags",
+                    key=f"semantic_error_{current_cluster}"
+                )
             
             notes = st.text_area(
                 "Additional Notes (optional)",
@@ -333,48 +370,25 @@ def main():
             )
             
             submitted = st.form_submit_button("Submit Evaluation")
-
-        # Show/hide error fields based on selection
-        precision_error = ""
-        if precision == "Less Precise":
-            precision_error = precision_container.text_area(
-                "Please describe why GPT-4o's label is less precise",
-                key=f"precision_error_{current_cluster}"
-            )
-        else:
-            precision_container.empty()
-            
-        quality_error = ""
-        if quality == "Inferior":
-            quality_error = quality_container.text_area(
-                "Please describe why GPT-4o's label is inferior",
-                key=f"quality_error_{current_cluster}"
-            )
-        else:
-            quality_container.empty()
-            
-        semantic_error = ""
-        if semantic_tags == "No":
-            semantic_error = semantic_container.text_area(
-                "Please describe the error in GPT-4o's semantic tags",
-                key=f"semantic_error_{current_cluster}"
-            )
-        else:
-            semantic_container.empty()
             
         if submitted:
-            # Save to database
-            if comparator.save_progress(current_cluster, {
+            evaluation_data = {
                 "acceptability": acceptability,
                 "precision": precision,
-                "precision_error": precision_error,
                 "quality": quality,
-                "quality_error": quality_error,
                 "semantic_tags": semantic_tags,
-                "semantic_error": semantic_error,
                 "notes": notes
-            }):
-                # Find next unevaluated cluster
+            }
+            
+            # Add error fields if they exist
+            if precision == "Less Precise":
+                evaluation_data["precision_error"] = st.session_state.get(f"precision_error_{current_cluster}", "")
+            if quality == "Inferior":
+                evaluation_data["quality_error"] = st.session_state.get(f"quality_error_{current_cluster}", "")
+            if semantic_tags == "No":
+                evaluation_data["semantic_error"] = st.session_state.get(f"semantic_error_{current_cluster}", "")
+            
+            if comparator.save_progress(current_cluster, evaluation_data):
                 next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index + 1)
                 if next_index is not None:
                     st.session_state.current_index = next_index
