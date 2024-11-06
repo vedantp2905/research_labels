@@ -204,9 +204,8 @@ def main():
         ### How to Use This Tool
 
         1. **Getting Started**
-           - Choose a batch of clusters to evaluate
-           - Use "Jump to cluster" to go to your assigned batch
-
+           - Choose a batch of clusters to evaluate on the sidebar
+          
         2. **For Each Cluster**
            - Review the tokens shown
            - Compare V1 and GPT-4o labels side by side
