@@ -305,70 +305,65 @@ def main():
         if 'semantic_value' not in st.session_state:
             st.session_state.semantic_value = "Yes"
 
-        # Callback functions to update session state
-        def update_precision():
-            st.session_state.precision_value = st.session_state[f"precision_{current_cluster}"]
-            
-        def update_quality():
-            st.session_state.quality_value = st.session_state[f"quality_{current_cluster}"]
-            
-        def update_semantic():
-            st.session_state.semantic_value = st.session_state[f"semantic_tags_{current_cluster}"]
-
-        with st.form(key=f"evaluation_form_{current_cluster}"):
-            acceptability = st.radio(
-                "Is the GPT-4o label acceptable?",
-                ["Yes", "No"],
-                key=f"acceptability_{current_cluster}"
+        # Radio buttons outside the form
+        acceptability = st.radio(
+            "Is the GPT-4o label acceptable?",
+            ["Yes", "No"],
+            key=f"acceptability_{current_cluster}"
+        )
+        
+        precision = st.radio(
+            "How precise is the GPT-4o label compared to V1?",
+            ["More Precise", "Less Precise", "Same"],
+            key=f"precision_{current_cluster}",
+            on_change=lambda: setattr(st.session_state, 'precision_value', st.session_state[f"precision_{current_cluster}"])
+        )
+        
+        # Show precision error field if needed
+        precision_error = ""
+        if st.session_state[f"precision_{current_cluster}"] == "Less Precise":
+            precision_error = st.text_area(
+                "Please describe why GPT-4o's label is less precise",
+                key=f"precision_error_{current_cluster}"
             )
-            
-            precision = st.radio(
-                "How precise is the GPT-4o label compared to V1?",
-                ["More Precise", "Less Precise", "Same"],
-                key=f"precision_{current_cluster}",
-                on_change=update_precision
+        
+        quality = st.radio(
+            "Is the GPT-4o label superior?",
+            ["Superior", "Inferior", "Same"],
+            key=f"quality_{current_cluster}",
+            on_change=lambda: setattr(st.session_state, 'quality_value', st.session_state[f"quality_{current_cluster}"])
+        )
+        
+        # Show quality error field if needed
+        quality_error = ""
+        if st.session_state[f"quality_{current_cluster}"] == "Inferior":
+            quality_error = st.text_area(
+                "Please describe why GPT-4o's label is inferior",
+                key=f"quality_error_{current_cluster}"
             )
-            
-            # Show precision error field if needed
-            if st.session_state.precision_value == "Less Precise":
-                precision_error = st.text_area(
-                    "Please describe why GPT-4o's label is less precise",
-                    key=f"precision_error_{current_cluster}"
-                )
-            
-            quality = st.radio(
-                "Is the GPT-4o label superior?",
-                ["Superior", "Inferior", "Same"],
-                key=f"quality_{current_cluster}",
-                on_change=update_quality
+        
+        semantic_tags = st.radio(
+            "Does the GPT-4o have the precise and accurate semantic tags? (Atleast 3 out of 5)",
+            ["Yes", "No"],
+            key=f"semantic_tags_{current_cluster}",
+            on_change=lambda: setattr(st.session_state, 'semantic_value', st.session_state[f"semantic_tags_{current_cluster}"])
+        )
+        
+        # Show semantic error field if needed
+        semantic_error = ""
+        if st.session_state[f"semantic_tags_{current_cluster}"] == "No":
+            semantic_error = st.text_area(
+                "Please describe the error in GPT-4o's semantic tags",
+                key=f"semantic_error_{current_cluster}"
             )
-            
-            # Show quality error field if needed
-            if st.session_state.quality_value == "Inferior":
-                quality_error = st.text_area(
-                    "Please describe why GPT-4o's label is inferior",
-                    key=f"quality_error_{current_cluster}"
-                )
-            
-            semantic_tags = st.radio(
-                "Does the GPT-4o have the precise and accurate semantic tags? (Atleast 3 out of 5)",
-                ["Yes", "No"],
-                key=f"semantic_tags_{current_cluster}",
-                on_change=update_semantic
-            )
-            
-            # Show semantic error field if needed
-            if st.session_state.semantic_value == "No":
-                semantic_error = st.text_area(
-                    "Please describe the error in GPT-4o's semantic tags",
-                    key=f"semantic_error_{current_cluster}"
-                )
-            
-            notes = st.text_area(
-                "Additional Notes (optional)",
-                key=f"notes_{current_cluster}"
-            )
-            
+        
+        notes = st.text_area(
+            "Additional Notes (optional)",
+            key=f"notes_{current_cluster}"
+        )
+        
+        # Submit button in a form
+        with st.form(key=f"submit_form_{current_cluster}"):
             submitted = st.form_submit_button("Submit Evaluation")
             
         if submitted:
@@ -377,16 +372,11 @@ def main():
                 "precision": precision,
                 "quality": quality,
                 "semantic_tags": semantic_tags,
-                "notes": notes
+                "notes": notes,
+                "precision_error": precision_error,
+                "quality_error": quality_error,
+                "semantic_error": semantic_error
             }
-            
-            # Add error fields if they exist
-            if precision == "Less Precise":
-                evaluation_data["precision_error"] = st.session_state.get(f"precision_error_{current_cluster}", "")
-            if quality == "Inferior":
-                evaluation_data["quality_error"] = st.session_state.get(f"quality_error_{current_cluster}", "")
-            if semantic_tags == "No":
-                evaluation_data["semantic_error"] = st.session_state.get(f"semantic_error_{current_cluster}", "")
             
             if comparator.save_progress(current_cluster, evaluation_data):
                 next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index + 1)
