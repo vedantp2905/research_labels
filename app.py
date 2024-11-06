@@ -302,6 +302,7 @@ def main():
         gpt4_cluster = next((item[current_cluster_key] for item in comparator.gpt4_labels 
                            if current_cluster_key in item), {})
         st.write("Label:", gpt4_cluster.get("Label", "N/A"))
+        st.write("Description:", gpt4_cluster.get("Description", "N/A"))
         st.write("Semantic Tags:", gpt4_cluster.get("Semantic Tags", []))
     
     with col3:
