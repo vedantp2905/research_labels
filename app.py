@@ -311,7 +311,18 @@ def main():
                 # Display additional fields from V1 labels
                 v1_label_data = comparator.v1_labels[current_cluster_key]
                 st.write("Label:", v1_label_data.get("Labels", ["N/A"])[0])
-                st.write("Semantic:", v1_label_data.get("Semantic", "N/A"))
+                st.write("Meaningful:", v1_label_data.get("Meaningful", "N/A"))
+                st.write("Lexicographic:", v1_label_data.get("Lexicographic", "N/A"))
+                
+                # Display Semantic one below the other
+                semantic_tags = v1_label_data.get("Semantic", "").split(", ")  # Split by comma for individual tags
+                if semantic_tags:
+                    st.write("Semantic Tags:")
+                    for tag in semantic_tags:
+                        st.write(f"- {tag}")  # Display each tag on a new line
+                else:
+                    st.write("Semantic Tags: N/A")  # If no tags are present
+                
                 st.write("Syntactic:", v1_label_data.get("Syntactic", "N/A"))
                 st.write("Description:", v1_label_data.get("Description", "N/A"))
         
