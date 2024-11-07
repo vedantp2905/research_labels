@@ -117,7 +117,7 @@ class ClusterComparator:
         self.cluster_ids = sorted(list(set(self.clusters_data.keys())), 
                                 key=lambda x: int(x) if x.isdigit() else float('inf'))
         
-def find_next_unevaluated_cluster(comparator, start_index=0, batch_size=100):
+def find_next_unevaluated_cluster(comparator, start_index=0, batch_size=50):
     """Find the next unevaluated cluster within the user's assigned batch"""
     fresh_evaluations = comparator.load_progress()
     evaluated_cluster_ids = set(fresh_evaluations.keys())
@@ -233,14 +233,14 @@ def main():
         # Add batch selector in the sidebar
         with st.sidebar:
             st.header("Batch Selection")
-            batch_size = 100
+            batch_size = 50
             total_batches = (len(st.session_state.comparator.cluster_ids) + batch_size - 1) // batch_size
             
             new_batch = st.selectbox(
-                "Select your batch (100 clusters each)",
+                "Select your batch (50 clusters each)",
                 range(total_batches),
                 index=st.session_state.batch_number,
-                format_func=lambda x: f"Batch {x} (clusters {x*100}-{min((x+1)*100-1, len(st.session_state.comparator.cluster_ids)-1)})"
+                format_func=lambda x: f"Batch {x} (clusters {x*50}-{min((x+1)*50-1, len(st.session_state.comparator.cluster_ids)-1)})"
             )
             
             if new_batch != st.session_state.batch_number:
