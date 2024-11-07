@@ -313,7 +313,7 @@ def main():
                 st.write("LLM Label:", v1_label_data.get("Labels", ["N/A"])[0])
                 
                 # Display Semantic one below the other
-                semantic_tags = v1_label_data.get("Human Semantic", "").split(", ")  # Split by comma for individual tags
+                semantic_tags = v1_label_data.get("Semantic", "").split(", ")  # Split by comma for individual tags
                 if semantic_tags:
                     st.write("Semantic Tags:")
                     for tag in semantic_tags:
@@ -332,7 +332,7 @@ def main():
             st.write("LLM Syntactic Label:", gpt4_cluster.get("Syntactic Label", "N/A"))
             
             # Display Semantic Tags one below the other
-            semantic_tags = gpt4_cluster.get("LLM Semantic Tags", [])
+            semantic_tags = gpt4_cluster.get("emantic Tags", [])
             if semantic_tags:
                 st.write("LLM Semantic Tags:")
                 for tag in semantic_tags:
