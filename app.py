@@ -146,21 +146,17 @@ def calculate_evaluation_stats(evaluations):
     """Calculate statistics for evaluation criteria"""
     total = len(evaluations)
     if total == 0:
-        return {
-            'prompt_engineering': {'N/A': 0, 'Yes': 0, 'No': 0},
-            'syntactic': {'Yes': 0, 'No': 0, 'Same': 0},
-            'semantic': {'Yes': 0, 'No': 0, 'Same': 0}
-        }
-    
-    stats = {
-        'prompt_engineering': {'N/A': 0, 'Yes': 0, 'No': 0},
-        'syntactic': {'Yes': 0, 'No': 0, 'Same': 0},
-        'semantic': {'Yes': 0, 'No': 0, 'Same': 0}
-    }
+        return pd.DataFrame()
     
     # Count unacceptable cases from V1
     unacceptable_count = 0
     improved_count = 0
+    
+    # Initialize counters for superiority
+    syntactic_v1_better = 0
+    syntactic_gpt4_better = 0
+    semantic_v1_better = 0
+    semantic_gpt4_better = 0
     
     for cluster_id, eval_data in evaluations.items():
         # Get V1 acceptability for this cluster
@@ -174,19 +170,26 @@ def calculate_evaluation_stats(evaluations):
         
         # Count syntactic superiority
         syn_value = eval_data.get('syntactic_superior', 'No')
-        stats['syntactic'][syn_value] = stats['syntactic'].get(syn_value, 0) + 1
+        if syn_value == 'Yes':
+            syntactic_gpt4_better += 1
+        elif syn_value == 'No':
+            syntactic_v1_better += 1
+        # If 'Same', neither counter increases
         
         # Count semantic superiority
         sem_value = eval_data.get('semantic_superior', 'No')
-        stats['semantic'][sem_value] = stats['semantic'].get(sem_value, 0) + 1
+        if sem_value == 'Yes':
+            semantic_gpt4_better += 1
+        elif sem_value == 'No':
+            semantic_v1_better += 1
+        # If 'Same', neither counter increases
     
-    # Calculate prompt engineering improvement percentage
+    # Calculate percentages
     prompt_engineering_percentage = (improved_count / unacceptable_count * 100) if unacceptable_count > 0 else 0
-    
-    # Add debug information
-    st.write(f"Debug: Unacceptable count: {unacceptable_count}")
-    st.write(f"Debug: Improved count: {improved_count}")
-    st.write(f"Debug: Percentage: {prompt_engineering_percentage}%")
+    syntactic_v1_percentage = (syntactic_v1_better / total * 100) if total > 0 else 0
+    syntactic_gpt4_percentage = (syntactic_gpt4_better / total * 100) if total > 0 else 0
+    semantic_v1_percentage = (semantic_v1_better / total * 100) if total > 0 else 0
+    semantic_gpt4_percentage = (semantic_gpt4_better / total * 100) if total > 0 else 0
     
     # Create DataFrame for the statistics
     data = {
@@ -197,13 +200,13 @@ def calculate_evaluation_stats(evaluations):
         ],
         'V1 (%)': [
             'N/A',
-            f"{stats['syntactic']['Yes']/total*100:.1f}%",
-            f"{stats['semantic']['Yes']/total*100:.1f}%"
+            f"{syntactic_v1_percentage:.1f}%",
+            f"{semantic_v1_percentage:.1f}%"
         ],
         'GPT-4o (%)': [
             f"{prompt_engineering_percentage:.1f}%",
-            f"{(stats['syntactic']['Yes'] + stats['syntactic']['Same'])/total*100:.1f}%",
-            f"{(stats['semantic']['Yes'] + stats['semantic']['Same'])/total*100:.1f}%"
+            f"{syntactic_gpt4_percentage:.1f}%",
+            f"{semantic_gpt4_percentage:.1f}%"
         ]
     }
     
