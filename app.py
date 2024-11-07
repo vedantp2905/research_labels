@@ -43,9 +43,9 @@ class ClusterComparator:
             for row in response.data:
                 evaluations[row['cluster_id']] = {
                     'last_cluster_index': row['last_cluster_index'],
-                    'prompt_engineering_helped': 'Yes' if row['prompt_engineering_helped'] else 'No',
-                    'syntactic_superior': 'Yes' if row['syntactic_superior'] else 'No',
-                    'semantic_superior': 'Yes' if row['semantic_superior'] else 'No',
+                    'prompt_engineering_helped': row['prompt_engineering_helped'],
+                    'syntactic_superior': row['syntactic_superior'],
+                    'semantic_superior': row['semantic_superior'],
                     'error_description': row['error_description'],
                     'syntactic_error_notes': row['syntactic_error_notes'],
                     'semantic_error_notes': row['semantic_error_notes']
@@ -57,17 +57,12 @@ class ClusterComparator:
 
     def save_progress(self, cluster_id, evaluation):
         try:
-            # Convert radio button responses to boolean, handling 'N/A' case
-            prompt_engineering = None if evaluation['prompt_engineering_helped'] == 'N/A' else (evaluation['prompt_engineering_helped'] == 'Yes')
-            syntactic_superior = None if evaluation['syntactic_superior'] == 'Same' else (evaluation['syntactic_superior'] == 'Yes')
-            semantic_superior = None if evaluation['semantic_superior'] == 'Same' else (evaluation['semantic_superior'] == 'Yes')
-            
             eval_data = {
                 'cluster_id': cluster_id,
                 'last_cluster_index': st.session_state.current_index,
-                'prompt_engineering_helped': prompt_engineering,
-                'syntactic_superior': syntactic_superior,
-                'semantic_superior': semantic_superior,
+                'prompt_engineering_helped': evaluation['prompt_engineering_helped'],
+                'syntactic_superior': evaluation['syntactic_superior'],
+                'semantic_superior': evaluation['semantic_superior'],
                 'error_description': evaluation.get('error_description', ''),
                 'syntactic_error_notes': evaluation.get('syntactic_notes', ''),
                 'semantic_error_notes': evaluation.get('semantic_notes', ''),
