@@ -165,10 +165,26 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
     
-    # Initialize acknowledgment state if not exists
+    # Initialize all session state variables
     if 'instructions_acknowledged' not in st.session_state:
         st.session_state.instructions_acknowledged = False
-    
+        
+    if 'comparator' not in st.session_state:
+        st.session_state.comparator = ClusterComparator()
+        st.session_state.comparator.load_data()
+        
+    if 'current_index' not in st.session_state:
+        st.session_state.current_index = 0
+        
+    if 'batch_number' not in st.session_state:
+        st.session_state.batch_number = 0
+        
+    if 'evaluation_start_time' not in st.session_state:
+        st.session_state.evaluation_start_time = datetime.now().isoformat()
+        
+    if 'last_viewed_cluster' not in st.session_state:
+        st.session_state.last_viewed_cluster = None
+
     # Add instructions with checkbox
     with st.expander("📖 Instructions", expanded=not st.session_state.instructions_acknowledged):
         st.markdown("""
@@ -211,50 +227,6 @@ def main():
     
     # Only show the main content if instructions are acknowledged
     if st.session_state.instructions_acknowledged:
-        # Initialize the comparator and rest of the main content
-        if 'comparator' not in st.session_state:
-            st.session_state.comparator = ClusterComparator()
-            st.session_state.comparator.load_data()
-            
-            # Get all evaluations
-            evaluations = st.session_state.comparator.load_progress()
-            
-            # Find the highest cluster index that has been evaluated
-            if evaluations:
-                last_evaluated_index = max(
-                    st.session_state.comparator.cluster_ids.index(cluster_id)
-                    for cluster_id in evaluations.keys()
-                )
-                # Start from the next unevaluated cluster
-                st.session_state.current_index = last_evaluated_index + 1
-            else:
-                # If no evaluations exist, start from 0
-                st.session_state.current_index = 0
-                
-        if 'batch_number' not in st.session_state:
-            st.session_state.batch_number = 0
-            
-        # Add batch selector in the sidebar
-        with st.sidebar:
-            st.header("Batch Selection")
-            batch_size = 100
-            total_batches = (len(st.session_state.comparator.cluster_ids) + batch_size - 1) // batch_size
-            
-            new_batch = st.selectbox(
-                "Select your batch (100 clusters each)",
-                range(total_batches),
-                index=st.session_state.batch_number,
-                format_func=lambda x: f"Batch {x} (clusters {x*100}-{min((x+1)*100-1, len(st.session_state.comparator.cluster_ids)-1)})"
-            )
-            
-            if new_batch != st.session_state.batch_number:
-                st.session_state.batch_number = new_batch
-                # Find the last evaluated cluster in the new batch or start at beginning of batch
-                batch_start = new_batch * batch_size
-                next_index = find_next_unevaluated_cluster(st.session_state.comparator, batch_start)
-                st.session_state.current_index = next_index
-                st.rerun()
-
         comparator = st.session_state.comparator
 
         # Fetch fresh evaluations data for the count
