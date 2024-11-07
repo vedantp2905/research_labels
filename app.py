@@ -335,21 +335,6 @@ def main():
                 st.session_state.current_index = next_index
                 st.rerun()
 
-            # st.header("Jump to Cluster")
-            # jump_to_cluster = st.number_input(
-            #     "Enter cluster number to jump to (0-499):",
-            #     min_value=0,
-            #     max_value=499,
-            #     value=st.session_state.current_index
-            # )
-            
-            # if st.button("Jump"):
-            #     if jump_to_cluster != st.session_state.current_index:
-            #         st.session_state.current_index = jump_to_cluster
-            #         # Update batch number based on jumped cluster
-            #         st.session_state.batch_number = jump_to_cluster // 50
-            #         st.rerun()
-
         comparator = st.session_state.comparator
 
         # Fetch fresh evaluations data for the count
