@@ -93,7 +93,7 @@ class ClusterComparator:
             return False
 
     def load_data(self):
-        v1_labels_path = os.path.join(self.base_path, 'Labels_and_tags_V1.json')
+        v1_labels_path = os.path.join(self.base_path, 'V1_Labels.json')
         with open(v1_labels_path, 'r') as f:
             self.v1_labels = json.load(f)
                 
@@ -306,10 +306,11 @@ def main():
         
         with col1:
             st.header("CodeConceptNet-V1 Labels")
-            current_cluster_key = f"c{current_cluster}"
+            current_cluster_key = str(current_cluster)
             if current_cluster_key in comparator.v1_labels:
-                st.write("Label:", comparator.v1_labels[current_cluster_key].get("Label", "N/A"))
-                st.write("Semantic Tags:", comparator.v1_labels[current_cluster_key].get("Semantic_Tags", []))
+                st.write("Label:", comparator.v1_labels[current_cluster_key].get("label", "N/A"))
+                st.write("Semantic Tags:", comparator.v1_labels[current_cluster_key].get("semantic_tags", []))
+                st.write("Unique Tokens:", comparator.v1_labels[current_cluster_key].get("unique_tokens", []))
         
         with col2:
             st.header("GPT-4o Labels")
