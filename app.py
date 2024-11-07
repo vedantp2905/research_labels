@@ -325,8 +325,6 @@ def main():
                 
                 st.write("Syntactic:", v1_label_data.get("Syntactic", "N/A"))
                 st.write("Description:", v1_label_data.get("Description", "N/A"))
-            else:
-                st.write("No V1 labels found for this cluster.")
         
         with col2:
             st.header("GPT-4o Labels")
