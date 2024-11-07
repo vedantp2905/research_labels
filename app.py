@@ -365,9 +365,9 @@ def main():
                 key=f"syntactic_superior_{current_cluster}"
             )
             
-            if syntactic_superior == "Yes":
+            if syntactic_superior == "No":
                 syntactic_notes = st.text_area(
-                    "Provide examples of superiority:",
+                    "Why is it not superior?",
                     key=f"syntactic_notes_{current_cluster}"
                 )
             
@@ -377,9 +377,9 @@ def main():
                 key=f"semantic_superior_{current_cluster}"
             )
             
-            if semantic_superior == "Yes":
+            if semantic_superior == "No":
                 semantic_notes = st.text_area(
-                    "Provide examples of superiority:",
+                    "Why are they not superior?",
                     key=f"semantic_notes_{current_cluster}"
                 )
 
@@ -390,8 +390,8 @@ def main():
                     'syntactic_superior': syntactic_superior,
                     'semantic_superior': semantic_superior,
                     'error_description': error_description if prompt_engineering_helped == "No" else "",
-                    'syntactic_notes': syntactic_notes if syntactic_superior == "Yes" else "",
-                    'semantic_notes': semantic_notes if semantic_superior == "Yes" else ""
+                    'syntactic_notes': syntactic_notes if syntactic_superior == "No" else "",
+                    'semantic_notes': semantic_notes if semantic_superior == "No" else ""
                 }
                 
                 if comparator.save_progress(current_cluster, evaluation):
