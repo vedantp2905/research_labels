@@ -349,7 +349,7 @@ def main():
             st.header("Error Analysis and Prompt Engineering Impact")
             
             prompt_engineering_helped = st.radio(
-                "Has prompt engineering helped convert previously unacceptable labels to acceptable ones?",
+                "Has prompt engineering helped convert previously unacceptable labels to acceptable ones?(Wont be always applicable)",
                 ["N/A", "Yes", "No"],
                 key=f"prompt_engineering_{current_cluster}"
             )
