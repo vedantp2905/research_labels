@@ -142,6 +142,37 @@ def find_next_unevaluated_cluster(comparator, start_index=0, batch_size=50):
     # If no clusters found at all, return batch start
     return batch_start
 
+def calculate_evaluation_stats(evaluations):
+    """Calculate statistics for evaluation criteria"""
+    total = len(evaluations)
+    if total == 0:
+        return {
+            'prompt_engineering': {'N/A': 0, 'Yes': 0, 'No': 0},
+            'syntactic': {'Yes': 0, 'No': 0, 'Same': 0},
+            'semantic': {'Yes': 0, 'No': 0, 'Same': 0}
+        }
+    
+    stats = {
+        'prompt_engineering': {'N/A': 0, 'Yes': 0, 'No': 0},
+        'syntactic': {'Yes': 0, 'No': 0, 'Same': 0},
+        'semantic': {'Yes': 0, 'No': 0, 'Same': 0}
+    }
+    
+    for eval_data in evaluations.values():
+        # Count prompt engineering responses
+        pe_value = eval_data.get('prompt_engineering_helped', 'N/A')
+        stats['prompt_engineering'][pe_value] = stats['prompt_engineering'].get(pe_value, 0) + 1
+        
+        # Count syntactic superiority
+        syn_value = eval_data.get('syntactic_superior', 'No')
+        stats['syntactic'][syn_value] = stats['syntactic'].get(syn_value, 0) + 1
+        
+        # Count semantic superiority
+        sem_value = eval_data.get('semantic_superior', 'No')
+        stats['semantic'][sem_value] = stats['semantic'].get(sem_value, 0) + 1
+    
+    return stats
+
 def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
@@ -159,6 +190,55 @@ def main():
                 file_name="cluster_evaluations.json",
                 mime="application/json",
             )
+    
+    # Add this after the download button and before the instructions
+    if 'comparator' in st.session_state:
+        evaluations = st.session_state.comparator.load_progress()
+        if evaluations:
+            stats = calculate_evaluation_stats(evaluations)
+            total = len(evaluations)
+            
+            st.header("Evaluation Statistics")
+            
+            # Create DataFrame for the statistics
+            data = {
+                'Evaluation Criteria': [
+                    'Prompt Engineering Helped',
+                    'Syntactic Superiority',
+                    'Semantic Superiority'
+                ],
+                'V1 (%)': [
+                    f"{stats['prompt_engineering']['Yes']/total*100:.1f}%",
+                    f"{stats['syntactic']['Yes']/total*100:.1f}%",
+                    f"{stats['semantic']['Yes']/total*100:.1f}%"
+                ],
+                'GPT-4o (%)': [
+                    'N/A',
+                    f"{(stats['syntactic']['Yes'] + stats['syntactic']['Same'])/total*100:.1f}%",
+                    f"{(stats['semantic']['Yes'] + stats['semantic']['Same'])/total*100:.1f}%"
+                ]
+            }
+            
+            df = pd.DataFrame(data)
+            st.table(df)
+            
+            # Display detailed breakdown
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.write("Prompt Engineering Breakdown:")
+                for key, value in stats['prompt_engineering'].items():
+                    st.write(f"{key}: {value/total*100:.1f}%")
+                    
+            with col2:
+                st.write("Syntactic Superiority Breakdown:")
+                for key, value in stats['syntactic'].items():
+                    st.write(f"{key}: {value/total*100:.1f}%")
+                    
+            with col3:
+                st.write("Semantic Superiority Breakdown:")
+                for key, value in stats['semantic'].items():
+                    st.write(f"{key}: {value/total*100:.1f}%")
     
     # Initialize acknowledgment state if not exists
     if 'instructions_acknowledged' not in st.session_state:
