@@ -182,14 +182,10 @@ def main():
            - Compare GPT-4o labels with human labels
            
         3. **Evaluation Criteria**
-           - Prompt Engineering Impact: Has it helped convert previously unacceptable labels to acceptable ones?
+           - Prompt Engineering Impact: Has it helped convert previously unacceptable labels to acceptable ones? (Won't be always applicable)
            - Syntactic Superiority: Is GPT-4o's syntactic label better than the human label?
            - Semantic Superiority: Are GPT-4o's semantic tags better than human tags? (≥3/5 tags should be better)
-           
-        4. **Error Analysis**
-           - Document specific improvements in error cases
-           - Note any remaining issues
-           
+                      
 
         ⚠️ **Important**: 
         - Focus on comparing before/after prompt engineering and against human labels
@@ -350,7 +346,7 @@ def main():
             st.header("Evaluation")
             
             prompt_engineering_helped = st.radio(
-                "Has prompt engineering helped improve previously unacceptable labels?",
+                "Has prompt engineering helped convert previously unacceptable labels to acceptable ones?",
                 ["N/A", "Yes", "No"],
                 key=f"prompt_engineering_{current_cluster}"
             )
@@ -387,28 +383,28 @@ def main():
                     key=f"semantic_notes_{current_cluster}"
                 )
 
-        # Move submit button here, after the columns but before the sentences section
-        if st.button("Submit Evaluation", key=f"submit_{current_cluster}"):
-            evaluation = {
-                'prompt_engineering_helped': prompt_engineering_helped,
-                'syntactic_superior': syntactic_superior,
-                'semantic_superior': semantic_superior,
-                'error_description': error_description if prompt_engineering_helped == "No" else "",
-                'syntactic_notes': syntactic_notes if syntactic_superior == "Yes" else "",
-                'semantic_notes': semantic_notes if semantic_superior == "Yes" else ""
-            }
-            
-            if comparator.save_progress(current_cluster, evaluation):
-                st.success("Evaluation saved successfully!")
-                # Find next unevaluated cluster
-                next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index)
-                if next_index is not None:
-                    st.session_state.current_index = next_index
-                    st.rerun()
+            # Moved submit button here, inside col3
+            if st.button("Submit Evaluation", key=f"submit_{current_cluster}"):
+                evaluation = {
+                    'prompt_engineering_helped': prompt_engineering_helped,
+                    'syntactic_superior': syntactic_superior,
+                    'semantic_superior': semantic_superior,
+                    'error_description': error_description if prompt_engineering_helped == "No" else "",
+                    'syntactic_notes': syntactic_notes if syntactic_superior == "Yes" else "",
+                    'semantic_notes': semantic_notes if semantic_superior == "Yes" else ""
+                }
+                
+                if comparator.save_progress(current_cluster, evaluation):
+                    st.success("Evaluation saved successfully!")
+                    # Find next unevaluated cluster
+                    next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index)
+                    if next_index is not None:
+                        st.session_state.current_index = next_index
+                        st.rerun()
+                    else:
+                        st.success("All clusters in this batch have been evaluated!")
                 else:
-                    st.success("All clusters in this batch have been evaluated!")
-            else:
-                st.error("Failed to save evaluation")
+                    st.error("Failed to save evaluation")
 
         # Display code examples section
         st.header("Sentences where the token appears")
