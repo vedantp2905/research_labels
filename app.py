@@ -183,6 +183,11 @@ def calculate_evaluation_stats(evaluations):
     # Calculate prompt engineering improvement percentage
     prompt_engineering_percentage = (improved_count / unacceptable_count * 100) if unacceptable_count > 0 else 0
     
+    # Add debug information
+    st.write(f"Debug: Unacceptable count: {unacceptable_count}")
+    st.write(f"Debug: Improved count: {improved_count}")
+    st.write(f"Debug: Percentage: {prompt_engineering_percentage}%")
+    
     # Create DataFrame for the statistics
     data = {
         'Evaluation Criteria': [
