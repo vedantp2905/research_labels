@@ -168,12 +168,17 @@ def main():
         ### How to Use This Tool
 
         1. **Evaluation Goals**
-           - Analyze if prompt engineering has helped improve LLM labels
+           - Analyze if prompt engineering has helped improve LLM labels and made unacceptable labels acceptable
+           - Unacceptable labels are those that are 
+              -a) Uninterpretable concepts: Where the LLM didnt understand what was the token and used a completely different concept
+              -b) Precision: Where the LLM was able to understand but not give the exact concept 
+              -c) Where the model didnt recognise the token so didnt give an labels ( Check mainly for this)
            - Compare quality of GPT-4o labels with human labels
            
         2. **For Each Cluster**
+           
            - Review the tokens and their context
-           - Compare V1 (before prompt engineering) vs GPT-4o (after) labels
+           - Compare V1 (before prompt engineering) vs GPT-4o (after prompt engineering) labels
            - Compare GPT-4o labels with human labels
            
         3. **Evaluation Criteria**
@@ -186,7 +191,11 @@ def main():
            - Note any remaining issues
            
 
-        ⚠️ **Important**: Focus on comparing before/after prompt engineering and against human labels
+        ⚠️ **Important**: 
+        - Focus on comparing before/after prompt engineering and against human labels
+        - For V1 the model was just asked this question: 'Generate a concise label or theme for the following java code tokens: {token_summary}.' So there is no specific syntactic or semantic label it is just whatever LLM outputs. 
+        - We just want to see if prompt engineering helped getting all clusters labelled which the previous model failed to do.
+
         """)
         
         # Add checkbox at the bottom of instructions
