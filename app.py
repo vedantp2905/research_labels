@@ -93,7 +93,7 @@ class ClusterComparator:
             return False
 
     def load_data(self):
-        v1_labels_path = os.path.join(self.base_path, 'V1_Labels.json')
+        v1_labels_path = os.path.join(self.base_path, 'Labels_and_tags_V1.json')
         with open(v1_labels_path, 'r') as f:
             self.v1_labels = json.load(f)
                 
@@ -137,14 +137,11 @@ class ClusterComparator:
         
 def find_next_unevaluated_cluster(comparator, start_index=0, batch_size=100):
     """Find the next unevaluated cluster within the user's assigned batch"""
-    if start_index is None:
-        start_index = 0
-        
     fresh_evaluations = comparator.load_progress()
     evaluated_cluster_ids = set(fresh_evaluations.keys())
     
     # Calculate batch boundaries
-    batch_number = start_index // batch_size if start_index is not None else 0
+    batch_number = start_index // batch_size
     batch_start = batch_number * batch_size
     batch_end = (batch_number + 1) * batch_size
     
@@ -165,26 +162,10 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
     
-    # Initialize all session state variables
+    # Initialize acknowledgment state if not exists
     if 'instructions_acknowledged' not in st.session_state:
         st.session_state.instructions_acknowledged = False
-        
-    if 'comparator' not in st.session_state:
-        st.session_state.comparator = ClusterComparator()
-        st.session_state.comparator.load_data()
-        
-    if 'current_index' not in st.session_state:
-        st.session_state.current_index = 0
-        
-    if 'batch_number' not in st.session_state:
-        st.session_state.batch_number = 0
-        
-    if 'evaluation_start_time' not in st.session_state:
-        st.session_state.evaluation_start_time = datetime.now().isoformat()
-        
-    if 'last_viewed_cluster' not in st.session_state:
-        st.session_state.last_viewed_cluster = None
-
+    
     # Add instructions with checkbox
     with st.expander("📖 Instructions", expanded=not st.session_state.instructions_acknowledged):
         st.markdown("""
@@ -227,6 +208,50 @@ def main():
     
     # Only show the main content if instructions are acknowledged
     if st.session_state.instructions_acknowledged:
+        # Initialize the comparator and rest of the main content
+        if 'comparator' not in st.session_state:
+            st.session_state.comparator = ClusterComparator()
+            st.session_state.comparator.load_data()
+            
+            # Get all evaluations
+            evaluations = st.session_state.comparator.load_progress()
+            
+            # Find the highest cluster index that has been evaluated
+            if evaluations:
+                last_evaluated_index = max(
+                    st.session_state.comparator.cluster_ids.index(cluster_id)
+                    for cluster_id in evaluations.keys()
+                )
+                # Start from the next unevaluated cluster
+                st.session_state.current_index = last_evaluated_index + 1
+            else:
+                # If no evaluations exist, start from 0
+                st.session_state.current_index = 0
+                
+        if 'batch_number' not in st.session_state:
+            st.session_state.batch_number = 0
+            
+        # Add batch selector in the sidebar
+        with st.sidebar:
+            st.header("Batch Selection")
+            batch_size = 100
+            total_batches = (len(st.session_state.comparator.cluster_ids) + batch_size - 1) // batch_size
+            
+            new_batch = st.selectbox(
+                "Select your batch (100 clusters each)",
+                range(total_batches),
+                index=st.session_state.batch_number,
+                format_func=lambda x: f"Batch {x} (clusters {x*100}-{min((x+1)*100-1, len(st.session_state.comparator.cluster_ids)-1)})"
+            )
+            
+            if new_batch != st.session_state.batch_number:
+                st.session_state.batch_number = new_batch
+                # Find the last evaluated cluster in the new batch or start at beginning of batch
+                batch_start = new_batch * batch_size
+                next_index = find_next_unevaluated_cluster(st.session_state.comparator, batch_start)
+                st.session_state.current_index = next_index
+                st.rerun()
+
         comparator = st.session_state.comparator
 
         # Fetch fresh evaluations data for the count
@@ -281,18 +306,17 @@ def main():
         
         with col1:
             st.header("CodeConceptNet-V1 Labels")
-            current_cluster_key = str(current_cluster)
+            current_cluster_key = f"c{current_cluster}"
             if current_cluster_key in comparator.v1_labels:
-                st.write("Label:", comparator.v1_labels[current_cluster_key].get("label", "N/A"))
-                st.write("Semantic Tags:", comparator.v1_labels[current_cluster_key].get("semantic_tags", []))
-                st.write("Unique Tokens:", comparator.v1_labels[current_cluster_key].get("unique_tokens", []))
+                st.write("Label:", comparator.v1_labels[current_cluster_key].get("Label", "N/A"))
+                st.write("Semantic Tags:", comparator.v1_labels[current_cluster_key].get("Semantic_Tags", []))
         
         with col2:
             st.header("GPT-4o Labels")
             gpt4_cluster = next((item[current_cluster_key] for item in comparator.gpt4_labels 
                                if current_cluster_key in item), {})
-            st.write("Syntactic Label:", gpt4_cluster.get("Syntactic Label", "N/A"))
-            st.write("Semantic Tags:", gpt4_cluster.get("Semantic Tags", []))
+            st.write("Syntactic Label:", gpt4_cluster.get("Syntactic_Label", "N/A"))
+            st.write("Semantic Tags:", gpt4_cluster.get("Semantic_Tags", []))
             st.write("Description:", gpt4_cluster.get("Description", "N/A"))
 
         
@@ -389,7 +413,7 @@ def main():
                         # Find next unevaluated cluster within the same batch
                         next_index = find_next_unevaluated_cluster(
                             comparator, 
-                            st.session_state.current_index if st.session_state.current_index is not None else 0,
+                            st.session_state.current_index + 1,
                             batch_size=100
                         )
                         
