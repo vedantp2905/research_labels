@@ -93,7 +93,7 @@ class ClusterComparator:
             return False
 
     def load_data(self):
-        v1_labels_path = os.path.join(self.base_path, 'v1_labels.json')
+        v1_labels_path = os.path.join(self.base_path, 'Labels_and_tags_V1.json')
         with open(v1_labels_path, 'r') as f:
             self.v1_labels = json.load(f)
                 
