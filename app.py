@@ -207,7 +207,8 @@ def calculate_evaluation_stats(evaluations):
         ]
     }
     
-    return stats
+    df = pd.DataFrame(data)
+    return df
 
 def main():
     st.set_page_config(layout="wide")
