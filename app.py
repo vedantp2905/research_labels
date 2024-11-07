@@ -444,17 +444,31 @@ def main():
         with col3:
             st.header("Error Analysis and Prompt Engineering Impact")
             
-            prompt_engineering_helped = st.radio(
-                "For previously unacceptable V1 labels: Has prompt engineering helped make this label acceptable?",
-                ["N/A", "Yes", "No"],
-                key=f"prompt_engineering_{current_cluster}"
-            )
+            # Check if current cluster had unacceptable V1 label
+            current_cluster_key = str(current_cluster)
+            v1_label_data = comparator.v1_labels.get(current_cluster_key, {})
+            is_unacceptable = v1_label_data.get("Q1_Answer", "").lower() == "unacceptable"
             
-            if prompt_engineering_helped == "No":
-                error_description = st.text_area(
-                    "Describe the remaining issues:",
-                    key=f"error_description_{current_cluster}"
+            if is_unacceptable:
+                st.warning("⚠️ This cluster had an unacceptable V1 label")
+                st.write("V1 Label Acceptability Issue:", v1_label_data.get("Q1_Answer", "N/A"))
+                st.write("Original V1 Label:", v1_label_data.get("Labels", ["N/A"])[0])
+                
+                prompt_engineering_helped = st.radio(
+                    "Has prompt engineering helped make this label acceptable?",
+                    ["Yes", "No"],
+                    key=f"prompt_engineering_{current_cluster}"
                 )
+                
+                if prompt_engineering_helped == "No":
+                    error_description = st.text_area(
+                        "Describe the remaining issues:",
+                        key=f"error_description_{current_cluster}"
+                    )
+            else:
+                # For acceptable cases, automatically set to N/A
+                prompt_engineering_helped = "N/A"
+                st.info("✓ This cluster had an acceptable V1 label")
             
             st.header("Comparison with Human Labels")
             
