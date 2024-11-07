@@ -145,47 +145,133 @@ def main():
     st.set_page_config(
         layout="wide",
         page_title="Cluster Label Comparison Tool",
-        page_icon="🔍"
+        page_icon="🔍",
+        initial_sidebar_state="expanded"
     )
     
-    # Custom CSS for better styling
+    # Enhanced CSS styling
     st.markdown("""
         <style>
+        /* Global Styles */
         .stApp {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
+        
+        /* Header Styles */
         .main-header {
             text-align: center;
-            color: #1f77b4;
-            padding: 1rem 0;
+            color: #1e3d59;
+            padding: 1.5rem 0;
             margin-bottom: 2rem;
-            border-bottom: 2px solid #eee;
+            border-bottom: 3px solid #f5f5f5;
+            font-family: 'Helvetica Neue', sans-serif;
         }
-        .stat-box {
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
+        
+        /* Card Styles */
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             text-align: center;
+            transition: transform 0.2s ease;
         }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Section Headers */
         .section-header {
-            color: #2c3e50;
-            margin: 1.5rem 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #eee;
+            color: #1e3d59;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #f5f5f5;
+            font-weight: 600;
         }
+        
+        /* Button Styles */
         .stButton>button {
             width: 100%;
-            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #1e3d59;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .stButton>button:hover {
+            background-color: #2b4f76;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Radio Button Styling */
+        .stRadio > div {
+            background-color: #f8f9fa;
+            padding: 1.25rem;
+            border-radius: 10px;
+            margin: 0.75rem 0;
+            border: 1px solid #e0e0e0;
+        }
+        
+        /* Text Area Styling */
+        .stTextArea > div > div {
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            background-color: white;
+        }
+        
+        /* Code Block Styling */
+        .code-block {
+            background-color: #f8f9fa;
+            padding: 1.25rem;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            font-family: 'Monaco', monospace;
+        }
+        
+        /* Sidebar Styling */
+        .css-1d391kg {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        /* Progress Bar */
+        .stProgress > div > div > div {
+            background-color: #1e3d59;
+        }
+        
+        /* Tables */
+        .dataframe {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .dataframe th {
+            background-color: #f8f9fa;
+            padding: 0.75rem !important;
+        }
+        .dataframe td {
+            padding: 0.75rem !important;
+        }
+        
+        /* Expander */
+        .streamlit-expanderHeader {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
         }
         </style>
     """, unsafe_allow_html=True)
 
-    # Main title with custom styling
+    # Main title with enhanced styling
     st.markdown('<h1 class="main-header">🔍 Cluster Label Comparison Tool</h1>', unsafe_allow_html=True)
 
-    # Download button with better styling
+    # Download button with improved styling
     if 'comparator' in st.session_state:
         evaluations = st.session_state.comparator.load_progress()
         if evaluations:
@@ -195,129 +281,97 @@ def main():
             col1, col2, col3 = st.columns([1,2,1])
             with col2:
                 st.download_button(
-                    label="📥 Download Evaluated Clusters (JSON)",
+                    label="📥 Download Evaluations",
                     data=json_str,
                     file_name="cluster_evaluations.json",
                     mime="application/json",
                     help="Download your evaluation results as a JSON file",
                 )
 
-    # Instructions section with better formatting
-    with st.expander("📖 Instructions", expanded=not st.session_state.instructions_acknowledged):
+    # Enhanced Instructions section
+    with st.expander("📖 Instructions & Guidelines", expanded=not st.session_state.instructions_acknowledged):
         st.markdown("""
-        <h3 style='color: #1f77b4;'>How to Use This Tool</h3>
-        
-        <div style='background-color: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0;'>
-            <h4>1️⃣ Evaluation Goals</h4>
-            <ul>
-                <li>Analyze if prompt engineering has helped improve LLM labels</li>
-                <li>Identify unacceptable labels:
-                    <ul>
-                        <li>🔸 Uninterpretable concepts</li>
-                        <li>🔸 Precision issues</li>
-                        <li>🔸 Unrecognized tokens</li>
-                    </ul>
-                </li>
-                <li>Compare GPT-4o labels with human labels</li>
-            </ul>
-        </div>
+        <div style='background-color: white; padding: 2rem; border-radius: 12px; border: 1px solid #e0e0e0;'>
+            <h3 style='color: #1e3d59; margin-bottom: 1.5rem;'>How to Use This Tool</h3>
+            
+            <div style='background-color: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;'>
+                <h4 style='color: #1e3d59;'>🎯 Evaluation Goals</h4>
+                <ul>
+                    <li>Analyze prompt engineering effectiveness</li>
+                    <li>Identify and document unacceptable labels</li>
+                    <li>Compare GPT-4o outputs with human labels</li>
+                </ul>
+            </div>
 
-        <div style='background-color: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0;'>
-            <h4>2️⃣ For Each Cluster</h4>
-            <ul>
-                <li>Review tokens and context</li>
-                <li>Compare V1 vs GPT-4o labels</li>
-                <li>Compare GPT-4o with human labels</li>
-            </ul>
-        </div>
+            <div style='background-color: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;'>
+                <h4 style='color: #1e3d59;'>📝 Evaluation Process</h4>
+                <ul>
+                    <li>Review cluster tokens and context</li>
+                    <li>Compare V1 vs GPT-4o labels</li>
+                    <li>Assess label quality and accuracy</li>
+                </ul>
+            </div>
 
-        <div style='background-color: #f8f9fa; padding: 1rem; border-radius: 8px; margin: 1rem 0;'>
-            <h4>3️⃣ Evaluation Criteria</h4>
-            <ul>
-                <li>✨ Prompt Engineering Impact</li>
-                <li>📝 Syntactic Superiority</li>
-                <li>🎯 Semantic Superiority (≥3/5 tags should be better)</li>
-            </ul>
-        </div>
-
-        <div style='background-color: #fff3cd; padding: 1rem; border-radius: 8px; margin: 1rem 0;'>
-            <h4>⚠️ Important Notes</h4>
-            <ul>
-                <li>Focus on before/after prompt engineering comparison</li>
-                <li>V1 used basic prompting without specific syntactic/semantic labels</li>
-                <li>Evaluate if prompt engineering improved cluster labeling coverage</li>
-            </ul>
+            <div style='background-color: #fff3cd; padding: 1.5rem; border-radius: 10px; margin: 1rem 0;'>
+                <h4 style='color: #856404;'>⚠️ Important Notes</h4>
+                <ul>
+                    <li>Focus on before/after prompt engineering comparison</li>
+                    <li>V1 used basic prompting</li>
+                    <li>Evaluate labeling coverage improvements</li>
+                </ul>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
-    # Stats display with better styling
+    # Enhanced Stats display
     if st.session_state.instructions_acknowledged and 'comparator' in st.session_state:
         comparator = st.session_state.comparator
         fresh_evaluations = comparator.load_progress()
         evaluated_clusters = len(fresh_evaluations)
+        
+        progress_percentage = (evaluated_clusters / 500) * 100
 
         st.markdown('<h3 class="section-header">📊 Progress Overview</h3>', unsafe_allow_html=True)
-        col1, col2, col3 = st.columns(3)
+        
+        # Progress bar
+        st.progress(progress_percentage / 100)
+        
+        col1, col2, col3, col4 = st.columns(4)
         
         with col1:
             st.markdown(f"""
-                <div class="stat-box">
-                    <h4>Total Clusters</h4>
-                    <h2>{len(comparator.cluster_ids)}</h2>
+                <div class="stat-card">
+                    <h4 style="color: #666;">Total Clusters</h4>
+                    <h2 style="color: #1e3d59; margin: 0;">{len(comparator.cluster_ids)}</h2>
                 </div>
             """, unsafe_allow_html=True)
         
         with col2:
             st.markdown(f"""
-                <div class="stat-box">
-                    <h4>Remaining Clusters</h4>
-                    <h2>{500 - evaluated_clusters}</h2>
+                <div class="stat-card">
+                    <h4 style="color: #666;">Evaluated</h4>
+                    <h2 style="color: #1e3d59; margin: 0;">{evaluated_clusters}</h2>
                 </div>
             """, unsafe_allow_html=True)
-            
+        
         with col3:
             st.markdown(f"""
-                <div class="stat-box">
-                    <h4>Current Cluster</h4>
-                    <h2>{st.session_state.current_index}</h2>
+                <div class="stat-card">
+                    <h4 style="color: #666;">Remaining</h4>
+                    <h2 style="color: #1e3d59; margin: 0;">{500 - evaluated_clusters}</h2>
+                </div>
+            """, unsafe_allow_html=True)
+        
+        with col4:
+            st.markdown(f"""
+                <div class="stat-card">
+                    <h4 style="color: #666;">Current Cluster</h4>
+                    <h2 style="color: #1e3d59; margin: 0;">{st.session_state.current_index}</h2>
                 </div>
             """, unsafe_allow_html=True)
 
-        # Comparison sections with better organization
-        st.markdown('<h3 class="section-header">🔄 Label Comparison</h3>', unsafe_allow_html=True)
-        
         # Rest of your existing comparison code...
-        # When adding the radio buttons and text areas, wrap them in containers:
-        st.markdown("""
-            <style>
-            .stRadio > div {
-                background-color: #f8f9fa;
-                padding: 1rem;
-                border-radius: 8px;
-                margin: 0.5rem 0;
-            }
-            .stTextArea > div > div {
-                background-color: #ffffff;
-                border: 1px solid #dee2e6;
-                border-radius: 8px;
-            }
-            </style>
-        """, unsafe_allow_html=True)
-
-        # Code examples section with better styling
-        st.markdown('<h3 class="section-header">💻 Code Examples</h3>', unsafe_allow_html=True)
-        
-        # Add a subtle container around code examples
-        st.markdown("""
-            <style>
-            .stCode {
-                background-color: #f8f9fa;
-                padding: 1rem;
-                border-radius: 8px;
-                margin: 0.5rem 0;
-            }
-            </style>
-        """, unsafe_allow_html=True)
+        st.markdown('<h3 class="section-header">🔄 Label Comparison</h3>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
