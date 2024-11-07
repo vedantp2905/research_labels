@@ -57,12 +57,17 @@ class ClusterComparator:
 
     def save_progress(self, cluster_id, evaluation):
         try:
+            # Convert radio button responses to boolean, handling 'N/A' case
+            prompt_engineering = None if evaluation['prompt_engineering_helped'] == 'N/A' else (evaluation['prompt_engineering_helped'] == 'Yes')
+            syntactic_superior = None if evaluation['syntactic_superior'] == 'Same' else (evaluation['syntactic_superior'] == 'Yes')
+            semantic_superior = None if evaluation['semantic_superior'] == 'Same' else (evaluation['semantic_superior'] == 'Yes')
+            
             eval_data = {
                 'cluster_id': cluster_id,
                 'last_cluster_index': st.session_state.current_index,
-                'prompt_engineering_helped': evaluation['prompt_engineering_helped'] == 'Yes',
-                'syntactic_superior': evaluation['syntactic_superior'] == 'Yes',
-                'semantic_superior': evaluation['semantic_superior'] == 'Yes',
+                'prompt_engineering_helped': prompt_engineering,
+                'syntactic_superior': syntactic_superior,
+                'semantic_superior': semantic_superior,
                 'error_description': evaluation.get('error_description', ''),
                 'syntactic_error_notes': evaluation.get('syntactic_notes', ''),
                 'semantic_error_notes': evaluation.get('semantic_notes', ''),
@@ -185,9 +190,8 @@ def main():
            
         3. **Evaluation Criteria**
            - Prompt Engineering Impact: Has it helped convert previously unacceptable labels to acceptable ones? (Won't be always applicable)
-           - Syntactic Superiority: Is GPT-4o's syntactic label better than the human label? 
+           - Syntactic Superiority: Is GPT-4o's syntactic label better than the human label?
            - Semantic Superiority: Are GPT-4o's semantic tags better than human tags? (≥3/5 tags should be better)
-           - For superiority, look at precision and accruacy. How precision are the labels/tags as compared to human labels/tags and are these labels/tags correct?
                       
 
         ⚠️ **Important**: 
@@ -364,7 +368,7 @@ def main():
             st.header("Comparison with Human Labels")
             
             syntactic_superior = st.radio(
-                "Is GPT-4o's syntactic label superior to the human label?(is it more accurate and precise)",
+                "Is GPT-4o's syntactic label superior to the human label?",
                 ["Yes", "No","Same"],
                 key=f"syntactic_superior_{current_cluster}"
             )
