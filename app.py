@@ -137,11 +137,14 @@ class ClusterComparator:
         
 def find_next_unevaluated_cluster(comparator, start_index=0, batch_size=100):
     """Find the next unevaluated cluster within the user's assigned batch"""
+    if start_index is None:
+        start_index = 0
+        
     fresh_evaluations = comparator.load_progress()
     evaluated_cluster_ids = set(fresh_evaluations.keys())
     
     # Calculate batch boundaries
-    batch_number = start_index // batch_size
+    batch_number = start_index // batch_size if start_index is not None else 0
     batch_start = batch_number * batch_size
     batch_end = (batch_number + 1) * batch_size
     
@@ -414,7 +417,7 @@ def main():
                         # Find next unevaluated cluster within the same batch
                         next_index = find_next_unevaluated_cluster(
                             comparator, 
-                            st.session_state.current_index + 1,
+                            st.session_state.current_index if st.session_state.current_index is not None else 0,
                             batch_size=100
                         )
                         
