@@ -320,7 +320,16 @@ def main():
             gpt4_cluster = next((item[current_cluster_key] for item in comparator.gpt4_labels 
                                if current_cluster_key in item), {})
             st.write("Syntactic Label:", gpt4_cluster.get("Syntactic Label", "N/A"))
-            st.write("Semantic Tags:", ", ".join(gpt4_cluster.get("Semantic Tags", ["N/A"])) if gpt4_cluster.get("Semantic Tags") else "N/A")
+            
+            # Display Semantic Tags one below the other
+            semantic_tags = gpt4_cluster.get("Semantic Tags", [])
+            if semantic_tags:
+                st.write("Semantic Tags:")
+                for tag in semantic_tags:
+                    st.write(f"- {tag}")  # Display each tag on a new line
+            else:
+                st.write("Semantic Tags: N/A")  # If no tags are present
+            
             st.write("Description:", gpt4_cluster.get("Description", "N/A"))
 
         
