@@ -312,7 +312,6 @@ def main():
                 v1_label_data = comparator.v1_labels[current_cluster_key]
                 st.write("Label:", v1_label_data.get("Labels", ["N/A"])[0])
                 st.write("Meaningful:", v1_label_data.get("Meaningful", "N/A"))
-                st.write("Lexicographic:", v1_label_data.get("Lexicographic", "N/A"))
                 
                 # Display Semantic one below the other
                 semantic_tags = v1_label_data.get("Semantic", "").split(", ")  # Split by comma for individual tags
@@ -328,8 +327,9 @@ def main():
         
         with col2:
             st.header("GPT-4o Labels")
-            gpt4_cluster = next((item[current_cluster_key] for item in comparator.gpt4_labels 
-                               if current_cluster_key in item), {})
+            gpt4_cluster_key = f"c{current_cluster}"
+            gpt4_cluster = next((item[gpt4_cluster_key] for item in comparator.gpt4_labels 
+                               if gpt4_cluster_key in item), {})
             st.write("Syntactic Label:", gpt4_cluster.get("Syntactic Label", "N/A"))
             
             # Display Semantic Tags one below the other
