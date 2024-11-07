@@ -43,10 +43,12 @@ class ClusterComparator:
             for row in response.data:
                 evaluations[row['cluster_id']] = {
                     'last_cluster_index': row['last_cluster_index'],
-                    'acceptability': row['acceptability'],
-                    'precision': row['precision'],
-                    'quality': row['quality'],
-                    'notes': row['notes']
+                    'prompt_engineering_helped': 'Yes' if row['prompt_engineering_helped'] else 'No',
+                    'syntactic_superior': 'Yes' if row['syntactic_superior'] else 'No',
+                    'semantic_superior': 'Yes' if row['semantic_superior'] else 'No',
+                    'error_description': row['error_description'],
+                    'syntactic_error_notes': row['syntactic_error_notes'],
+                    'semantic_error_notes': row['semantic_error_notes']
                 }
             return evaluations
         except Exception as e:
