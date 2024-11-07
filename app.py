@@ -177,28 +177,12 @@ def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
     
-    # Add download button at the top
-    if 'comparator' in st.session_state:
-        evaluations = st.session_state.comparator.load_progress()
-        if evaluations:
-            df = pd.DataFrame(evaluations).T
-            json_str = df.to_json(orient='index', indent=2)
-            
-            st.download_button(
-                label="Download Evaluated Clusters (JSON)",
-                data=json_str,
-                file_name="cluster_evaluations.json",
-                mime="application/json",
-            )
-    
-    # Add this after the download button and before the instructions
+    # Add statistics table and download options at the top
     if 'comparator' in st.session_state:
         evaluations = st.session_state.comparator.load_progress()
         if evaluations:
             stats = calculate_evaluation_stats(evaluations)
             total = len(evaluations)
-            
-            st.header("Evaluation Statistics")
             
             # Create DataFrame for the statistics
             data = {
@@ -222,24 +206,24 @@ def main():
             df = pd.DataFrame(data)
             st.table(df)
             
-            # Display detailed breakdown
-            col1, col2, col3 = st.columns(3)
+            # Add CSV download button for the statistics table
+            csv = df.to_csv(index=False)
+            st.download_button(
+                label="Download Statistics as CSV",
+                data=csv,
+                file_name="evaluation_statistics.csv",
+                mime="text/csv",
+            )
             
-            with col1:
-                st.write("Prompt Engineering Breakdown:")
-                for key, value in stats['prompt_engineering'].items():
-                    st.write(f"{key}: {value/total*100:.1f}%")
-                    
-            with col2:
-                st.write("Syntactic Superiority Breakdown:")
-                for key, value in stats['syntactic'].items():
-                    st.write(f"{key}: {value/total*100:.1f}%")
-                    
-            with col3:
-                st.write("Semantic Superiority Breakdown:")
-                for key, value in stats['semantic'].items():
-                    st.write(f"{key}: {value/total*100:.1f}%")
-    
+            # Add JSON download button for full evaluations
+            json_str = pd.DataFrame(evaluations).T.to_json(orient='index', indent=2)
+            st.download_button(
+                label="Download Full Evaluations (JSON)",
+                data=json_str,
+                file_name="cluster_evaluations.json",
+                mime="application/json",
+            )
+
     # Initialize acknowledgment state if not exists
     if 'instructions_acknowledged' not in st.session_state:
         st.session_state.instructions_acknowledged = False
