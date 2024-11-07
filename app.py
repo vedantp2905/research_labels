@@ -253,28 +253,34 @@ def main():
 
         1. **Evaluation Goals**
            - Analyze if prompt engineering has helped improve LLM labels and made unacceptable labels acceptable
-           - Unacceptable labels are those that are 
+           - There are approximately 23 clusters that were marked as 'unacceptable' in V1
+           - The prompt engineering questions will automatically appear when you encounter these specific clusters
+           - Unacceptable labels are those that are:
               -a) Uninterpretable concepts: Where the LLM didnt understand what was the token and used a completely different concept
               -b) Precision: Where the LLM was able to understand but not give the exact concept 
               -c) Where the model didnt recognise the token so didnt give an labels ( Check mainly for this)
            - Compare quality of GPT-4o labels with human labels
            
         2. **For Each Cluster**
-           
            - Review the tokens and their context
            - Compare V1 (before prompt engineering) vs GPT-4o (after prompt engineering) labels
            - Compare GPT-4o labels with human labels
+           - For unacceptable cases (23 clusters), you'll see additional questions about prompt engineering improvement
            
         3. **Evaluation Criteria**
-           - Prompt Engineering Impact: Has it helped convert previously unacceptable labels to acceptable ones? (Won't be always applicable)
+           - Prompt Engineering Impact: Has it helped convert previously unacceptable labels to acceptable ones? (Only appears for about 23 unacceptable clusters)
            - Syntactic Superiority: Is GPT-4o's syntactic label better than the human label?
            - Semantic Superiority: Are GPT-4o's semantic tags better than human tags? (≥3/5 tags should be better)
                       
-
         ⚠️ **Important**: 
         - Focus on comparing before/after prompt engineering and against human labels
         - For V1 the model was just asked this question: 'Generate a concise label or theme for the following java code tokens: {token_summary}.' So there is no specific syntactic or semantic label it is just whatever LLM outputs. 
         - We just want to see if prompt engineering helped getting all clusters labelled which the previous model failed to do.
+        - The statistics will show "Haven't evaluated an unacceptable label yet" until you encounter one of the 23 unacceptable clusters
+        - For superiority comparisons:
+          * Select 'Yes' if GPT-4o is better (V1 will show 0%, GPT-4o 100%)
+          * Select 'No' if V1 is better (V1 will show 100%, GPT-4o 0%)
+          * Select 'Same' if they are equal (both will show 0%)
 
         """)
         
