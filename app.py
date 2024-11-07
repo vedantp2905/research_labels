@@ -158,10 +158,19 @@ def calculate_evaluation_stats(evaluations):
         'semantic': {'Yes': 0, 'No': 0, 'Same': 0}
     }
     
-    for eval_data in evaluations.values():
-        # Count prompt engineering responses
-        pe_value = eval_data.get('prompt_engineering_helped', 'N/A')
-        stats['prompt_engineering'][pe_value] = stats['prompt_engineering'].get(pe_value, 0) + 1
+    # Count unacceptable cases from V1
+    unacceptable_count = 0
+    improved_count = 0
+    
+    for cluster_id, eval_data in evaluations.items():
+        # Get V1 acceptability for this cluster
+        v1_data = st.session_state.comparator.v1_labels.get(cluster_id, {})
+        is_unacceptable = v1_data.get('Q1_Answer', '').lower() == 'unacceptable'
+        
+        if is_unacceptable:
+            unacceptable_count += 1
+            if eval_data.get('prompt_engineering_helped') == 'Yes':
+                improved_count += 1
         
         # Count syntactic superiority
         syn_value = eval_data.get('syntactic_superior', 'No')
@@ -170,6 +179,28 @@ def calculate_evaluation_stats(evaluations):
         # Count semantic superiority
         sem_value = eval_data.get('semantic_superior', 'No')
         stats['semantic'][sem_value] = stats['semantic'].get(sem_value, 0) + 1
+    
+    # Calculate prompt engineering improvement percentage
+    prompt_engineering_percentage = (improved_count / unacceptable_count * 100) if unacceptable_count > 0 else 0
+    
+    # Create DataFrame for the statistics
+    data = {
+        'Evaluation Criteria': [
+            'Prompt Engineering Helped',
+            'Syntactic Superiority',
+            'Semantic Superiority'
+        ],
+        'V1 (%)': [
+            'N/A',
+            f"{stats['syntactic']['Yes']/total*100:.1f}%",
+            f"{stats['semantic']['Yes']/total*100:.1f}%"
+        ],
+        'GPT-4o (%)': [
+            f"{prompt_engineering_percentage:.1f}%",
+            f"{(stats['syntactic']['Yes'] + stats['syntactic']['Same'])/total*100:.1f}%",
+            f"{(stats['semantic']['Yes'] + stats['semantic']['Same'])/total*100:.1f}%"
+        ]
+    }
     
     return stats
 
@@ -192,12 +223,12 @@ def main():
                     'Semantic Superiority'
                 ],
                 'V1 (%)': [
-                    f"{stats['prompt_engineering']['Yes']/total*100:.1f}%",
+                    'N/A',
                     f"{stats['syntactic']['Yes']/total*100:.1f}%",
                     f"{stats['semantic']['Yes']/total*100:.1f}%"
                 ],
                 'GPT-4o (%)': [
-                    'N/A',
+                    f"{stats['prompt_engineering']['Yes']/total*100:.1f}%",
                     f"{(stats['syntactic']['Yes'] + stats['syntactic']['Same'])/total*100:.1f}%",
                     f"{(stats['semantic']['Yes'] + stats['semantic']['Same'])/total*100:.1f}%"
                 ]
@@ -414,7 +445,7 @@ def main():
             st.header("Error Analysis and Prompt Engineering Impact")
             
             prompt_engineering_helped = st.radio(
-                "Has prompt engineering helped convert previously unacceptable labels to acceptable ones? Wont be always applicable)",
+                "For previously unacceptable V1 labels: Has prompt engineering helped make this label acceptable?",
                 ["N/A", "Yes", "No"],
                 key=f"prompt_engineering_{current_cluster}"
             )
