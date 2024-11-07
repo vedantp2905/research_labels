@@ -4,6 +4,8 @@ import os
 from supabase import create_client
 from analyze_results import analyze_evaluations
 from datetime import datetime
+import pandas as pd
+import io
 
 class ClusterComparator:
     def __init__(self):
@@ -141,6 +143,20 @@ def find_next_unevaluated_cluster(comparator, start_index=0, batch_size=100):
 def main():
     st.set_page_config(layout="wide")
     st.title("Cluster Label Comparison Tool")
+    
+    # Add download button at the top
+    if 'comparator' in st.session_state:
+        evaluations = st.session_state.comparator.load_progress()
+        if evaluations:
+            df = pd.DataFrame(evaluations).T
+            json_str = df.to_json(orient='index', indent=2)
+            
+            st.download_button(
+                label="Download Evaluated Clusters (JSON)",
+                data=json_str,
+                file_name="cluster_evaluations.json",
+                mime="application/json",
+            )
     
     # Initialize acknowledgment state if not exists
     if 'instructions_acknowledged' not in st.session_state:
@@ -362,6 +378,29 @@ def main():
                     "Why are they not superior?",
                     key=f"semantic_notes_{current_cluster}"
                 )
+
+        # Add submit button
+        if st.button("Submit Evaluation", key=f"submit_{current_cluster}"):
+            evaluation = {
+                'prompt_engineering_helped': prompt_engineering_helped,
+                'syntactic_superior': syntactic_superior,
+                'semantic_superior': semantic_superior,
+                'error_description': error_description if prompt_engineering_helped == "No" else "",
+                'syntactic_notes': syntactic_notes if syntactic_superior == "Yes" else "",
+                'semantic_notes': semantic_notes if semantic_superior == "Yes" else ""
+            }
+            
+            if comparator.save_progress(current_cluster, evaluation):
+                st.success("Evaluation saved successfully!")
+                # Find next unevaluated cluster
+                next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index)
+                if next_index is not None:
+                    st.session_state.current_index = next_index
+                    st.rerun()
+                else:
+                    st.success("All clusters in this batch have been evaluated!")
+            else:
+                st.error("Failed to save evaluation")
 
         # Display code examples section
         st.header("Sentences where the token appears")
