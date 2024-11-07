@@ -218,29 +218,7 @@ def main():
     if 'comparator' in st.session_state:
         evaluations = st.session_state.comparator.load_progress()
         if evaluations:
-            stats = calculate_evaluation_stats(evaluations)
-            total = len(evaluations)
-            
-            # Create DataFrame for the statistics
-            data = {
-                'Evaluation Criteria': [
-                    'Prompt Engineering Helped',
-                    'Syntactic Superiority',
-                    'Semantic Superiority'
-                ],
-                'V1 (%)': [
-                    'N/A',
-                    f"{stats['syntactic']['Yes']/total*100:.1f}%",
-                    f"{stats['semantic']['Yes']/total*100:.1f}%"
-                ],
-                'GPT-4o (%)': [
-                    f"{stats['prompt_engineering']['Yes']/total*100:.1f}%",
-                    f"{(stats['syntactic']['Yes'] + stats['syntactic']['Same'])/total*100:.1f}%",
-                    f"{(stats['semantic']['Yes'] + stats['semantic']['Same'])/total*100:.1f}%"
-                ]
-            }
-            
-            df = pd.DataFrame(data)
+            df = calculate_evaluation_stats(evaluations)
             st.table(df)
             
             # Add CSV download button for the statistics table
