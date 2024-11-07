@@ -364,7 +364,7 @@ def main():
             
             syntactic_superior = st.radio(
                 "Is GPT-4o's syntactic label superior to the human label?",
-                ["Yes", "No"],
+                ["Yes", "No","Same"],
                 key=f"syntactic_superior_{current_cluster}"
             )
             
@@ -375,8 +375,8 @@ def main():
                 )
             
             semantic_superior = st.radio(
-                "Are GPT-4o's semantic tags superior to human tags? (≥3/5 tags)",
-                ["Yes", "No"],
+                "Are GPT-4o's semantic tags superior to human tags? (At least 3 tags should be really good and better tags)",
+                ["Yes", "No","Same"],
                 key=f"semantic_superior_{current_cluster}"
             )
             
