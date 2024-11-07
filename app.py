@@ -308,8 +308,12 @@ def main():
             st.header("CodeConceptNet-V1 Labels")
             current_cluster_key = f"c{current_cluster}"
             if current_cluster_key in comparator.v1_labels:
-                st.write("Label:", comparator.v1_labels[current_cluster_key].get("Label", "N/A"))
-                st.write("Semantic Tags:", comparator.v1_labels[current_cluster_key].get("Semantic_Tags", []))
+                # Display additional fields from V1 labels
+                v1_label_data = comparator.v1_labels[current_cluster_key]
+                st.write("Label:", v1_label_data.get("Labels", ["N/A"])[0])
+                st.write("Semantic:", v1_label_data.get("Semantic", "N/A"))
+                st.write("Syntactic:", v1_label_data.get("Syntactic", "N/A"))
+                st.write("Description:", v1_label_data.get("Description", "N/A"))
         
         with col2:
             st.header("GPT-4o Labels")
