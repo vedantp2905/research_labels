@@ -53,38 +53,18 @@ class ClusterComparator:
 
     def save_progress(self, cluster_id, evaluation):
         try:
-            # Check if evaluation already exists
-            existing = self.supabase.table('evaluations').select("*").eq('cluster_id', cluster_id).execute()
-            
-            if existing.data and st.session_state.get('evaluation_start_time', 0) < existing.data[0].get('created_at', 0):
-                # Someone else evaluated this cluster after we loaded it
-                if not st.confirm("This cluster has been evaluated by someone else since you started. Do you want to overwrite their evaluation?"):
-                    return False
-            
-            # Prepare evaluation data
             eval_data = {
                 'cluster_id': cluster_id,
                 'last_cluster_index': st.session_state.current_index,
-                'acceptability': evaluation['acceptability'],
-                'precision': evaluation['precision'],
-                'quality': evaluation['quality'],
-                'notes': evaluation.get('notes', ''),
+                'prompt_engineering_helped': evaluation['prompt_engineering_helped'] == 'Yes',
+                'syntactic_superior': evaluation['syntactic_superior'] == 'Yes',
+                'semantic_superior': evaluation['semantic_superior'] == 'Yes',
+                'error_description': evaluation.get('error_description', ''),
+                'syntactic_error_notes': evaluation.get('syntactic_notes', ''),
+                'semantic_error_notes': evaluation.get('semantic_notes', ''),
                 'created_at': datetime.now().isoformat()
             }
-
-            # Add error descriptions if they exist
-            if evaluation['precision'] == 'Less Precise':
-                eval_data['precision_error'] = evaluation.get('precision_error', '')
-                
-            if evaluation['quality'] == 'Inferior':
-                eval_data['quality_error'] = evaluation.get('quality_error', '')
-                
-            if evaluation.get('semantic_tags'):
-                eval_data['semantic_tags'] = evaluation['semantic_tags']
-                if evaluation['semantic_tags'] == 'No':
-                    eval_data['semantic_error'] = evaluation.get('semantic_error', '')
-
-            # Save the evaluation
+            
             self.supabase.table('evaluations').upsert(eval_data).execute()
             return True
             
@@ -171,28 +151,26 @@ def main():
         st.markdown("""
         ### How to Use This Tool
 
-        1. **Getting Started**
-           - Choose a batch of clusters to evaluate on the sidebar
-          
+        1. **Evaluation Goals**
+           - Analyze if prompt engineering has helped improve LLM labels
+           - Compare quality of GPT-4o labels with human labels
+           
         2. **For Each Cluster**
-           - Review the tokens shown
-           - Compare V1 and GPT-4o labels side by side
-           - Look at example sentences for context
+           - Review the tokens and their context
+           - Compare V1 (before prompt engineering) vs GPT-4o (after) labels
+           - Compare GPT-4o labels with human labels
            
         3. **Evaluation Criteria**
-           - Acceptable : if label and description fits some aspect of the cluster correctly
-           - Precise: if it’s to  the point and not overly vague, no extra information
-           - Superior: based on precision and accuracy take your judgement
-           - Error description: if the label and semantic tags are not correct give a one-two sentence description of the error
-
-        4. **Tips**
-           - Add notes to justify your choices
-           - Check example sentences for context
-           - Look for both syntactic and semantic accuracy
-           - So First evaluate the GPT40 abel ad semantic tags and then compare it. 
+           - Prompt Engineering Impact: Has it helped convert previously unacceptable labels to acceptable ones?
+           - Syntactic Superiority: Is GPT-4o's syntactic label better than the human label?
+           - Semantic Superiority: Are GPT-4o's semantic tags better than human tags? (≥3/5 tags should be better)
+           
+        4. **Error Analysis**
+           - Document specific improvements in error cases
+           - Note any remaining issues
            
 
-        ⚠️ **Important**: Avoid evaluating clusters outside your assigned batch
+        ⚠️ **Important**: Focus on comparing before/after prompt engineering and against human labels
         """)
         
         # Add checkbox at the bottom of instructions
@@ -346,119 +324,44 @@ def main():
         with col3:
             st.header("Evaluation")
             
-            # Radio buttons and their error fields
-            acceptability = st.radio(
-                "Is the GPT-4o label acceptable? (If the label and description fits some aspect of the cluster correctly)",
+            prompt_engineering_helped = st.radio(
+                "Has prompt engineering helped improve previously unacceptable labels?",
                 ["Yes", "No"],
-                key=f"acceptability_{current_cluster}"
+                key=f"prompt_engineering_{current_cluster}",
+        
             )
             
-            precision = st.radio(
-                "How precise is the GPT-4o label compared to V1? (If it’s to  the point and not overly vague, no extra information)",
-                ["More Precise", "Less Precise", "Same"],
-                key=f"precision_{current_cluster}"
-            )
-            
-            # Show precision error field if needed
-            precision_error = ""
-            if precision == "Less Precise":
-                precision_error = st.text_area(
-                    "* Please describe why GPT-4o's label is less precise",
-                    key=f"precision_error_{current_cluster}"
+            if prompt_engineering_helped == "No":
+                error_description = st.text_area(
+                    "Describe the remaining issues:",
+                    key=f"error_description_{current_cluster}"
                 )
             
-            quality = st.radio(
-                "Is the GPT-4o label superior? (Based on precision and accuracy take your judgement)",
-                ["Superior", "Inferior", "Same"],
-                key=f"quality_{current_cluster}"
-            )
+            st.header("Comparison with Human Labels")
             
-            # Show quality error field if needed
-            quality_error = ""
-            if quality == "Inferior":
-                quality_error = st.text_area(
-                    "* Please describe why GPT-4o's label is inferior",
-                    key=f"quality_error_{current_cluster}"
-                )
-            
-            semantic_tags = st.radio(
-                "Does the GPT-4o have the precise and accurate semantic tags? (Atleast 3 out of 5)",
+            syntactic_superior = st.radio(
+                "Is GPT-4o's syntactic label superior to the human label?",
                 ["Yes", "No"],
-                key=f"semantic_tags_{current_cluster}"
+                key=f"syntactic_superior_{current_cluster}"
             )
             
-            # Show semantic error field if needed
-            semantic_error = ""
-            if semantic_tags == "No":
-                semantic_error = st.text_area(
-                    "* Please describe the error in GPT-4o's semantic tags",
-                    key=f"semantic_error_{current_cluster}"
+            if syntactic_superior == "No":
+                syntactic_notes = st.text_area(
+                    "Why is it not superior?",
+                    key=f"syntactic_notes_{current_cluster}"
                 )
             
-            notes = st.text_area(
-                "Additional Notes (optional)",
-                key=f"notes_{current_cluster}"
+            semantic_superior = st.radio(
+                "Are GPT-4o's semantic tags superior to human tags? (≥3/5 tags)",
+                ["Yes", "No"],
+                key=f"semantic_superior_{current_cluster}"
             )
             
-            # Submit button in a form
-            with st.form(key=f"submit_form_{current_cluster}"):
-                submitted = st.form_submit_button("Submit Evaluation")
-                
-            if submitted:
-                # Validation
-                validation_failed = False
-                
-                if precision == "Less Precise" and not precision_error.strip():
-                    st.error("Please provide a description for why the GPT-4o label is less precise.")
-                    validation_failed = True
-                    
-                if quality == "Inferior" and not quality_error.strip():
-                    st.error("Please provide a description for why the GPT-4o label is inferior.")
-                    validation_failed = True
-                    
-                if semantic_tags == "No" and not semantic_error.strip():
-                    st.error("Please provide a description for the semantic tags error.")
-                    validation_failed = True
-                
-                if not validation_failed:
-                    evaluation_data = {
-                        "acceptability": acceptability,
-                        "precision": precision,
-                        "quality": quality,
-                        "semantic_tags": semantic_tags,
-                        "notes": notes,
-                        "precision_error": precision_error,
-                        "quality_error": quality_error,
-                        "semantic_error": semantic_error
-                    }
-                    
-                    if comparator.save_progress(current_cluster, evaluation_data):
-                        # Find next unevaluated cluster within the same batch
-                        next_index = find_next_unevaluated_cluster(
-                            comparator, 
-                            st.session_state.current_index + 1,
-                            batch_size=100
-                        )
-                        
-                        if next_index is not None:
-                            # Check if next index is still within current batch
-                            current_batch = st.session_state.batch_number
-                            if next_index // 100 == current_batch:
-                                st.session_state.current_index = next_index
-                                st.rerun()
-                            else:
-                                st.success(f"Batch {current_batch} completed!")
-                        else:
-                            st.success(f"Batch {st.session_state.batch_number} completed!")
-
-            # Show previous evaluation if it exists
-            if current_cluster in comparator.evaluations:
-                existing_eval = comparator.evaluations[current_cluster]
-                st.info("Previous evaluation exists:")
-                st.write(f"Acceptability: {existing_eval['acceptability']}")
-                st.write(f"Precision: {existing_eval['precision']}")
-                st.write(f"Quality: {existing_eval['quality']}")
-                st.write(f"Notes: {existing_eval['notes']}")
+            if semantic_superior == "No":
+                semantic_notes = st.text_area(
+                    "Why are they not superior?",
+                    key=f"semantic_notes_{current_cluster}"
+                )
 
         # Display code examples section
         st.header("Sentences where the token appears")
