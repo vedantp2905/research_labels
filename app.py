@@ -310,11 +310,10 @@ def main():
             if current_cluster_key in comparator.v1_labels:
                 # Display additional fields from V1 labels
                 v1_label_data = comparator.v1_labels[current_cluster_key]
-                st.write("Label:", v1_label_data.get("Labels", ["N/A"])[0])
-                st.write("Meaningful:", v1_label_data.get("Meaningful", "N/A"))
+                st.write("LLM Label:", v1_label_data.get("Labels", ["N/A"])[0])
                 
                 # Display Semantic one below the other
-                semantic_tags = v1_label_data.get("Semantic", "").split(", ")  # Split by comma for individual tags
+                semantic_tags = v1_label_data.get("Human Semantic", "").split(", ")  # Split by comma for individual tags
                 if semantic_tags:
                     st.write("Semantic Tags:")
                     for tag in semantic_tags:
@@ -322,26 +321,26 @@ def main():
                 else:
                     st.write("Semantic Tags: N/A")  # If no tags are present
                 
-                st.write("Syntactic:", v1_label_data.get("Syntactic", "N/A"))
-                st.write("Description:", v1_label_data.get("Description", "N/A"))
+                st.write("Human Syntactic Label:", v1_label_data.get("Syntactic", "N/A"))
+                st.write("Human Description:", v1_label_data.get("Description", "N/A"))
         
         with col2:
             st.header("GPT-4o Labels")
             gpt4_cluster_key = f"c{current_cluster}"
             gpt4_cluster = next((item[gpt4_cluster_key] for item in comparator.gpt4_labels 
                                if gpt4_cluster_key in item), {})
-            st.write("Syntactic Label:", gpt4_cluster.get("Syntactic Label", "N/A"))
+            st.write("LLM Syntactic Label:", gpt4_cluster.get("Syntactic Label", "N/A"))
             
             # Display Semantic Tags one below the other
-            semantic_tags = gpt4_cluster.get("Semantic Tags", [])
+            semantic_tags = gpt4_cluster.get("LLM Semantic Tags", [])
             if semantic_tags:
-                st.write("Semantic Tags:")
+                st.write("LLM Semantic Tags:")
                 for tag in semantic_tags:
                     st.write(f"- {tag}")  # Display each tag on a new line
             else:
                 st.write("Semantic Tags: N/A")  # If no tags are present
             
-            st.write("Description:", gpt4_cluster.get("Description", "N/A"))
+            st.write("LLM Description:", gpt4_cluster.get("Description", "N/A"))
 
         
         with col3:
