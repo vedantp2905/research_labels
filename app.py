@@ -174,7 +174,6 @@ def calculate_evaluation_stats(evaluations):
             syntactic_gpt4_better += 1
         elif syn_value == 'No':
             syntactic_v1_better += 1
-        # If 'Same', neither counter increases
         
         # Count semantic superiority
         sem_value = eval_data.get('semantic_superior', 'No')
@@ -182,10 +181,11 @@ def calculate_evaluation_stats(evaluations):
             semantic_gpt4_better += 1
         elif sem_value == 'No':
             semantic_v1_better += 1
-        # If 'Same', neither counter increases
     
     # Calculate percentages
-    prompt_engineering_percentage = (improved_count / unacceptable_count * 100) if unacceptable_count > 0 else 0
+    prompt_engineering_display = ('Haven\'t evaluated an unacceptable label yet' if unacceptable_count == 0 
+                                else f"{(improved_count / unacceptable_count * 100):.1f}%")
+    
     syntactic_v1_percentage = (syntactic_v1_better / total * 100) if total > 0 else 0
     syntactic_gpt4_percentage = (syntactic_gpt4_better / total * 100) if total > 0 else 0
     semantic_v1_percentage = (semantic_v1_better / total * 100) if total > 0 else 0
@@ -204,7 +204,7 @@ def calculate_evaluation_stats(evaluations):
             f"{semantic_v1_percentage:.1f}%"
         ],
         'GPT-4o (%)': [
-            f"{prompt_engineering_percentage:.1f}%",
+            prompt_engineering_display,  # More descriptive message when no unacceptable cases yet
             f"{syntactic_gpt4_percentage:.1f}%",
             f"{semantic_gpt4_percentage:.1f}%"
         ]
@@ -220,7 +220,7 @@ def main():
     # Add statistics table and download options at the top
     if 'comparator' in st.session_state:
         evaluations = st.session_state.comparator.load_progress()
-        if evaluations:
+        if evaluations:  # Will be true even with just one evaluation
             df = calculate_evaluation_stats(evaluations)
             st.table(df)
             
