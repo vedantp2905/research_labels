@@ -342,9 +342,8 @@ def main():
             
             prompt_engineering_helped = st.radio(
                 "Has prompt engineering helped improve previously unacceptable labels?",
-                ["Yes", "No"],
-                key=f"prompt_engineering_{current_cluster}",
-        
+                ["N/A", "Yes", "No"],
+                key=f"prompt_engineering_{current_cluster}"
             )
             
             if prompt_engineering_helped == "No":
@@ -361,9 +360,9 @@ def main():
                 key=f"syntactic_superior_{current_cluster}"
             )
             
-            if syntactic_superior == "No":
+            if syntactic_superior == "Yes":
                 syntactic_notes = st.text_area(
-                    "Why is it not superior?",
+                    "Provide examples of superiority:",
                     key=f"syntactic_notes_{current_cluster}"
                 )
             
@@ -373,13 +372,13 @@ def main():
                 key=f"semantic_superior_{current_cluster}"
             )
             
-            if semantic_superior == "No":
+            if semantic_superior == "Yes":
                 semantic_notes = st.text_area(
-                    "Why are they not superior?",
+                    "Provide examples of superiority:",
                     key=f"semantic_notes_{current_cluster}"
                 )
 
-        # Add submit button
+        # Move submit button here, after the columns but before the sentences section
         if st.button("Submit Evaluation", key=f"submit_{current_cluster}"):
             evaluation = {
                 'prompt_engineering_helped': prompt_engineering_helped,
