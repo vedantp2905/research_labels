@@ -313,6 +313,7 @@ def main():
                 v1_label_data = comparator.v1_labels[current_cluster_key]
                 st.write("LLM Label (not specific to syntactic or semantic):")
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
+                st.write("Acceptability:", v1_label_data.get("Q1_Answer", "N/A"))
                 
                 # Display Semantic one below the other
                 semantic_tags = v1_label_data.get("Semantic", "").split(", ")  # Split by comma for individual tags
@@ -349,7 +350,7 @@ def main():
             st.header("Error Analysis and Prompt Engineering Impact")
             
             prompt_engineering_helped = st.radio(
-                "Has prompt engineering helped convert previously unacceptable labels to acceptable ones?(Wont be always applicable)",
+                "Has prompt engineering helped convert previously unacceptable labels to acceptable ones? Wont be always applicable)",
                 ["N/A", "Yes", "No"],
                 key=f"prompt_engineering_{current_cluster}"
             )
