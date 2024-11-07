@@ -343,7 +343,7 @@ def main():
 
         
         with col3:
-            st.header("Evaluation")
+            st.header("Error Analysis and Prompt Engineering Impact")
             
             prompt_engineering_helped = st.radio(
                 "Has prompt engineering helped convert previously unacceptable labels to acceptable ones?",
