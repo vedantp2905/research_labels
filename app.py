@@ -319,8 +319,8 @@ def main():
             st.header("GPT-4o Labels")
             gpt4_cluster = next((item[current_cluster_key] for item in comparator.gpt4_labels 
                                if current_cluster_key in item), {})
-            st.write("Syntactic Label:", gpt4_cluster.get("Syntactic_Label", "N/A"))
-            st.write("Semantic Tags:", gpt4_cluster.get("Semantic_Tags", []))
+            st.write("Syntactic Label:", gpt4_cluster.get("Syntactic Label", "N/A"))
+            st.write("Semantic Tags:", gpt4_cluster.get("Semantic_Tags", "N/A"))
             st.write("Description:", gpt4_cluster.get("Description", "N/A"))
 
         
