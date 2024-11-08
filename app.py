@@ -400,6 +400,7 @@ def main():
                 # Display additional fields from V1 labels
                 v1_label_data = comparator.v1_labels[current_cluster_key]
                 st.write("Prompt given:  f(Generate a concise label or theme for the following java code tokens: {token_summary}")
+                st.write("---")
                 st.write("LLM Label (not specific to syntactic or semantic):")
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
                 st.write("LLM label Acceptability:", v1_label_data.get("Q1_Answer", "N/A"))
@@ -419,10 +420,11 @@ def main():
         with col2:
             st.header("GPT-4o Labels")
             st.write("Prompt Engineering Prompt (just a small part of the prompt):")
-            st.write("""3. **Concise Syntactic Label**: Choose a descriptive label that accurately describes the syntactic function or syntactic role of the tokens in the code. Use specific terminology where applicable (e.g., Object,Dot operator,methods) . Avoid generic terms.
-        4. **Semantic Tags**: Provide 3-5 semantic tags that accurately describe the key functionality and purpose of the code. These tags should reflect the overall functionality and purpose of the code. Avoid using the same tag twice and avoid generic tags. Aim for detailed tags. Examples of good tags include "Concurrency Control", "Data Serialization", "Error Handling".
-        5. **Description**: Provide a concise justification for the syntactic label and semantic tags you have chosen. Explain why these tokens and sentences are significant in the context of Java programming.
-        And 2 examples from previous clusters as few shot examples""")
+            st.write(" 3. **Concise Syntactic Label**: Choose a descriptive label that accurately describes the syntactic function or syntactic role of the tokens in the code. Use specific terminology where applicable (e.g., Object,Dot operator,methods) . Avoid generic terms.")
+            st.write("4. **Semantic Tags**: Provide 3-5 semantic tags that accurately describe the key functionality and purpose of the code. These tags should reflect the overall functionality and purpose of the code. Avoid using the same tag twice and avoid generic tags. Aim for detailed tags. Examples of good tags include "Concurrency Control", "Data Serialization", "Error Handling".")
+            st.write("5. **Description**: Provide a concise justification for the syntactic label and semantic tags you have chosen. Explain why these tokens and sentences are significant in the context of Java programming.")
+            st.write("And 2 examples from previous clusters as few shot examples")
+            st.write("---")
             gpt4_cluster_key = f"c{current_cluster}"
             gpt4_cluster = next((item[gpt4_cluster_key] for item in comparator.gpt4_labels 
                                if gpt4_cluster_key in item), {})
