@@ -402,7 +402,9 @@ def main():
                 st.write("LLM Label (not specific to syntactic or semantic):")
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
                 st.write("LLM label Acceptability:", v1_label_data.get("Q1_Answer", "N/A"))
-                
+
+                st.write("Human Syntactic Label:", v1_label_data.get("Syntactic", "N/A"))
+
                 # Display Semantic one below the other
                 semantic_tags = v1_label_data.get("Semantic", "").split(", ")  # Split by comma for individual tags
                 if semantic_tags:
@@ -412,7 +414,6 @@ def main():
                 else:
                     st.write("Semantic Tags: N/A")  # If no tags are present
                 
-                st.write("Human Syntactic Label:", v1_label_data.get("Syntactic", "N/A"))
                 st.write("Human Description:", v1_label_data.get("Description", "N/A"))
         
         with col2:
