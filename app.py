@@ -416,12 +416,12 @@ def main():
                 if semantic_tags:
                     st.markdown("<span style='color: red'>**Human Semantic Tags:**</span>", unsafe_allow_html=True)
                     for tag in semantic_tags:
-                        st.write(f"<span style='color: red'>- {tag}</span>", unsafe_allow_html=True)
+                        st.write(f"- {tag}")
                 else:
                     st.markdown("<span style='color: red'>**Semantic Tags: N/A**</span>", unsafe_allow_html=True)
                 
                 # Highlight syntactic label in red
-                st.markdown(f"<span style='color: red'>**Human Syntactic Label:** {v1_label_data.get('Syntactic', 'N/A')}</span>", unsafe_allow_html=True)
+                st.markdown(f"<span style='color: red'>**Human Syntactic Label:**</span> {v1_label_data.get('Syntactic', 'N/A')}", unsafe_allow_html=True)
                 st.write("Human Description:", v1_label_data.get("Description", "N/A"))
         
         with col2:
@@ -431,14 +431,14 @@ def main():
                                if gpt4_cluster_key in item), {})
             
             # Highlight syntactic label in red
-            st.markdown(f"<span style='color: red'>**LLM Syntactic Label:** {gpt4_cluster.get('Syntactic Label', 'N/A')}</span>", unsafe_allow_html=True)
+            st.markdown(f"<span style='color: red'>**LLM Syntactic Label:**</span> {gpt4_cluster.get('Syntactic Label', 'N/A')}", unsafe_allow_html=True)
             
             # Highlight semantic tags in red
             semantic_tags = gpt4_cluster.get("Semantic Tags", [])
             if semantic_tags:
                 st.markdown("<span style='color: red'>**LLM Semantic Tags:**</span>", unsafe_allow_html=True)
                 for tag in semantic_tags:
-                    st.write(f"<span style='color: red'>- {tag}</span>", unsafe_allow_html=True)
+                    st.write(f"- {tag}")
             else:
                 st.markdown("<span style='color: red'>**Semantic Tags: N/A**</span>", unsafe_allow_html=True)
             
