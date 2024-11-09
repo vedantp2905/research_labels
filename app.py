@@ -409,7 +409,7 @@ def main():
                 v1_label_data = comparator.v1_labels[current_cluster_key]
                 st.write("LLM Label (not specific to syntactic or semantic):")
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
-                st.markdown(f"<span style='color: red'>**LLM label Acceptability:** {v1_label_data.get('Q1_Answer', 'N/A')}</span>", unsafe_allow_html=True)
+                st.markdown(f"<span style='color: red'>**LLM label Acceptability:**</span> {v1_label_data.get('Q1_Answer', 'N/A')}", unsafe_allow_html=True)
             
                 # Highlight semantic tags in red
                 semantic_tags = v1_label_data.get("Semantic", "").split(", ")
@@ -442,7 +442,7 @@ def main():
             else:
                 st.markdown("<span style='color: red'>**Semantic Tags: N/A**</span>", unsafe_allow_html=True)
             
-            st.write("LLM Description:", gpt4_cluster.get("Description", "N/A"))
+            st.markdown(f"<span style='color: red'>**LLM Description:**</span> {gpt4_cluster.get('Description', 'N/A')}", unsafe_allow_html=True)
 
         
         with col3:
