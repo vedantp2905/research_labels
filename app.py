@@ -261,6 +261,11 @@ def main():
               -c) Where the model didnt recognise the token so didnt give an labels ( Check mainly for this)
            - Compare quality of GPT-4o labels with human labels
            
+        ⚠️ **Important Note About V1 Labels**:
+           - Even though some V1 labels are marked as "acceptable", they might not actually be acceptable
+           - You should independently evaluate the quality of each label regardless of its marked acceptability
+           - Focus on whether prompt engineering has made the v1 unacceptable label acceptable wherever it applies
+           
         2. **Prompts Used**
            - V1 Prompt: "Generate a concise label or theme for the following java code tokens: {token_summary}"
            
@@ -277,20 +282,15 @@ def main():
            - For unacceptable cases (23 clusters), you'll see additional questions about prompt engineering improvement
            
         4. **Evaluation Criteria**
-           - Prompt Engineering Impact: Has it helped convert previously unacceptable labels to acceptable ones? (Only appears for about 23 unacceptable clusters)
+           - Prompt Engineering Impact: Has it helped convert previously unacceptable labels to acceptable ones?
            - Syntactic Superiority: Is GPT-4o's syntactic label better than the human label?
            - Semantic Superiority: Are GPT-4o's semantic tags better than human tags? (≥3/5 tags should be better)
                       
         ⚠️ **Important**: 
         - Focus on comparing before/after prompt engineering and against human labels
-        - For V1 the model was just asked this question: 'Generate a concise label or theme for the following java code tokens: {token_summary}.' So there is no specific syntactic or semantic label it is just whatever LLM outputs. 
+        - For V1 the model was just asked this question: 'Generate a concise label or theme for the following java code tokens: {token_summary}.' So there is no specific syntactic or semantic label it is just whatever LLM aligns to. 
         - We just want to see if prompt engineering helped getting all clusters labelled which the previous model failed to do.
-        - The statistics will show "Haven't evaluated an unacceptable label yet" until you encounter one of the 23 unacceptable clusters
-        - For superiority comparisons:
-          * Select 'Yes' if GPT-4o is better (V1 will show 0%, GPT-4o 100%)
-          * Select 'No' if V1 is better (V1 will show 100%, GPT-4o 0%)
-          * Select 'Same' if they are equal (both will show 0%)
-
+        
         """)
         
         # Add checkbox at the bottom of instructions
@@ -409,14 +409,14 @@ def main():
                 v1_label_data = comparator.v1_labels[current_cluster_key]
                 st.write("LLM Label (not specific to syntactic or semantic):")
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
-                st.write("LLM label Acceptability:", v1_label_data.get("Q1_Answer", "N/A"))
+                st.markdown(f"<span style='color: red'>**LLM label Acceptability:** {v1_label_data.get('Q1_Answer', 'N/A')}</span>", unsafe_allow_html=True)
             
                 # Highlight semantic tags in red
                 semantic_tags = v1_label_data.get("Semantic", "").split(", ")
                 if semantic_tags:
                     st.markdown("<span style='color: red'>**Human Semantic Tags:**</span>", unsafe_allow_html=True)
                     for tag in semantic_tags:
-                        st.write(f"- {tag}")
+                        st.write(f"<span style='color: red'>- {tag}</span>", unsafe_allow_html=True)
                 else:
                     st.markdown("<span style='color: red'>**Semantic Tags: N/A**</span>", unsafe_allow_html=True)
                 
@@ -438,7 +438,7 @@ def main():
             if semantic_tags:
                 st.markdown("<span style='color: red'>**LLM Semantic Tags:**</span>", unsafe_allow_html=True)
                 for tag in semantic_tags:
-                    st.write(f"- {tag}")
+                    st.write(f"<span style='color: red'>- {tag}</span>", unsafe_allow_html=True)
             else:
                 st.markdown("<span style='color: red'>**Semantic Tags: N/A**</span>", unsafe_allow_html=True)
             
@@ -450,7 +450,7 @@ def main():
             
             # Always show prompt engineering question regardless of acceptability
             prompt_engineering_helped = st.radio(
-                "Has prompt engineering helped improve this label?",
+                "Has prompt engineering made V1 unacceptable label acceptable?",
                 ["Yes", "No"],
                 key=f"prompt_engineering_{current_cluster}"
             )
