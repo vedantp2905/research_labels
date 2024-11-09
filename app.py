@@ -406,22 +406,22 @@ def main():
             st.header("CodeConceptNet-V1 Labels")
             current_cluster_key = str(current_cluster)
             if current_cluster_key in comparator.v1_labels:
-                # Display additional fields from V1 labels
                 v1_label_data = comparator.v1_labels[current_cluster_key]
                 st.write("LLM Label (not specific to syntactic or semantic):")
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
                 st.write("LLM label Acceptability:", v1_label_data.get("Q1_Answer", "N/A"))
-                
-                # Display Semantic one below the other
-                semantic_tags = v1_label_data.get("Semantic", "").split(", ")  # Split by comma for individual tags
+            
+                # Highlight semantic tags in red
+                semantic_tags = v1_label_data.get("Semantic", "").split(", ")
                 if semantic_tags:
-                    st.write("Human Semantic Tags:")
+                    st.markdown("<span style='color: red'>**Human Semantic Tags:**</span>", unsafe_allow_html=True)
                     for tag in semantic_tags:
-                        st.write(f"- {tag}")  # Display each tag on a new line
+                        st.write(f"- {tag}")
                 else:
-                    st.write("Semantic Tags: N/A")  # If no tags are present
+                    st.markdown("<span style='color: red'>**Semantic Tags: N/A**</span>", unsafe_allow_html=True)
                 
-                st.write("Human Syntactic Label:", v1_label_data.get("Syntactic", "N/A"))
+                # Highlight syntactic label in red
+                st.markdown(f"<span style='color: red'>**Human Syntactic Label:** {v1_label_data.get('Syntactic', 'N/A')}</span>", unsafe_allow_html=True)
                 st.write("Human Description:", v1_label_data.get("Description", "N/A"))
         
         with col2:
@@ -429,16 +429,18 @@ def main():
             gpt4_cluster_key = f"c{current_cluster}"
             gpt4_cluster = next((item[gpt4_cluster_key] for item in comparator.gpt4_labels 
                                if gpt4_cluster_key in item), {})
-            st.write("LLM Syntactic Label:", gpt4_cluster.get("Syntactic Label", "N/A"))
             
-            # Display Semantic Tags one below the other
+            # Highlight syntactic label in red
+            st.markdown(f"<span style='color: red'>**LLM Syntactic Label:** {gpt4_cluster.get('Syntactic Label', 'N/A')}</span>", unsafe_allow_html=True)
+            
+            # Highlight semantic tags in red
             semantic_tags = gpt4_cluster.get("Semantic Tags", [])
             if semantic_tags:
-                st.write("LLM Semantic Tags:")
+                st.markdown("<span style='color: red'>**LLM Semantic Tags:**</span>", unsafe_allow_html=True)
                 for tag in semantic_tags:
-                    st.write(f"- {tag}")  # Display each tag on a new line
+                    st.write(f"- {tag}")
             else:
-                st.write("Semantic Tags: N/A")  # If no tags are present
+                st.markdown("<span style='color: red'>**Semantic Tags: N/A**</span>", unsafe_allow_html=True)
             
             st.write("LLM Description:", gpt4_cluster.get("Description", "N/A"))
 
