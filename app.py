@@ -408,8 +408,6 @@ def main():
             if current_cluster_key in comparator.v1_labels:
                 # Display additional fields from V1 labels
                 v1_label_data = comparator.v1_labels[current_cluster_key]
-                st.write("Prompt given:  f(Generate a concise label or theme for the following java code tokens: {token_summary}")
-                st.write("---")
                 st.write("LLM Label (not specific to syntactic or semantic):")
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
                 st.write("LLM label Acceptability:", v1_label_data.get("Q1_Answer", "N/A"))
