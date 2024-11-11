@@ -451,7 +451,7 @@ def main():
             # Always show prompt engineering question regardless of acceptability
             prompt_engineering_helped = st.radio(
                 "Has prompt engineering made V1 unacceptable label acceptable?",
-                ["Yes", "No", "N/A"],
+                ["N/A", "Yes", "No"],
                 key=f"prompt_engineering_{current_cluster}"
             )
             
