@@ -407,7 +407,7 @@ def main():
             current_cluster_key = str(current_cluster)
             if current_cluster_key in comparator.v1_labels:
                 v1_label_data = comparator.v1_labels[current_cluster_key]
-                st.write("<span style='color: red'>**LLM Label (not specific to syntactic or semantic):**</span>")
+                st.write("<span style='color: red'>**LLM Label (not specific to syntactic or semantic):**</span>", unsafe_allow_html=True)
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
                 st.markdown(f"<span style='color: red'>**LLM label Acceptability:**</span> {v1_label_data.get('Q1_Answer', 'N/A')}", unsafe_allow_html=True)
             
