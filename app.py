@@ -407,7 +407,7 @@ def main():
             current_cluster_key = str(current_cluster)
             if current_cluster_key in comparator.v1_labels:
                 v1_label_data = comparator.v1_labels[current_cluster_key]
-                st.write("LLM Label (not specific to syntactic or semantic):")
+                st.write("<span style='color: red'>**LLM Label (not specific to syntactic or semantic):**</span>")
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
                 st.markdown(f"<span style='color: red'>**LLM label Acceptability:**</span> {v1_label_data.get('Q1_Answer', 'N/A')}", unsafe_allow_html=True)
             
@@ -451,7 +451,7 @@ def main():
             # Always show prompt engineering question regardless of acceptability
             prompt_engineering_helped = st.radio(
                 "Has prompt engineering made V1 unacceptable label acceptable?",
-                ["Yes", "No"],
+                ["Yes", "No", "N/A"],
                 key=f"prompt_engineering_{current_cluster}"
             )
             
