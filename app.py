@@ -158,6 +158,10 @@ def calculate_evaluation_stats(evaluations):
     semantic_v1_better = 0
     semantic_gpt4_better = 0
     
+    # Initialize counters for prompt engineering
+    helped_yes = 0
+    helped_no = 0
+    
     for cluster_id, eval_data in evaluations.items():
         # Get V1 acceptability for this cluster
         v1_data = st.session_state.comparator.v1_labels.get(cluster_id, {})
@@ -181,10 +185,17 @@ def calculate_evaluation_stats(evaluations):
             semantic_gpt4_better += 1
         elif sem_value == 'No':
             semantic_v1_better += 1
+        
+        # Count prompt engineering responses
+        pe_value = eval_data.get('prompt_engineering_helped', 'N/A')
+        if pe_value == 'Yes':
+            helped_yes += 1
+        elif pe_value == 'No':
+            helped_no += 1
     
     # Calculate percentages
-    prompt_engineering_display = ('Haven\'t evaluated an unacceptable label yet' if unacceptable_count == 0 
-                                else f"{(improved_count / unacceptable_count * 100):.1f}%")
+    prompt_engineering_display = ('No evaluations yet' if helped_yes + helped_no == 0 
+                                else f"{(helped_yes / (helped_yes + helped_no) * 100):.1f}%")
     
     syntactic_v1_percentage = (syntactic_v1_better / total * 100) if total > 0 else 0
     syntactic_gpt4_percentage = (syntactic_gpt4_better / total * 100) if total > 0 else 0
@@ -422,7 +433,7 @@ def main():
                 
                 # Highlight syntactic label in red
                 st.markdown(f"<span style='color: red'>**Human Syntactic Label:**</span> {v1_label_data.get('Syntactic', 'N/A')}", unsafe_allow_html=True)
-                st.write("Human Description:", v1_label_data.get("Description", "N/A"))
+                st.write("<span style='color: red'>**Human Description:**</span>", v1_label_data.get("Description", "N/A"), unsafe_allow_html=True)
         
         with col2:
             st.header("GPT-4o Labels")
