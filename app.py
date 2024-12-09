@@ -2,7 +2,6 @@ import streamlit as st
 import json
 import os
 from supabase import create_client
-from analyze_results import analyze_evaluations
 from datetime import datetime
 import pandas as pd
 import io
