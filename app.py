@@ -1,10 +1,11 @@
 import streamlit as st
 import json
 import os
-from supabase import create_client
 from datetime import datetime
 import pandas as pd
 import io
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
 class ClusterComparator:
     def __init__(self):
@@ -14,65 +15,26 @@ class ClusterComparator:
         self.clusters_data = {}
         self.current_cluster_index = 0
         self.cluster_ids = []
-        
-        # Connect to Supabase
-        self.supabase = create_client(
-            "https://jfnrbqmcaqrydpqubqjr.supabase.co",
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmbnJicW1jYXFyeWRwcXVicWpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzA4Mjk2MjMsImV4cCI6MjA0NjQwNTYyM30.GOUJFOoCaPdkIPHrqtGg350ZsyYQA0PJrVGQqygG3cc"
-        )
-        self.create_table()
-        self.evaluations = self.load_progress()
-        self.base_path = os.getcwd()
-        
-    def create_table(self):
-        # Supabase tables are created in the dashboard, not in code
-        # You'll need to create a table named 'evaluations' with columns:
-        # cluster_id (text, primary key)
-        # last_cluster_index (int)
-        # acceptability (text)
-        # precision (text)
-        # quality (text)
-        # notes (text)
-        pass
-        
+        self.base_path = os.path.dirname(os.path.abspath(__file__))
+        self.evaluations_file = os.path.join(self.base_path, 'evaluations.json')
+
     def load_progress(self):
-        try:
-            response = self.supabase.table('evaluations').select("*").execute()
-            evaluations = {}
-            for row in response.data:
-                evaluations[row['cluster_id']] = {
-                    'last_cluster_index': row['last_cluster_index'],
-                    'prompt_engineering_helped': row['prompt_engineering_helped'],
-                    'syntactic_superior': row['syntactic_superior'],
-                    'semantic_superior': row['semantic_superior'],
-                    'error_description': row['error_description'],
-                    'syntactic_error_notes': row['syntactic_error_notes'],
-                    'semantic_error_notes': row['semantic_error_notes']
-                }
-            return evaluations
-        except Exception as e:
-            st.error(f"Error loading evaluations: {str(e)}")
-            return {}
+        if os.path.exists(self.evaluations_file):
+            try:
+                with open(self.evaluations_file, 'r') as f:
+                    return json.load(f)
+            except:
+                return {}
+        return {}
 
     def save_progress(self, cluster_id, evaluation):
+        evaluations = self.load_progress()
+        evaluations[cluster_id] = evaluation
         try:
-            eval_data = {
-                'cluster_id': cluster_id,
-                'last_cluster_index': st.session_state.current_index,
-                'prompt_engineering_helped': evaluation['prompt_engineering_helped'],
-                'syntactic_superior': evaluation['syntactic_superior'],
-                'semantic_superior': evaluation['semantic_superior'],
-                'error_description': evaluation.get('error_description', ''),
-                'syntactic_error_notes': evaluation.get('syntactic_notes', ''),
-                'semantic_error_notes': evaluation.get('semantic_notes', ''),
-                'created_at': datetime.now().isoformat()
-            }
-            
-            self.supabase.table('evaluations').upsert(eval_data).execute()
+            with open(self.evaluations_file, 'w') as f:
+                json.dump(evaluations, f, indent=2)
             return True
-            
-        except Exception as e:
-            st.error(f"Error saving evaluation: {str(e)}")
+        except:
             return False
 
     def load_data(self):
@@ -141,87 +103,16 @@ def find_next_unevaluated_cluster(comparator, start_index=0, batch_size=50):
     # If no clusters found at all, return batch start
     return batch_start
 
-def calculate_evaluation_stats(evaluations):
-    """Calculate statistics for evaluation criteria"""
-    total = len(evaluations)
-    if total == 0:
-        return pd.DataFrame()
+
+def generate_wordcloud(text_data, title):
+    """Generate and display a wordcloud from the given text data"""
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text_data)
     
-    # Count unacceptable cases from V1
-    unacceptable_count = 0
-    improved_count = 0
-    
-    # Initialize counters for superiority
-    syntactic_v1_better = 0
-    syntactic_gpt4_better = 0
-    semantic_v1_better = 0
-    semantic_gpt4_better = 0
-    
-    # Initialize counters for prompt engineering
-    helped_yes = 0
-    helped_no = 0
-    
-    for cluster_id, eval_data in evaluations.items():
-        # Get V1 acceptability for this cluster
-        v1_data = st.session_state.comparator.v1_labels.get(cluster_id, {})
-        is_unacceptable = v1_data.get('Q1_Answer', '').lower() == 'unacceptable'
-        
-        if is_unacceptable:
-            unacceptable_count += 1
-            if eval_data.get('prompt_engineering_helped') == 'Yes':
-                improved_count += 1
-        
-        # Count syntactic superiority
-        syn_value = eval_data.get('syntactic_superior', 'No')
-        if syn_value == 'Yes':
-            syntactic_gpt4_better += 1
-        elif syn_value == 'No':
-            syntactic_v1_better += 1
-        
-        # Count semantic superiority
-        sem_value = eval_data.get('semantic_superior', 'No')
-        if sem_value == 'Yes':
-            semantic_gpt4_better += 1
-        elif sem_value == 'No':
-            semantic_v1_better += 1
-        
-        # Count prompt engineering responses
-        pe_value = eval_data.get('prompt_engineering_helped', 'N/A')
-        if pe_value == 'Yes':
-            helped_yes += 1
-        elif pe_value == 'No':
-            helped_no += 1
-    
-    # Calculate percentages
-    prompt_engineering_display = ('No evaluations yet' if helped_yes + helped_no == 0 
-                                else f"{(helped_yes / (helped_yes + helped_no) * 100):.1f}%")
-    
-    syntactic_v1_percentage = (syntactic_v1_better / total * 100) if total > 0 else 0
-    syntactic_gpt4_percentage = (syntactic_gpt4_better / total * 100) if total > 0 else 0
-    semantic_v1_percentage = (semantic_v1_better / total * 100) if total > 0 else 0
-    semantic_gpt4_percentage = (semantic_gpt4_better / total * 100) if total > 0 else 0
-    
-    # Create DataFrame for the statistics
-    data = {
-        'Evaluation Criteria': [
-            'Prompt Engineering Helped',
-            'Syntactic Superiority',
-            'Semantic Superiority'
-        ],
-        'V1 (%)': [
-            'N/A',
-            f"{syntactic_v1_percentage:.1f}%",
-            f"{semantic_v1_percentage:.1f}%"
-        ],
-        'GPT-4o (%)': [
-            prompt_engineering_display,  # More descriptive message when no unacceptable cases yet
-            f"{syntactic_gpt4_percentage:.1f}%",
-            f"{semantic_gpt4_percentage:.1f}%"
-        ]
-    }
-    
-    df = pd.DataFrame(data)
-    return df
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+    plt.title(title)
+    st.pyplot(plt)
 
 def main():
     st.set_page_config(layout="wide")
@@ -230,27 +121,33 @@ def main():
     # Add statistics table and download options at the top
     if 'comparator' in st.session_state:
         evaluations = st.session_state.comparator.load_progress()
-        if evaluations:  # Will be true even with just one evaluation
-            df = calculate_evaluation_stats(evaluations)
-            st.table(df)
+        if evaluations:
+            st.table(evaluations)
             
-            # Add CSV download button for the statistics table
-            csv = df.to_csv(index=False)
-            st.download_button(
-                label="Download Statistics as CSV",
-                data=csv,
-                file_name="evaluation_statistics.csv",
-                mime="text/csv",
-            )
+            # Generate wordclouds for semantic tags
+            st.header("Visualization")
+            col1, col2 = st.columns(2)
             
-            # Add JSON download button for full evaluations
-            json_str = pd.DataFrame(evaluations).T.to_json(orient='index', indent=2)
-            st.download_button(
-                label="Download Full Evaluations (JSON)",
-                data=json_str,
-                file_name="cluster_evaluations.json",
-                mime="application/json",
-            )
+            with col1:
+                # Collect all V1 semantic tags
+                v1_tags = []
+                for cluster_id in evaluations:
+                    if cluster_id in st.session_state.comparator.v1_labels:
+                        tags = st.session_state.comparator.v1_labels[cluster_id].get("Semantic", "").split(", ")
+                        v1_tags.extend(tags)
+                generate_wordcloud(" ".join(v1_tags), "V1 Semantic Tags WordCloud")
+            
+            with col2:
+                # Collect all GPT-4o semantic tags
+                gpt4_tags = []
+                for cluster_id in evaluations:
+                    cluster_key = f"c{cluster_id}"
+                    for item in st.session_state.comparator.gpt4_labels:
+                        if cluster_key in item:
+                            tags = item[cluster_key].get("Semantic Tags", [])
+                            gpt4_tags.extend(tags)
+                generate_wordcloud(" ".join(gpt4_tags), "GPT-4o Semantic Tags WordCloud")
+            
 
     # Initialize acknowledgment state if not exists
     if 'instructions_acknowledged' not in st.session_state:
@@ -410,6 +307,8 @@ def main():
             st.write(", ".join(sorted(tokens)) if tokens else "No tokens found")
             st.markdown("---")
         
+        # ... existing code until the columns section ...
+
         col1, col2, col3 = st.columns(3)
         
         with col1:
@@ -421,7 +320,6 @@ def main():
                 st.write(v1_label_data.get("Labels", ["N/A"])[0])
                 st.markdown(f"<span style='color: red'>**LLM label Acceptability:**</span> {v1_label_data.get('Q1_Answer', 'N/A')}", unsafe_allow_html=True)
             
-                # Highlight semantic tags in red
                 semantic_tags = v1_label_data.get("Semantic", "").split(", ")
                 if semantic_tags:
                     st.markdown("<span style='color: red'>**Human Semantic Tags:**</span>", unsafe_allow_html=True)
@@ -430,7 +328,6 @@ def main():
                 else:
                     st.markdown("<span style='color: red'>**Semantic Tags: N/A**</span>", unsafe_allow_html=True)
                 
-                # Highlight syntactic label in red
                 st.markdown(f"<span style='color: red'>**Human Syntactic Label:**</span> {v1_label_data.get('Syntactic', 'N/A')}", unsafe_allow_html=True)
                 st.write("<span style='color: red'>**Human Description:**</span>", v1_label_data.get("Description", "N/A"), unsafe_allow_html=True)
         
@@ -440,10 +337,8 @@ def main():
             gpt4_cluster = next((item[gpt4_cluster_key] for item in comparator.gpt4_labels 
                                if gpt4_cluster_key in item), {})
             
-            # Highlight syntactic label in red
             st.markdown(f"<span style='color: red'>**LLM Syntactic Label:**</span> {gpt4_cluster.get('Syntactic Label', 'N/A')}", unsafe_allow_html=True)
             
-            # Highlight semantic tags in red
             semantic_tags = gpt4_cluster.get("Semantic Tags", [])
             if semantic_tags:
                 st.markdown("<span style='color: red'>**LLM Semantic Tags:**</span>", unsafe_allow_html=True)
@@ -454,95 +349,24 @@ def main():
             
             st.markdown(f"<span style='color: red'>**LLM Description:**</span> {gpt4_cluster.get('Description', 'N/A')}", unsafe_allow_html=True)
 
-        
-        with col3:
-            st.header("Error Analysis and Prompt Engineering Impact")
-            
-            # Always show prompt engineering question regardless of acceptability
-            prompt_engineering_helped = st.radio(
-                "Has prompt engineering made V1 unacceptable label acceptable?",
-                ["N/A", "Yes", "No"],
-                key=f"prompt_engineering_{current_cluster}"
-            )
-            
-            if prompt_engineering_helped == "No":
-                error_description = st.text_area(
-                    "Describe the issues:",
-                    key=f"error_description_{current_cluster}"
-                )
-            
-            st.header("Comparison with Human Labels")
-            
-            syntactic_superior = st.radio(
-                "Is GPT-4o's syntactic label superior to the human label?",
-                ["Yes", "No","Same"],
-                key=f"syntactic_superior_{current_cluster}"
-            )
-            
-            if syntactic_superior == "No":
-                syntactic_notes = st.text_area(
-                    "Why is it not superior?",
-                    key=f"syntactic_notes_{current_cluster}"
-                )
-            
-            semantic_superior = st.radio(
-                "Are GPT-4o's semantic tags superior to human tags? (At least 3 tags should be really good and better tags)",
-                ["Yes", "No","Same"],
-                key=f"semantic_superior_{current_cluster}"
-            )
-            
-            if semantic_superior == "No":
-                semantic_notes = st.text_area(
-                    "Why are they not superior?",
-                    key=f"semantic_notes_{current_cluster}"
-                )
-
-            # Moved submit button here, inside col3
-            if st.button("Submit Evaluation", key=f"submit_{current_cluster}"):
-                evaluation = {
-                    'prompt_engineering_helped': prompt_engineering_helped,
-                    'syntactic_superior': syntactic_superior,
-                    'semantic_superior': semantic_superior,
-                    'error_description': error_description if prompt_engineering_helped == "No" else "",
-                    'syntactic_notes': syntactic_notes if syntactic_superior == "No" else "",
-                    'semantic_notes': semantic_notes if semantic_superior == "No" else ""
-                }
-                
-                if comparator.save_progress(current_cluster, evaluation):
-                    st.success("Evaluation saved successfully!")
-                    # Find next unevaluated cluster
-                    next_index = find_next_unevaluated_cluster(comparator, st.session_state.current_index)
-                    if next_index is not None:
-                        st.session_state.current_index = next_index
-                        st.rerun()
-                    else:
-                        st.success("All clusters in this batch have been evaluated!")
-                else:
-                    st.error("Failed to save evaluation")
+        # Navigation buttons
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("Previous Cluster") and st.session_state.current_index > 0:
+                st.session_state.current_index -= 1
+                st.rerun()
+        with col2:
+            if st.button("Next Cluster") and st.session_state.current_index < len(comparator.cluster_ids) - 1:
+                st.session_state.current_index += 1
+                st.rerun()
 
         # Display code examples section
         st.header("Sentences where the token appears")
         if current_cluster in comparator.clusters_data:
-            token_positions = {}
-            with open(os.path.join(comparator.base_path, 'clusters-500.txt'), 'r') as f:
-                for line in f:
-                    parts = line.strip().split('|||')
-                    if len(parts) >= 5 and parts[4] == str(current_cluster):
-                        line_num = int(parts[2])
-                        if line_num not in token_positions:
-                            token_positions[line_num] = []
-                        token_positions[line_num].append({
-                            'token': parts[0],
-                            'column': int(parts[3])
-                        })
-                
             for sentence_id in comparator.clusters_data[current_cluster]:
                 if sentence_id in comparator.java_sentences:
                     sentence = comparator.java_sentences[sentence_id]
                     st.code(sentence, language="java")
-    else:
-        st.warning("Please read the instructions and check the acknowledgment box to continue.")
-        st.stop()
 
 if __name__ == "__main__":
     main()
